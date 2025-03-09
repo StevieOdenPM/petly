@@ -1,4 +1,4 @@
-## How To Use
+### How To Use
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
@@ -8,6 +8,11 @@ $ git clone https://github.com/StevieOdenPM/petly.git
 
 # Go into the repository
 $ cd petly
+
+# Go to file code
+$ code .
+
+## VS Code Terminal
 
 # Installing Packages and Dependencies
 $ composer install
@@ -30,7 +35,7 @@ $ npm run dev
 $ php artisan serve || run from laragon
 ```
 
-## Before run project
+### Before run project
 
 ```bash
 # Run your tailwind
