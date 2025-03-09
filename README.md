@@ -9,6 +9,12 @@ $ git clone https://github.com/StevieOdenPM/petly.git
 # Go into the repository
 $ cd petly
 
+# Go to file code
+$ code .
+```
+
+## VS Code Terminal
+```bash
 # Installing Packages and Dependencies
 $ composer install
 
@@ -30,7 +36,7 @@ $ npm run dev
 $ php artisan serve || run from laragon
 ```
 
-## Before run project
+### Before run project
 
 ```bash
 # Run your tailwind
