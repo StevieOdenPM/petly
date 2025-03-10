@@ -19,5 +19,8 @@ class RoleSeeder extends Seeder
         Role::create([
             'role_name' => 'courier'
         ]);
+        Role::create([
+            'role_name' => 'admin'
+        ]);
     }
 }
