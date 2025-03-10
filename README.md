@@ -1,4 +1,14 @@
-## How To Use
+## Introduction
+
+## Documentation
+
+You can find our project documentation at the link below
+- [User Stories](https://www.example.com)
+- [Product Backlog](https://www.example.com)
+- [Class Diagram](https://www.example.com)
+- [Use Case & Description](https://docs.google.com/document/d/19TAbjlhc3pjHJ3MwaDicQSX8pJDX8mlgfbXbBO0gnBs/edit?usp=sharing)
+
+## Getting Started
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
