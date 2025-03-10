@@ -3,10 +3,9 @@
 ## Documentation
 
 You can find our project documentation at the link below
-- [User Stories](https://www.example.com)
-- [Product Backlog](https://www.example.com)
-- [Class Diagram](https://www.example.com)
+- [User Stories & Product Backlog](https://docs.google.com/document/d/1AxqJpKs-DbMR0quMGbwgfa-Y6-AJZn7Lxe9TsNOoqP8/edit?usp=sharing)
 - [Use Case & Description](https://docs.google.com/document/d/19TAbjlhc3pjHJ3MwaDicQSX8pJDX8mlgfbXbBO0gnBs/edit?usp=sharing)
+- [Class Diagram](https://drive.google.com/file/d/15m3194yPbA4TpRoFZ20xNIgZ6N2mGydK/view?usp=sharing)
 
 ## Getting Started
 
