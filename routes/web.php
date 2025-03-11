@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('main');
@@ -20,4 +21,8 @@ Route::get('/login', function () {
 
 Route::get('/home', function () {
     return view('home');
+});
+
+Route::get('/profile', function () {
+    return view('profile');
 });
