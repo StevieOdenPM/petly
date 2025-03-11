@@ -1,31 +1,35 @@
-<nav class="bg-gray-800" x-data="{ isOpen: false }">
+<nav class="bg-[#FBFCFF] shadow-md shadow-gray-200" x-data="{ isOpen: false }">
     <div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img class="size-8" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+            <img class="h-auto w-auto max-h-10" src="{{ asset('img/logo-petly.png') }}" alt="Petly">
           </div>
           <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
+            <div class="ml-10 flex items-baseline space-x-6">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="home" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Home</a>
-              <a href="product" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Product</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Booking</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">History</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Profile</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
+              <a href="home" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]"  aria-current="page">Home</a>
+              <a href="product" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Product</a>
+              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Booking</a>
+              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">History</a>
+              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Profile</a>
+              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]">About</a>
             </div>
           </div>
         </div>
         <div class="hidden md:block">
           <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">View notifications</span>
-              <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-              </svg>
-            </button>
+            <div class="flex items-center gap-2">
+              <form action="" class="relative">
+                <input type="search" 
+                      class="peer cursor-pointer relative z-10 h-8 w-8 rounded-full border bg-transparent pr-2 outline-none focus:w-full focus:cursor-text focus:border-[#FE9494] focus:pl-8 focus:pr-4" />
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     class="absolute top-1/2 -translate-y-1/2 h-4 w-4 stroke-gray-500 peer-focus:stroke-[#FE9494] left-2 peer-focus:left-2" 
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </form>
+            </div>
 
             <!-- Profile dropdown -->
             <div class="relative ml-3">
@@ -37,16 +41,6 @@
                 </button>
               </div>
 
-              <!--
-                Dropdown menu, show/hide based on menu state.
-
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
               <div  x-show="isOpen"
               x-transition:enter="transition ease-out duration-100 transform"
               x-transition:enter-start="opacity-0 scale-95"
