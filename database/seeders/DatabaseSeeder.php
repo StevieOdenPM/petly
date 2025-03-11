@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         
-        $this->call([RoleSeeder::class]);
+        $this->call([RoleSeeder::class, ProductSeeder::class]);
         // User::factory(5)->recycle([Role::all()])->create();
     }
 }

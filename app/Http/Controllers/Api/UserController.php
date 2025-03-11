@@ -6,10 +6,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('auth:sanctum', except: ['index', 'show'])
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,37 +35,6 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string',
-            'password' => 'alpha_num|between:6,12|confirmed',
-            'email' => 'required|email|unique:users,email',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation errors',
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $user = User::create([
-            'username' => $request->username,
-            'password' => $request->password,
-            'email' => $request->email,
-        ]);
-
-        return response()->json([
-            'message' => 'User Created Successfully',
-            'data' => new UserResource($user),
-        ], 200);
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(User $user)
@@ -65,9 +45,24 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        // $fields = $request->validate([
+        //     'email' => 'required|unique:users,email'.Auth::user()->id,
+        //     'username' => 'required',
+        // ]);
+
+        // $user = User::find(Auth::user()->id);
+        // if (!$user) {
+        //     return [
+        //         'message' => 'The provided credentials are incorrect.',
+        //         'data' => $user
+        //     ];
+        // }
+
+        // $user->update($fields);
+
+        // return $user;
     }
 
     /**
