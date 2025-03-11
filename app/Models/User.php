@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
     protected $table = "users";
     protected $primaryKey = "user_id";
     protected $keyType = "int";
@@ -21,6 +22,18 @@ class User extends Model
         'email',
         'password',
     ];
+
+    protected $hidden = [
+        'password',
+        'token',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
 
     public function role(): BelongsTo{
         return $this->belongsTo(Role::class);
