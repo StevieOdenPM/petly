@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-100">
+<html lang="en" class="h-full bg-[#FBFCFF]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,7 @@
                 {{ $slot }}
             </div>
         </main>
+        <x-footer></x-footer>
     </div>
 </body>
 </html>
