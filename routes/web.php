@@ -26,3 +26,20 @@ Route::get('/profile', function () {
     return view('profile');
 });
 
+Route::get('/history', function () {
+    return view('history');
+});
+
+Route::get('/aboutus', function () {
+    return view('aboutus');
+});
+
+Route::get('/detailproduct', function () {
+    return view('detailproduct');
+});
+
+Route::get('/product', function () {
+    $response = Http::get("http://petly.test/api/products");
+    
+    return view('product', ['products' => $response]);
+});

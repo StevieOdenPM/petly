@@ -1,7 +1,7 @@
 <x-main>    
   <p>{{ $response}}</p>
     <!-- Breadcrumb -->
-    <nav class="flex px-5 py-3 text-[#FE9494] border border-[#FEE7E5] rounded-lg bg-[#FEE7E5]/70 mt-2" aria-label="Breadcrumb">
+    <nav class="flex px-5 py-3 text-[#FE9494] border border-[#FEE7E5] rounded-lg bg-[#FEE7E5]/70 mt-9" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
             <li class="inline-flex items-center">
                 <a href="#" class="inline-flex items-center text-sm font-medium text-[#FE9494] hover:text-[#FE7070]">
@@ -21,7 +21,7 @@
             </li>
         </ol>
     </nav>
-        </div>
+  </div>
 
     <section>
         <div class="mx-auto max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
@@ -30,10 +30,6 @@
             <div class="col-span-12 md:col-span-3 w-full max-md:max-w-md max-md:mx-auto">
                   <p class="font-semibold text-2xl leading-7 text-black">Filter</p>
                   <div class="mt-3 rounded-xl bg-white p-6 w-full md:max-w-xs shadow-md">
-
-
-
-
                         <div class="w-full mb-7">
                             <form class="hidden lg:block">
 
@@ -334,264 +330,33 @@
                 <div class="col-span-12 md:col-span-9">
                   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                     <!-- Product Card 1 (Original) -->
+                    @foreach($products['data'] as $product)
+                    <!-- Product Card -->
                     <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Brand</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Product Name</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$149</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
+                        <a href="#">
+                            <img 
+                                src="{{ $product['product_image'] ?? 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80' }}" 
+                                {{-- alt="{{ $product['product_name'] ?? 'Product image' }}"  --}}
+                                class="h-60 w-full object-cover rounded-t-xl"
+                            />
+                        </a>
+                        <div class="px-3 py-2">
+                            <span class="text-gray-400 uppercase text-xs">{{ $product['product_type']}}</span>
+                            <p class="text-base font-semibold text-black truncate capitalize">{{ $product['product_name'] }}</p>
+                            <div class="flex items-center mt-1">
+                                <p class="text-base text-lg font-semibold text-black">IDR {{($product['product_price']) }} </p>
+                                <div class="ml-auto">
+                                    <a href="#">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
+                                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                       </div>
-                    </div>
-                
-                    <!-- Product Card 2 -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Footwear</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Running Shoes</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$199</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Product Card 3 -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Accessories</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Smart Watch</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$299</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Product Card 4 -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Electronics</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Wireless Headphones</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$129</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Product Card 5 -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Fashion</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Leather Backpack</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$89</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                
-                    <!-- Product Card 6 -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1597248881519-db089d3744a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Home</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Scented Candle Set</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$49</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- Product Card 7 (Added an extra card) -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1511385348-a52b4a160dc2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Tech</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Tablet Pro</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$499</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <!-- Product Card 8 (Added an extra card) -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Audio</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Portable Speaker</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$79</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Product Card 9 (Added an extra card) -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Audio</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Portable Speaker</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$79</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Product Card 10 (Added an extra card) -->
-                    <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                      <a href="#">
-                        <img 
-                          src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80" 
-                          alt="Product image" 
-                          class="h-60 w-full object-cover rounded-t-xl"
-                        />
-                      </a>
-                      <div class="px-3 py-2">
-                        <span class="text-gray-400 uppercase text-xs">Audio</span>
-                        <p class="text-base font-semibold text-black truncate capitalize">Portable Speaker</p>
-                        <div class="flex items-center mt-1">
-                          <p class="text-base text-lg font-semibold text-black">$79</p>
-                          <div class="ml-auto">
-                            <a href="#">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#FFA4A4" class="bi bi-bag-plus" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z" />
-                                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                              </svg>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      @endforeach                   
                   </div>
                 </div>
             </div>
@@ -600,4 +365,4 @@
 </x-main>
 
         
-                                            
+                                          
