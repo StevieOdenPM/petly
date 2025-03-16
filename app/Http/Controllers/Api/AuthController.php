@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,15 +18,26 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users',
         ]);
 
-        $user = User::create($fields);
+        $fieldsCustomer = $request->validate([
+            'phone_number' => 'required|size:12',
+            'address' => 'nullable|size:255'
+        ]);
 
+        $user = User::create($fields);
+        $customer = $user->customerDetails()->create($fieldsCustomer);
+        
         $token = $user->createToken($request->username);
 
         return [
-            'user' => $user,
+            'user' => [
+                'username' => $user->username,
+                'email' => $user->email,
+                'role' => $customer,
+            ],
             'token' => $token->plainTextToken
         ];
     }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -48,6 +61,7 @@ class AuthController extends Controller
             'token' => $token->plainTextToken
         ];
     }
+    
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
