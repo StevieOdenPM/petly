@@ -1,5 +1,4 @@
 <x-main>    
-  <p>{{ $response}}</p>
     <!-- Breadcrumb -->
     <nav class="flex px-5 py-3 text-[#FE9494] border border-[#FEE7E5] rounded-lg bg-[#FEE7E5]/70 mt-9" aria-label="Breadcrumb">
         <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
