@@ -11,9 +11,8 @@
               <a href="home" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]"  aria-current="page">Home</a>
               <a href="product" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Product</a>
               <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Booking</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">History</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Profile</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]">About</a>
+              <a href="history" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">History</a>
+              <a href="aboutus" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]">About</a>
             </div>
           </div>
         </div>
