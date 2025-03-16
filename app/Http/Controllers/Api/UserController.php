@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
@@ -47,22 +49,39 @@ class UserController extends Controller implements HasMiddleware
      */
     public function update(Request $request)
     {
-        // $fields = $request->validate([
-        //     'email' => 'required|unique:users,email'.Auth::user()->id,
-        //     'username' => 'required',
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:users,email' . Auth::user()->id,
+            'username' => 'required',
+            'phone_number' => 'required|numeric',
+            'address' => ''
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => "Validation Error",
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = $request->user();
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+
+        Customer::where('user_id', $request->user()->user_id)->update([
+            'phone_number' => $request->phone_number,
+            'address' => $request->address
+        ]);
+
+        // $request->user()->customerDetails()->update([
+        //     'phone_number' => $request->phone_number,
+        //     'address' => $request->address
         // ]);
 
-        // $user = User::find(Auth::user()->id);
-        // if (!$user) {
-        //     return [
-        //         'message' => 'The provided credentials are incorrect.',
-        //         'data' => $user
-        //     ];
-        // }
-
-        // $user->update($fields);
-
-        // return $user;
+        return response()->json([
+            'message' => 'Profile successfully updated'
+        ], 200);
     }
 
     /**

@@ -14,6 +14,10 @@ class Role extends Model
     protected $keyType = "int";
     public $timestamps = true;
 
+    protected $fillable = [
+        'role_name',
+    ];
+
     public function user(): HasMany{
         return $this->hasMany(User::class);
     }
