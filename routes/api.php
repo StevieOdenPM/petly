@@ -12,7 +12,11 @@ Route::get('/profile', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::put('/profile/update-user', [UserController::class, 'update'])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::put('/profile/update-user/{user}', [UserController::class, 'update']);
+});
+
 
 Route::post('/register', [AuthController::class, 'register']);
 

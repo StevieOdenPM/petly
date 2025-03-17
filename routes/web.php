@@ -1,13 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
-
-Route::get('/product', function () {
-    return view('product');
 });
 
 Route::get('/register', function () {
@@ -39,7 +36,7 @@ Route::get('/detailproduct', function () {
 });
 
 Route::get('/product', function () {
-    $response = Http::get("http://petly.test/api/products");
+    $response = Http::get("http://petly.test:8080/api/products");
     
     return view('product', ['products' => $response]);
 });
