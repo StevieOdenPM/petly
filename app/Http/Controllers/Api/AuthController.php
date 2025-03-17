@@ -3,71 +3,140 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Courier;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
-        $fields = $request->validate([
-            'username' => 'required|max:255|string',
-            'password' => 'required|confirmed',
-            'email' => 'required|email|unique:users',
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:30|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'role' => 'required|in:customer,admin,courier',
+            'phone_number' => 'required|string|max:12',
         ]);
 
-        $fieldsCustomer = $request->validate([
-            'phone_number' => 'required|size:12',
-            'address' => 'nullable|size:255'
-        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
-        $user = User::create($fields);
-        $customer = $user->customerDetails()->create($fieldsCustomer);
-        
-        $token = $user->createToken($request->username);
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
 
-        return [
-            'user' => [
-                'username' => $user->username,
-                'email' => $user->email,
-                'role' => $customer,
-            ],
-            'token' => $token->plainTextToken
-        ];
+            switch ($request->role) {
+                case 'customer':
+                    Customer::create([
+                        'user_user_id' => $user->user_id,
+                        'phone_number' => $request->phone_number,
+                    ]);
+                    break;
+                case 'admin':
+                    Admin::create([
+                        'user_user_id' => $user->user_id,
+                        'phone_number' => $request->phone_number,
+                    ]);
+                    break;
+                case 'courier':
+                    Courier::create([
+                        'user_user_id' => $user->user_id,
+                        'phone_number' => $request->phone_number,
+                        'status' => 'Available',
+                    ]);
+                    break;
+            }
+
+            DB::commit();
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User registered successfully',
+                'user' => $user,
+                'user_id' => $user->user_id,
+                'token' => $token
+            ], 201);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Registration failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-            'password' => 'required',
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
         ]);
-        
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return [
-                'message' => 'The provided credentials are incorrect.'
-            ];
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid credentials'
+            ], 401);
         }
 
-        $token = $user->createToken($user->username);
+        $user->tokens()->delete();
+        
+        $token = $user->createToken('auth_token')->plainTextToken;
 
+        $user->update([
+                    'token' => $token
+                ]);
 
-        return [
+        return response()->json([
+            'status' => true,
+            'message' => 'Login successful',
             'user' => $user,
-            'token' => $token->plainTextToken
-        ];
+            'token' => $token
+        ]);
     }
     
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
-        return [
-            'message' => 'You are logged out.'
-        ];
+        $request->user()->update([
+            'token' => ''
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Logged out successfully'
+        ]);
     }
 }
