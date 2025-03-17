@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://unpkg.com/lucide@latest"></script>
-    <title>User Profile</title>
-</head>
-<body class="bg-gray-100 flex min-h-screen items-center justify-center p-6">
+<x-main>
 
     <!-- Layout Wrapper -->
-    <div class="flex gap-10 max-w-6xl w-full">
+    <div class="flex gap-12 max-w-7xl w-full mt-12 mb-22">
 
         <!-- User Profile Sidebar (Same Style as Profile Container) -->
         <aside class="bg-white shadow-md rounded-xl p-6 w-80 flex flex-col items-center self-start">
@@ -40,17 +31,17 @@
         </aside>
 
         <!-- Profile Container -->
-        <main class="flex-1 flex justify-center items-center">
-            <div class="bg-white p-6 rounded-xl shadow-md max-w-3xl w-full">
+        <main class="flex-1">
+            <div class="bg-white p-7 rounded-xl shadow-md">
                 <!-- Profile Header -->
-                <div class="flex items-center mb-6">
+                <div class="flex items-center mb-12">
                     <div class="relative">
                         <img src="{{ URL('img/registercat1.png') }}" alt="Profile" class="w-24 h-24 rounded-full object-cover border-4 border-gray-300">
                         <button class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md">
-                            ✎
+                        
                         </button>
                     </div>
-                    <div class="ml-4"> <!-- Menambahkan margin kiri agar ada jarak -->
+                    <div class="ml-4"> 
                         <h1 class="text-xl font-semibold">Joni Sutedja</h1>
                         <p class="text-gray-500">Palmerah, Jakarta</p>
                     </div>
@@ -58,33 +49,33 @@
                 
                 <!-- Profile Form -->
                 <form>
-                    <div class="grid grid-cols-2 gap-4">
+                     <div class="grid grid-cols-2 gap-x-10 gap-y-8">
                         <div>
-                            <label class="block text-gray-700">First Name</label>
-                            <input type="text" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">First Name</label>
+                            <input type="text" class="w-full p-2 border rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-gray-700">Last Name</label>
-                            <input type="text" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">Last Name</label>
+                            <input type="text" class="w-full p-2 border rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-gray-700">Email</label>
-                            <input type="email" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full p-2 border rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-gray-700">Phone Number</label>
-                            <input type="tel" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="w-full p-2 border rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-gray-700">City</label>
-                            <input type="text" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">City</label>
+                            <input type="text" class="w-full p-2 border rounded-lg">
                         </div>
                         <div>
-                            <label class="block text-gray-700">Province</label>
-                            <input type="text" class="w-full p-2 border rounded">
+                            <label class="block text-gray-700 mb-2">Province</label>
+                            <input type="text" class="w-full p-2 border rounded-lg">
                         </div>
                     </div>
-                    <div class="text-center mt-6">
+                    <div class="text-center mt-10">
                         <button class="bg-red-400 text-white px-6 py-2 rounded-lg">Save</button>
                     </div>
                 </form>
@@ -96,5 +87,4 @@
         lucide.createIcons(); // Load Lucide Icons
     </script>
 
-</body>
-</html>
+</x-main>

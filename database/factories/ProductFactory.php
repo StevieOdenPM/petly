@@ -18,10 +18,11 @@ class ProductFactory extends Factory
     {
         return [
             'product_name' => fake()->sentence(1),
+            'product_desc' => fake()->paragraph(10),
             'product_type' => fake()->randomElement(['food', 'accessories', 'medicine']),
             'product_stock' => fake()->numberBetween(1, 100),
             'product_price' => fake()->randomNumber(5,true),
-            'product_rating'=> fake()->numberBetween(1, 5),
+            'product_rating'=> fake()->numberBetween(1, 10),
             'product_image' => fake()->imageUrl(640, 480, 'animals', true)
         ];
     }

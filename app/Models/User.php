@@ -21,9 +21,12 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'phone_number',
+        'token'
     ];
 
     protected $hidden = [
+        'user_id',
         'password',
         'token',
     ];
@@ -37,5 +40,17 @@ class User extends Authenticatable
 
     public function role(): BelongsTo{
         return $this->belongsTo(Role::class);
+    }
+
+    public function customerDetails() {
+        return $this->hasOne(Customer::class, 'user_user_id', 'user_id');
+    }
+
+    public function courierDetails() {
+        return $this->belongsTo(Courier::class, 'user_user_id', 'user_id');
+    }
+
+    public function adminDetails() {
+        return $this->belongsTo(Admin::class, 'user_user_id', 'user_id');
     }
 }
