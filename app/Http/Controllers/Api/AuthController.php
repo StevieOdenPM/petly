@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Courier;
@@ -35,30 +36,31 @@ class AuthController extends Controller
 
         DB::beginTransaction();
         try {
+
+            $role = Role::where('role_name', $request->role)->first();
+            
             $user = User::create([
                 'username' => $request->username,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => $request->role,
+                'phone_number' => $request->phone_number,
+                'role_role_id' => $role->role_id,
             ]);
 
             switch ($request->role) {
                 case 'customer':
                     Customer::create([
                         'user_user_id' => $user->user_id,
-                        'phone_number' => $request->phone_number,
                     ]);
                     break;
                 case 'admin':
                     Admin::create([
                         'user_user_id' => $user->user_id,
-                        'phone_number' => $request->phone_number,
                     ]);
                     break;
                 case 'courier':
                     Courier::create([
                         'user_user_id' => $user->user_id,
-                        'phone_number' => $request->phone_number,
                         'status' => 'Available',
                     ]);
                     break;
@@ -66,14 +68,13 @@ class AuthController extends Controller
 
             DB::commit();
 
-            $token = $user->createToken('auth_token')->plainTextToken;
+            // $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'status' => true,
                 'message' => 'User registered successfully',
                 'user' => $user,
-                'user_id' => $user->user_id,
-                'token' => $token
+                'role_id' => $role->role_id,
             ], 201);
 
         } catch (\Exception $e) {
