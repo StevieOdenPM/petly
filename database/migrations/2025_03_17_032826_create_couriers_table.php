@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('couriers', function (Blueprint $table) {
             $table->unsignedInteger('user_user_id')->primary();
-            $table->string('phone_number');
             $table->string('status')->nullable(true);
             $table->timestamps();
             $table->foreign('user_user_id')->on('users')->references('user_id')->onDelete('cascade')->onUpdate('cascade');
