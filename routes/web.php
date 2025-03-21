@@ -40,3 +40,14 @@ Route::get('/product', function () {
     
     return view('product', ['products' => $response]);
 });
+
+Route::get('/courier-info', function () {
+    return view('courier/courierInfo'); // Set courierInfo as the landing page
+});
+
+Route::get('/parcel-tracking', function () {
+    return view('courier/parcelTracking'); // Access parcel tracking here
+});
+
+
+
