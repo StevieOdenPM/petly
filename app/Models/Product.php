@@ -16,10 +16,22 @@ class Product extends Model
     protected $fillable = [
         'product_name',
         'product_desc',
-        'product_type',
+        'product_product_type_id',
+        'pet_pet_types_id',
         'product_stock',
         'product_price',
         'product_rating',
         'product_image'
     ];
+
+    public function petType()
+    {
+        return $this->belongsTo(PetType::class);
+    }
+
+    public function productType()
+    {
+        return $this->belongsTo(ProductType::class);
+    }
+    
 }

@@ -44,14 +44,14 @@ class User extends Authenticatable
     }
 
     public function customerDetails() {
-        return $this->hasOne(Customer::class, 'user_user_id', 'user_id');
+        return $this->hasOne(Customer::class);
     }
 
     public function courierDetails() {
-        return $this->belongsTo(Courier::class, 'user_user_id', 'user_id');
+        return $this->belongsTo(Courier::class);
     }
 
     public function adminDetails() {
-        return $this->belongsTo(Admin::class, 'user_user_id', 'user_id');
+        return $this->belongsTo(Admin::class);
     }
 }
