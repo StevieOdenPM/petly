@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Admin extends Model
 {
-    protected $table = "customers";
+    protected $table = "admins";
     protected $primaryKey = "user_user_id";
     public $incrementing = false;
 
     protected $fillable = [
         'user_user_id',
-        'address',
         'phone_number'
     ];
 
@@ -24,10 +23,5 @@ class Customer extends Model
     public function user()
     {
         return $this->hasOne(User::class);
-    }
-
-    public function pets()
-    {
-        return $this->hasMany(Pet::class);
     }
 }

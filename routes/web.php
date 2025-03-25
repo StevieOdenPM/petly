@@ -1,13 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
-
-Route::get('/product', function () {
-    return view('product');
 });
 
 Route::get('/register', function () {
@@ -51,7 +48,18 @@ Route::get('/services', function () {
 });
 
 Route::get('/product', function () {
-    $response = Http::get("http://petly.test/api/products");
-
+    $response = Http::get("http://petly.test:8080/api/products");
+    
     return view('product', ['products' => $response]);
 });
+
+Route::get('/courier-info', function () {
+    return view('courier/courierInfo'); // Set courierInfo as the landing page
+});
+
+Route::get('/parcel-tracking', function () {
+    return view('courier/parcelTracking'); // Access parcel tracking here
+});
+
+
+
