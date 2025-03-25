@@ -12,10 +12,8 @@
                 </h2>
             
                 <p class="text-gray-600 text-lg leading-relaxed">
-                    Welcome to Petly, your ultimate solution for streamlined and efficient pet shop management! 
-                    Our innovative platform is designed to simplify every aspect of running a pet shop, from inventory
-                    tracking and sales management to customer engagement and appointment scheduling. With Petly,
-                    you can effortlessly manage your pet products, monitor stock levels, and ensure your furry customers always find what they need. Our user-friendly interface and powerful tools empower you to focus on what truly matters—providing exceptional care and service to pets and their owners. Whether you're a small local shop or a growing pet business, Petly is here to help you thrive in the pet care industry. Let’s make pet management a joy!
+                Welcome to PETLY!, your all in one pet shop management system designed to make pet care effortless and enjoyable. We offer a seamless platform for purchasing high-quality pet products, booking professional grooming services, and accessing expert pet care to keep your furry friends happy and healthy. Whether you're a pet owner looking for the best for your 
+                companion or a business aiming to streamline operations, PETLY! is here to provide convenience, reliability, and a pet-friendly experience like no other. With a user-friendly interface and a commitment to excellence, PETLY! ensures that every pet receives the best care possible. 
                 </p>
             </div>
             
