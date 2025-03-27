@@ -35,8 +35,31 @@ Route::get('/detailproduct', function () {
     return view('detailproduct');
 });
 
+Route::get('/cart', function () {
+    return view('cart');
+});
+
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
+Route::get('/services', function () {
+    return view('services');
+});
+
 Route::get('/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
     
     return view('product', ['products' => $response]);
 });
+
+Route::get('/courier-info', function () {
+    return view('courier/courierInfo'); // Set courierInfo as the landing page
+});
+
+Route::get('/parcel-tracking', function () {
+    return view('courier/parcelTracking'); // Access parcel tracking here
+});
+
+
+

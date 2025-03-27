@@ -41,7 +41,7 @@
                                           @click="isOpen = !isOpen"
                                           :aria-expanded="isOpen"
                                         >
-                                        <span class="font-semibold text-sm text-gray-900">Kategori</span>
+                                        <span class="font-semibold text-sm text-gray-900">Category</span>
 
                                           <span class="ml-6 flex items-center">
                                             <!-- Expand icon, show/hide based on section open state. -->
@@ -81,7 +81,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-color-0" class="text-sm text-gray-600">Aksesoris</label>
+                                          <label for="filter-color-0" class="text-sm text-gray-600">Accessories</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -93,7 +93,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-color-1" class="text-sm text-gray-600">Makanan</label>
+                                          <label for="filter-color-1" class="text-sm text-gray-600">Food</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -105,7 +105,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-color-2" class="text-sm text-gray-600">Obat</label>
+                                          <label for="filter-color-2" class="text-sm text-gray-600">Medicine</label>
                                         </div>
                                       </div>
                                     </div>
@@ -119,7 +119,7 @@
                                           @click="isOpen = !isOpen"
                                           :aria-expanded="isOpen"
                                         >
-                                          <span class="font-semibold text-sm text-gray-900">Jenis Hewan</span>
+                                          <span class="font-semibold text-sm text-gray-900">Animal Type</span>
                                           <span class="ml-6 flex items-center">
                                             <!-- Expand icon, show/hide based on section open state. -->
                                             <svg
@@ -157,7 +157,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-category-0" class="text-sm text-gray-600">Anjing</label>
+                                          <label for="filter-category-0" class="text-sm text-gray-600">Dog</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -169,7 +169,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-category-1" class="text-sm text-gray-600">Kucing</label>
+                                          <label for="filter-category-1" class="text-sm text-gray-600">Cat</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -181,7 +181,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-category-2" class="text-sm text-gray-600">Kelinci</label>
+                                          <label for="filter-category-2" class="text-sm text-gray-600">Rabbit</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -193,7 +193,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-category-3" class="text-sm text-gray-600">Kura-Kura</label>
+                                          <label for="filter-category-3" class="text-sm text-gray-600">Turtle</label>
                                         </div>
                                       </div>
                                     </div>
@@ -201,7 +201,7 @@
 
                                   <div class="border-b border-gray-200 py-6">
                                     <h3 class="-my-3 flow-root">
-                                        <span class="font-semibold text-sm text-gray-900">Harga</span>
+                                        <span class="font-semibold text-sm text-gray-900">Price</span>
                                     </h3>
                                     <!-- Filter section, show/hide based on section state. -->
                                     <div class="pt-6">
@@ -242,7 +242,7 @@
                                           @click="isOpen = !isOpen"
                                           :aria-expanded="isOpen"
                                         >
-                                          <span class="font-semibold text-sm text-gray-900">Urutkan</span>
+                                          <span class="font-semibold text-sm text-gray-900">Sort By</span>
                                           <span class="ml-6 flex items-center">
                                             <!-- Expand icon, show/hide based on section open state. -->
                                             <svg
@@ -280,7 +280,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-size-0" class="text-sm text-gray-600">Terbaru</label>
+                                          <label for="filter-size-0" class="text-sm text-gray-600">Latest</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -292,7 +292,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-size-1" class="text-sm text-gray-600">Harga Tertinggi</label>
+                                          <label for="filter-size-1" class="text-sm text-gray-600">Highest Price</label>
                                         </div>
                                         <div class="flex gap-3">
                                           <div class="flex h-5 shrink-0 items-center">
@@ -304,7 +304,7 @@
                                               </svg>
                                             </div>
                                           </div>
-                                          <label for="filter-size-2" class="text-sm text-gray-600">Harga Terendah</label>
+                                          <label for="filter-size-2" class="text-sm text-gray-600">Lowest Price</label>
                                         </div>
                                       </div>
                                     </div>
@@ -330,17 +330,17 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
                     <!-- Product Card 1 (Original) -->
                     @foreach($products['data'] as $product)
-                    <!-- Product Card -->
+                    <!-- Product Card -->         
                     <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                        <a href="#">
+                        <a href="detailproduct">
                             <img 
                                 src="{{ $product['product_image'] ?? 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80' }}" 
-                                {{-- alt="{{ $product['product_name'] ?? 'Product image' }}"  --}}
+                                
                                 class="h-60 w-full object-cover rounded-t-xl"
                             />
                         </a>
                         <div class="px-3 py-2">
-                            <span class="text-gray-400 uppercase text-xs">{{ $product['product_type']}}</span>
+                            <span class="text-gray-400 uppercase text-xs">{{ $product['product_type']['product_type_name']}}</span>
                             <p class="text-base font-semibold text-black truncate capitalize">{{ $product['product_name'] }}</p>
                             <div class="flex items-center mt-1">
                                 <p class="text-base text-lg font-semibold text-black">IDR {{($product['product_price']) }} </p>

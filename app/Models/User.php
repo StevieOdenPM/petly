@@ -30,6 +30,9 @@ class User extends Authenticatable
         'user_id',
         'password',
         'token',
+        'role_role_id',
+        'created_at',
+        'updated_at'
     ];
 
     protected function casts(): array
@@ -40,18 +43,22 @@ class User extends Authenticatable
     }
 
     public function role(): BelongsTo{
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class, 'role_role_id', 'role_id');
     }
 
     public function customerDetails() {
-        return $this->hasOne(Customer::class, 'user_user_id', 'user_id');
+        return $this->hasOne(Customer::class);
     }
 
     public function courierDetails() {
-        return $this->belongsTo(Courier::class, 'user_user_id', 'user_id');
+        return $this->hasOne(Courier::class);
     }
 
     public function adminDetails() {
-        return $this->belongsTo(Admin::class, 'user_user_id', 'user_id');
+        return $this->hasOne(Admin::class);
+    }
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
     }
 }

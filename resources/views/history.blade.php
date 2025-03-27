@@ -1,6 +1,5 @@
 <x-main>
     <section class="py-10 relative">
-        {{-- <div class="w-full max-w-7xl mx-auto px-4 md:px-8"> --}}
             <h2 class="font-semibold text-2xl  text-black mb-5">Transaction History</h2>
 
             <div class="flex sm:flex-col lg:flex-row sm:items-center justify-between">
@@ -245,7 +244,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
                                             
 

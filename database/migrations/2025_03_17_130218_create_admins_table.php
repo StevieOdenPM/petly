@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->unsignedInteger('user_user_id')->primary();
             $table->timestamps();
-            $table->foreign('user_user_id')->on('users')->references('user_id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_user_id')->primary()->constrained('users', 'user_id')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

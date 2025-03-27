@@ -3,16 +3,15 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img class="h-auto w-auto max-h-10" src="{{ asset('img/logo-petly.png') }}" alt="Petly">
+            <img class="h-auto w-auto max-h-11" src="{{ asset('img/logo-petly.png') }}" alt="Petly">
           </div>
           <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-6">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="home" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]"  aria-current="page">Home</a>
-              <a href="product" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Product</a>
-              <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Booking</a>
-              <a href="history" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C]  hover:text-[#FE9494]">History</a>
-              <a href="aboutus" class="rounded-md px-3 py-2 text-sm font-medium text-[#9C9C9C] hover:text-[#FE9494]">About</a>
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a href="home" class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C] hover:text-[#FE9494]"  aria-current="page">Home</a>
+              <a href="product" class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C]  hover:text-[#FE9494]">Products</a>
+              <a href="services" class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C] hover:text-[#FE9494]">Services</a>
+              <a href="history" class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C]  hover:text-[#FE9494]">History</a>
+              <a href="aboutus" class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C] hover:text-[#FE9494]">About</a>
             </div>
           </div>
         </div>
@@ -20,16 +19,40 @@
           <div class="ml-4 flex items-center md:ml-6">
             <div class="flex items-center gap-2">
               <form action="" class="relative">
-                <input type="search" 
-                      class="peer cursor-pointer relative z-10 h-8 w-8 rounded-full border bg-transparent pr-2 outline-none focus:w-full focus:cursor-text focus:border-[#FE9494] focus:pl-8 focus:pr-4" />
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                     class="absolute top-1/2 -translate-y-1/2 h-4 w-4 stroke-gray-500 peer-focus:stroke-[#FE9494] left-2 peer-focus:left-2" 
-                     fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <input 
+                  type="search" 
+                  placeholder="search"
+                  class="relative z-10 h-8 w-60 rounded-full border bg-transparent pl-8 pr-4 outline-none focus:border-[#FE9494]" 
+                />
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="absolute left-2 top-1/2 -translate-y-1/2 h-4 w-4 stroke-gray-500 focus-within:stroke-[#FE9494]" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  stroke-width="2"
+                >
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </form>
             </div>
 
+            <!-- Cart Icon -->
+            <div class="ml-4 flex items-center md:ml-6">
+              <a href="cart" class="relative p-1">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-7 w-7 stroke-gray-500 hover:stroke-[#FE9494]" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  stroke-width="1"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </a>
+            </div>
+            
             <!-- Profile dropdown -->
             <div class="relative ml-3">
               <div>
@@ -48,7 +71,7 @@
               x-transition:leave-start="opacity-100 scale-100"
               x-transition:leave-end="opacity-0 scale-95"class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                 <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                <a href="profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
               </div>
