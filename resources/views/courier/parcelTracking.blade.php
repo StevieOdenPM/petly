@@ -1,18 +1,14 @@
-<!
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courier Tracking Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
         .route-line {
             border-top: 2px dashed #FF9999;
             position: absolute;
@@ -69,7 +65,7 @@ DOCTYPE html>
 <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
     <div class="mb-8">
         <a href="/">
-            <img src="/img/logopet.png" alt="Petty Logo" class="w-8 h-8">
+            <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
         </a>
     </div>
     <div class="flex flex-col items-center gap-8">
@@ -79,7 +75,7 @@ DOCTYPE html>
         <a href="/parcel-tracking" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
             <i class="ri-truck-line text-pink-400 text-xl"></i>
         </a>
-        <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <a href="/courier-info" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <i class="ri-user-line text-gray-400 text-xl"></i>
         </a>
     </div>
@@ -93,7 +89,7 @@ DOCTYPE html>
         <!-- Main Content -->
         <div class="flex-1 p-4">
             <!-- Search Bar -->
-            <div class="mb-4 flex">
+            <div class="mb-4 flex mt-6">
                 <div class="relative flex-1 max-w-md">
                     <i class="ri-search-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     <input 
@@ -227,51 +223,39 @@ DOCTYPE html>
                 <!-- Delivery Details -->
                 <div class="w-full lg:w-3/5 bg-white rounded-xl p-6 shadow-sm">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-<!-- Map Overview -->
-<div>
-  <h2 class="text-sm font-semibold text-gray-700 mb-3">MAP OVERVIEW</h2>
-  <div id="map" class="h-64 mb-4 rounded-lg"></div>
-  <div class="flex justify-center space-x-2">
-    <button onclick="zoomIn()" class="w-8 h-8 bg-white rounded-md shadow-sm flex items-center justify-center">
-      <i class="ri-add-line text-gray-500"></i>
-    </button>
-    <button onclick="zoomOut()" class="w-8 h-8 bg-white rounded-md shadow-sm flex items-center justify-center">
-      <i class="ri-subtract-line text-gray-500"></i>
-    </button>
-  </div>
-</div>
 
-<script>
-  // Initialize the map
-  var map = L.map('map').setView([-6.2088, 106.8456], 13); // Jakarta coordinates
-  
-  // Add the tile layer (map background)
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-  
-  // Add markers for origin and destination
-  var originMarker = L.marker([-6.2088, 106.8456]).addTo(map)
-    .bindPopup('Petty Kemangisan');
-    
-  var destinationMarker = L.marker([-6.2000, 106.7800]).addTo(map)
-    .bindPopup('BINUS University');
-  
-  // Draw a line between origin and destination
-  var route = L.polyline([
-    [-6.2088, 106.8456], // Origin coordinates
-    [-6.2000, 106.7800]  // Destination coordinates
-  ], {color: '#FF9999', dashArray: '5, 10'}).addTo(map);
-  
-  // Zoom functions for the buttons
-  function zoomIn() {
-    map.zoomIn();
-  }
-  
-  function zoomOut() {
-    map.zoomOut();
-  }
-</script>
+                <!-- Map Overview -->
+                <div>
+                <h2 class="text-sm font-semibold text-gray-700 mb-3">MAP OVERVIEW</h2>
+                <div id="map" class="h-64 mb-4 rounded-lg"></div>
+                <div class="flex justify-center space-x-2">
+                    <button onclick="zoomIn()" class="w-8 h-8 bg-white rounded-md shadow-sm flex items-center justify-center">
+                    <i class="ri-add-line text-gray-500"></i>
+                    </button>
+                    <button onclick="zoomOut()" class="w-8 h-8 bg-white rounded-md shadow-sm flex items-center justify-center">
+                    <i class="ri-subtract-line text-gray-500"></i>
+                    </button>
+                </div>
+                </div>
+
+                <script>
+                // Initialize the map
+                var map = L.map('map').setView([-6.2088, 106.8456], 13); // Jakarta coordinates
+                
+                // Add the tile layer (map background)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+                    
+                    // Zoom functions for the buttons
+                    function zoomIn() {
+                        map.zoomIn();
+                    }
+                    
+                    function zoomOut() {
+                        map.zoomOut();
+                    }
+                </script>
 
 
 
