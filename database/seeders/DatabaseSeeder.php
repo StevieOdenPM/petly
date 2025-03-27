@@ -17,7 +17,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         // ProductSeeder::class,
-        $this->call([RoleSeeder::class, PetTypeSeeder::class, DeliveryClassSeeder::class,ProductTypeSeeder::class, ProductSeeder::class, ]);
+        $this->call([
+            RoleSeeder::class, 
+            PetTypeSeeder::class, 
+            DeliveryClassSeeder::class, 
+            ProductTypeSeeder::class, 
+            ProductSeeder::class,
+            TransactionStatusSeeder::class
+        ]);
         // User::factory(5)->recycle([Role::all()])->create();
     }
 }

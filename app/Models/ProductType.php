@@ -12,6 +12,10 @@ class ProductType extends Model
         'product_type_name',
     ];
 
+    protected $hidden = [
+        'product_type_id',
+    ];
+
     public function products()
     {
         return $this->hasMany(Product::class);

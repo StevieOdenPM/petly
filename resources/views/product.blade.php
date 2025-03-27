@@ -340,7 +340,7 @@
                             />
                         </a>
                         <div class="px-3 py-2">
-                            <span class="text-gray-400 uppercase text-xs">{{ $product['product_type']}}</span>
+                            <span class="text-gray-400 uppercase text-xs">{{ $product['product_type']['product_type_name']}}</span>
                             <p class="text-base font-semibold text-black truncate capitalize">{{ $product['product_name'] }}</p>
                             <div class="flex items-center mt-1">
                                 <p class="text-base text-lg font-semibold text-black">IDR {{($product['product_price']) }} </p>

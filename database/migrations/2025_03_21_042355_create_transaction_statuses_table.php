@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('transaction_statuses', function (Blueprint $table) {
+            $table->unsignedBigInteger('transaction_status_id', true)->primary();
+            $table->string('transaction_status_name')->nullable(false); 
             $table->timestamps();
-            $table->foreignId('user_user_id')->primary()->constrained('users', 'user_id')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('transaction_statuses');
     }
 };

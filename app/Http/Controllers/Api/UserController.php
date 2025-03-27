@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Courier;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use App\Models\Courier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -31,15 +32,16 @@ class UserController extends Controller implements HasMiddleware
      */
     public function index(Request $request)
     {
-        // $users = User::get();
-        // if ($users) {
-        //     return UserResource::collection($users);
-        // } else {
-        //     return response()->json(['message' => 'No Record Available'], 200);
-        // }
+        $users = User::with('role')->get();
+        if ($users) {
+            return UserResource::collection($users);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
 
         $user = $request->user();
-        
+        $role = Role::where('role_id', $user->role)->first();
+
         // Load role-specific details based on user role
         switch ($user->role) {
             case 'customer':
@@ -52,19 +54,25 @@ class UserController extends Controller implements HasMiddleware
                 $user->load('courierDetails');
                 break;
         }
-        
+
         return response()->json([
             'status' => true,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(Request $request)
     {
-        //
+        $user = $request->user();
+        Role::where('role_id', $user->role)->first();
+
+        return response()->json([
+            'status' => true,
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -100,7 +108,7 @@ class UserController extends Controller implements HasMiddleware
                 'phone_number' => $request->phone_number,
                 'address' => $request->address
             ]);
-        }elseif ($roleName == 'courier') {
+        } elseif ($roleName == 'courier') {
             Courier::where('user_id', $request->user()->user_id)->update([
                 'phone_number' => $request->phone_number,
                 'status' => $request->status
@@ -122,6 +130,21 @@ class UserController extends Controller implements HasMiddleware
      */
     public function destroy(User $user)
     {
-        //
+        try {
+            $user->tokens()->delete();
+            $user->delete();
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Successfully Deleted User'
+            ]);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Delete User failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

@@ -12,17 +12,26 @@ class Pet extends Model
         'pet_name',
         'pet_gender',
         'pet_weight',
-        'pet_type_id',
-        'customer_user_user_id',
+        'pet_pet_types_id',
+        'user_user_id',
+    ];
+
+    protected $hidden = [
+        'pet_id',
+        'password',
+        'token',
+        'role_role_id',
+        'created_at',
+        'updated_at'
     ];
 
     public function customerDetails()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class, 'user_user_id', 'user_id');
     }
 
     public function petTypeDetails()
     {
-        return $this->belongsTo(PetType::class);
+        return $this->belongsTo(PetType::class, 'pet_pet_types_id', 'pet_type_id');
     }
 }
