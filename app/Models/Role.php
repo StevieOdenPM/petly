@@ -9,16 +9,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Role extends Model
 {
     use HasFactory;
-    protected $table = "roles";
     protected $primaryKey = "role_id";
-    protected $keyType = "int";
-    public $timestamps = true;
 
     protected $fillable = [
         'role_name',
     ];
 
+    protected $hidden = [
+        'role_id',
+        'created_at',
+        'updated_at'
+    ];
+
     public function user(): HasMany{
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class, 'role_role_id', 'role_id');
     }
 }

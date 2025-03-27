@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Transaction extends Model
+{
+    protected $primaryKey = "transaction_id";
+
+    protected $fillable = [
+        'transaction_date',
+        'total_price',
+        'user_user_id',
+        'delivery_delivery_id',
+        'transactions_transaction_status_id',
+    ];
+
+    public function transactionDetails() {
+        return $this->hasOne(TransactionDetail::class);
+    }
+
+    public function delivery() {
+        return $this->hasOne(Delivery::class, 'delivery_delivery_id', 'delivery_id')->withDefault();
+    }
+
+    public function transactionStatus() {
+        return $this->belongsTo(TransactionStatus::class, 'transactions_transaction_status_id', 'transaction_status_id');
+    }
+
+    public function users() {
+        return $this->belongsTo(User::class, 'user_user_id', 'user_id');
+    }
+}

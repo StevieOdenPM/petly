@@ -73,8 +73,8 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User registered successfully',
-                'user' => $user,
-                'role_id' => $role->role_id,
+                'data' => $user,
+                'role_name' => $role->role_name,
             ], 201);
 
         } catch (\Exception $e) {
@@ -109,9 +109,16 @@ class AuthController extends Controller
                 'status' => false,
                 'message' => 'Invalid credentials'
             ], 401);
+        }else if ($user->token) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Already Login'
+            ], 401);
         }
 
         $user->tokens()->delete();
+
+        
         
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -122,7 +129,7 @@ class AuthController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Login successful',
-            'user' => $user,
+            'data' => $user,
             'token' => $token
         ]);
     }

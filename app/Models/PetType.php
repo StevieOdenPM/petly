@@ -12,6 +12,10 @@ class PetType extends Model
         'pet_type_name',
     ];
 
+    protected $hidden = [
+        'pet_type_id',
+    ];
+
     public function pets()
     {
         return $this->hasMany(Pet::class);

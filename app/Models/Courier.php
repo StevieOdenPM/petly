@@ -25,4 +25,8 @@ class Courier extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function delivery(){
+        return $this->hasMany(Delivery::class, 'courier_id', 'user_user_id');
+    }
 }
