@@ -54,12 +54,22 @@ Route::get('/product', function () {
 });
 
 Route::get('/courier-info', function () {
-    return view('courier/courierInfo'); // Set courierInfo as the landing page
+    return view('courier/courierInfo');
 });
 
 Route::get('/parcel-tracking', function () {
-    return view('courier/parcelTracking'); // Access parcel tracking here
+    return view('courier/parcelTracking');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin/dashboard'); 
+});
 
+Route::get('/admin/order', function () {
+    return view('admin/order');
+});
+
+Route::get('/admin/product', function () {
+    return view('admin/product');
+});
 
