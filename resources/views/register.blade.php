@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="min-h-screen flex justify-center items-center bg-gray-100">
-        <div class="w-4/4 bg-white rounded-2xl shadow-xl flex overflow-hidden">
+        <div class="w-3/4 bg-white rounded-2xl shadow-xl flex overflow-hidden">
             <!-- Left: Register Form -->
             <div class="w-3/5 p-6 flex flex-col justify-center ml-12 mr-12">
                 <div class="mb-4">
@@ -30,27 +30,31 @@
                 <div class="relative my-3 text-center">
                     <span class="bg-white px-2 text-gray-600">or continue with email</span>
                 </div>
-                
-                <input type="text" placeholder="Full Name" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
-                <input type="email" placeholder="Email" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
-                <input type="text" placeholder="Phone Number" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
-                <input type="password" placeholder="Password" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
-                <input type="password" placeholder="Confirm Password" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
-                
-                <div class="flex items-center text-xs text-gray-600 mb-3">
-                    <input type="checkbox" class="mr-2"> 
-                    <span>I agree to the <a href="#" class="text-[#FF9494] font-semibold">Terms and Conditions</a> and the <a href="#" class="text-[#FF9494] font-semibold">Privacy Policy</a>.</span>
-                </div>
-                
-                <button class="w-full bg-[#FF9494] text-white py-2 rounded-lg font-semibold">Sign Up</button>
-                
+
+                <!-- Tambahkan Form untuk Mengirim Data ke Backend -->
+                <form action="{{ route('register') }}" method="POST">
+                    @csrf
+
+                    <input type="text" name="username" placeholder="Full Name" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
+                    <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
+                    <input type="text" name="phone" placeholder="Phone Number" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
+                    <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
+                    <input type="password" name="password_confirmation" placeholder="Confirm Password" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300">
+                    
+                    <div class="flex items-center text-xs text-gray-600 mb-3">
+                        <input type="checkbox" name="terms" class="mr-2"> 
+                        <span>I agree to the <a href="#" class="text-[#FF9494] font-semibold">Terms and Conditions</a> and the <a href="#" class="text-[#FF9494] font-semibold">Privacy Policy</a>.</span>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-[#FF9494] text-white py-2 rounded-lg font-semibold">Sign Up</button>
+                </form>
+
                 <p class="text-center text-gray-600 mt-3">
                     Already have an account? 
                     <a href="/login" class="text-[#FF9494]">Sign in</a>
                 </p>
             </div>
             
-            <!-- Right: Smaller Container but Larger Image -->
             <div class="w-2/3 flex justify-center items-center p-1">
                 <img class="rounded-xl object-cover w-4/4" src="{{ URL('img/registercat1.png') }}" alt="image description">
             </div>

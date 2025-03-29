@@ -39,3 +39,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 Route::apiResource('/products', ProductController::class);
+
+use App\Http\Controllers\loginController;
+
+Route::post('/login', [loginController::class, 'apiLogin']);
+
+use App\Http\Controllers\registerController;
+
+Route::post('/api/register', [registerController::class, 'apiRegister']);
