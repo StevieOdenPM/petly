@@ -15,7 +15,7 @@
                         <svg class="rtl:rotate-180 block w-3 h-3 mx-1 text-[#FE9494]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
                         </svg>
-                        <a href="product" class="ms-1 text-sm font-medium text-[#FE9494] hover:text-[#FE7070] md:ms-2">Product</a>
+                        <a href="{{ url('/product') }}" class="ms-1 text-sm font-medium text-[#FE9494] hover:text-[#FE7070] md:ms-2">Product</a>
                     </div>
                 </li>
                 <li>
@@ -34,17 +34,17 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2">
                     <div class="img">
                         <div class="img-box h-full max-lg:mx-auto">
-                            <img src="{{ URL('img/dogfood1.jpg')}}" alt="Pedigree Dog Dry Food package" 
+                            <img src="{{ $product['product_image'] }}" alt="Pedigree Dog Dry Food package" 
                                  class="max-lg:mx-auto lg:ml-auto h-full w-full object-cover max-h-[600px] rounded-lg shadow-sm">
                         </div>
                     </div>
                     <div class="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
                         <div class="data w-full max-w-xl" x-data="{ quantity: 2 }">
-                            <p class="text-lg font-light leading-8 text-[#000000] mb-4">Pet Food</p>
-                            <h2 class="font-sans font-medium text-4xl leading-10 text-gray-900 mb-2">Pedigree Dog Dry Food</h2>
+                            <p class="text-lg uppercase font-light leading-8 text-[#000000] mb-4">Pet {{ $product['product_type']['product_type_name']}}</p>
+                            <h2 class="font-sans font-medium text-4xl leading-10 text-gray-900 mb-2">{{ $product['product_name'] }}</h2>
                             
                             <div class="flex items-center mb-6">
-                                <div class="flex items-center gap-1">
+                                <div class="flex items-center gap-1 mt-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-yellow-400">
                                         <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                                     </svg>
@@ -62,12 +62,12 @@
                                     <p class="text-gray-800 font-medium">50 gram</p>
                                 </div>
                                 <div class="border border-gray-200 rounded-lg p-3">
-                                    <p class="text-[#FF9494] text-sm mb-1">Taste</p>
-                                    <p class="text-gray-800 font-medium">Beef</p>
+                                    <p class="text-[#FF9494] text-sm mb-1">Stock</p>
+                                    <p class="text-gray-800 font-medium">{{ $product['product_stock'] }}</p>
                                 </div>
                             </div>
                             
-                            <p class="text-gray-900 text-2xl font-semibold mb-6">IDR 500.000,00</p>
+                            <p class="text-gray-900 text-2xl font-semibold mb-6">IDR {{ $product['product_price'] }}</p>
                             
                             <div x-data="{ quantity: 1 }" class="mb-8">
                                 <div class="flex items-center gap-4">

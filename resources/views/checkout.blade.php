@@ -79,8 +79,7 @@
                         <label for="pay-on-delivery" class="font-medium leading-none text-gray-900 dark:text-white"> Payment on delivery </label>
                         <p id="pay-on-delivery-text" class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Pay with cash on delivery</p>
                       </div>
-                    </div>
-      
+                    </div>      
                   </div>
       
                 </div>

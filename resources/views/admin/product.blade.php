@@ -42,12 +42,6 @@
                     </svg>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <span class="text-gray-600">Showing</span>
-                    <select class="border rounded-lg p-2">
-                        <option>9</option>
-                        <option>15</option>
-                        <option>30</option>
-                    </select>
                     <button class="flex items-center px-4 py-2 bg-gray-200 rounded-lg shadow-sm">
                         <svg class="w-5 h-5 mr-1 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -71,34 +65,26 @@
                             <th class="pr-10 pl-6 py-3 text-gray-600">Price</th>
                             <th class="pr-10 pl-6 py-3 text-gray-600">Stock</th>
                             <th class="pr-10 pl-8 py-3 text-gray-600">Status</th>
-                            <th class="pr-12 pl-8 py-3 text-gray-600">Action</th>
+                            <th class="pr-10 pl-10 py-3 text-gray-600">Action</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($products as $product)
+                    <tbody>
+                        @foreach($products['data'] as $product)
                         <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $product->name }}</td>
-                            <td class="px-6 py-4">#{{ $product->id }}</td>
-                            <td class="px-6 py-4">IDR {{ number_format($product->price, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4">{{ $product->stock }} pcs</td>
-                            <td class="px-6 py-4 font-semibold {{ $product->stock > 0 ? 'text-green-600' : 'text-red-500' }}">
-                                {{ $product->stock > 0 ? 'Available' : 'Out of Stock' }}
+                            <td class="px-6 py-4">{{ $product['product_name'] }}</td>
+                            <td class="px-6 py-4">#{{ $product['product_id'] }}</td>
+                            <td class="px-6 py-4">IDR {{ $product['product_price'] }}</td>
+                            <td class="px-6 py-4">{{ $product['product_stock'] }} pcs</td>
+                            <td class="px-6 py-4 font-semibold {{ $product['product_stock'] > 0 ? 'text-green-600' : 'text-red-500' }}">
+                                {{ $product['product_stock'] > 0 ? 'Available' : 'Out of Stock' }}
                             </td>
-                            <td class="px-6 py-4">...</td>
+                            <td class="px-8 py-4">
+                                <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md">
+                                    Delete
+                                </button>
+                            </td>
                         </tr>
                         @endforeach
-                    </tbody> --}}
-                    <tbody>
-                        <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">Duri</td>
-                            <td class="px-6 py-4">#123333</td>
-                            <td class="px-6 py-4">IDR 1232333</td>
-                            <td class="px-6 py-4">5 pcs</td>
-                            <td class="px-6 py-4 font-semibold text-green-600">
-                                Available
-                            </td>
-                            <td class="px-8 py-4">....</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
