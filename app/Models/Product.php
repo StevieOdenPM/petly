@@ -27,6 +27,10 @@ class Product extends Model
         'product_image'
     ];
 
+    protected $hidden = [
+        'product_id',
+    ];
+
     public function petType()
     {
         return $this->belongsTo(PetType::class, 'pet_pet_types_id', 'pet_type_id');
@@ -37,14 +41,14 @@ class Product extends Model
         return $this->belongsTo(ProductType::class, 'product_product_type_id', 'product_type_id');
     }
 
-    public function transactionDetail()
-    {
-        return $this->hasMany(TransactionDetail::class, 'foreign_transaction_id', 'transaction_transaction_id');
-    }
-
     public function carts()
     {
-        return $this->belongsToMany(Cart::class, 'cart_products', 'foreign_product_id', 'foreign_cart_id');
+        return $this->belongsToMany(
+            Cart::class,
+            'cart_products',
+            'foreign_product_id',
+            'foreign_cart_id'
+        )->withPivot('quantity')->withPivot('total_price');
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filters)

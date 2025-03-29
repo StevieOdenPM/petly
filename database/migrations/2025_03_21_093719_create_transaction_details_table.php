@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaction_details', function (Blueprint $table) {
-            $table->integer('quantity')->nullable(false);
             $table->integer('total_payment')->nullable(false);
             $table->foreignId('transaction_transaction_id')->primary()->constrained('transactions', 'transaction_id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

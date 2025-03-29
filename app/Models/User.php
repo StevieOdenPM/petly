@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -46,6 +47,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_role_id', 'role_id');
     }
 
+    public function delivery(): HasMany{
+        return $this->hasMany(Delivery::class);
+    }
+
     public function customerDetails() {
         return $this->hasOne(Customer::class);
     }
@@ -60,5 +65,9 @@ class User extends Authenticatable
 
     public function transactions() {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function carts(){
+        return $this->hasMany(Cart::class);
     }
 }

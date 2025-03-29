@@ -10,14 +10,18 @@ class Transaction extends Model
 
     protected $fillable = [
         'transaction_date',
-        'total_price',
         'user_user_id',
         'delivery_delivery_id',
         'transactions_transaction_status_id',
+        'foreign_cart_id'
     ];
 
     public function transactionDetails() {
         return $this->hasOne(TransactionDetail::class);
+    }
+
+    public function cart() {
+        return $this->hasOne(Cart::class);
     }
 
     public function delivery() {

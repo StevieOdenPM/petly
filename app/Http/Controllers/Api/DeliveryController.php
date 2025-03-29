@@ -19,7 +19,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $delivery = Delivery::with(['deliveryClass', 'courier'])->get();
+        $delivery = Delivery::with(['deliveryClass', 'user', 'courier'])->get();
         if ($delivery) {
             return DeliveryResource::collection($delivery);
         } else {

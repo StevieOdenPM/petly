@@ -26,7 +26,7 @@ Kaya vitamin dan mineral',
             'product_image' => 'https://images.tokopedia.net/img/cache/700/hDjmkQ/2025/3/7/8f24522d-658b-46a0-91b2-3ec3518a49a7.jpg.webp?ect=4g',
             'product_stock' => fake()->numberBetween(1, 100),
             'product_rating' => fake()->numberBetween(1, 10),
-            'product_price' => fake()->randomNumber(5,true),
+            'product_price' => 49900,
         ]);
 
         Product::create([
@@ -45,7 +45,91 @@ Memiliki bentuk dan ukuran kibble yang disesuaikan secara khusus',
             'product_image' => 'https://images.tokopedia.net/img/cache/700/hDjmkQ/2025/2/13/3c04fa21-cdc1-4c11-8baa-721ae95ebefc.jpg.webp?ect=4g',
             'product_stock' => fake()->numberBetween(10, 100),
             'product_rating' => fake()->numberBetween(5, 10),
-            'product_price' => fake()->randomNumber(5,true),
+            'product_price' => 445900,
+        ]);
+
+        Product::create([
+            'product_name' => 'Pet Kingdom Wanpy 1.5 kg Makanan Kucing Kering Kitten grain Free Tuna Pakan Kucing Cat Food Kebutuhan Hewan Peliharaan',
+            'product_desc' => 'Terbuat dari bahan-bahan berkualitas
+Dilengkapi 91% protein hewani
+Grain-free (tanpa tambahan jangung, gandum, kedelai, atau kacang-kacangan)
+Meningkatkan sistem imun tubuh anak kucing selama masa pertumbuhan
+Membantu melatih insting alami kucing untuk mengunyah
+Tekstur mudah dicerna
+Rasa dan aroma yang disukai kucing
+Isi : 1.5 kg',
+            'product_product_type_id' => 1,
+            'pet_pet_types_id' => 2,
+            'product_image' => 'https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2025/3/25/c7f6f805-9520-432a-bc5f-1172e6e318e9.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 129900,
+        ]);
+        Product::create([
+            'product_name' => 'Pet Kingdom Aatas Cat 80 gr Makanan Kucing Basah Daily Defence Urinary Tract Health Pakan Kucing Cat Food Kebutuhan Hewan Peliharaan',
+            'product_desc' => 'Disajikan dalam jelly gurih untuk pengalaman makan yang nikmat
+Grain free
+Dengan kombinasi bahan berkualitas
+Mengandung Ammonium Chloride
+Mendukung kesehatan saluran kemih
+Membantu mencegah pembentukan batu ginjal dan kandung kemih
+Menambah variasi makanan serta membantu hidrasi kucing
+Memiliki rasa lezat yang disukai kucing 
+Isi : 80 gr',
+            'product_product_type_id' => 1,
+            'pet_pet_types_id' => 2,
+            'product_image' => 'https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2025/3/25/55a165ac-76d0-4ce6-9e05-5aa8126190e6.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 16900,
+        ]);
+        Product::create([
+            'product_name' => 'Pet Kingdom Ukuran S Coolpet Tali Ikatan Badan - Ungu/Hijau Mint',
+            'product_desc' => 'Perpaduan warna menarik
+Dilengkapi lubang pengait dan clip
+Dapat dikaitkan dengan tali anjing
+Panjang dan lebar tali dapat disesuaikan
+Mudah dipasang dan nyaman saat digunakan
+Material berkualitas, kuat, dan awet
+Cocok untuk mengawasi atau membawa pergi anjing
+Ukuran : S',
+            'product_product_type_id' => 2,
+            'pet_pet_types_id' => 1,
+            'product_image' => 'https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2025/3/5/4e4bb299-1f82-4e2f-99a2-889610016a0e.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 53940,
+        ]);
+        Product::create([
+            'product_name' => 'Pet Kingdom M-Pets Ukuran L Java Tempat Tidur Anjing Dengan Cushion - Abu-Abu dog bed kasur hewan peliharaan alas tidur anjing pet accessories',
+            'product_desc' => 'Cushion dengan kualitas bantalan empuk dan nyaman saat digunakan
+Keranjang mudah dibersihkan
+Mudah dipindahkan
+Material berkualitas dan awet
+Cocok digunakan sebagai tempat istirahat atau area tidur anjing
+Ukuran : L',
+            'product_product_type_id' => 2,
+            'pet_pet_types_id' => 1,
+            'product_image' => 'https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2025/2/21/c7e3bcf5-aeff-430c-a739-fe7d27547a68.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 459900,
+        ]);
+        Product::create([
+            'product_name' => 'Pet Kingdom 200 Ml Rose Parfum Hewan',
+            'product_desc' => 'Praktis digunakan
+Bebas alkohol
+Aman untuk hewan peliharaan
+Dapat digunakan untuk anjing dan kucing
+Membuat bulu terasa halus, berkilau, dan wangi
+Aroma : mawar
+Isi : 200 ml',
+            'product_product_type_id' => 3,
+            'pet_pet_types_id' => 1,
+            'product_image' => 'https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2025/2/13/93359398-1875-4b5c-a0fd-9fd430a4d496.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 119900,
         ]);
     }
 }

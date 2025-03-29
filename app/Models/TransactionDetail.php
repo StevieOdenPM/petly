@@ -10,7 +10,6 @@ class TransactionDetail extends Model
 
     protected $fillable = [
         'transaction_transaction_id',
-        'quantity',
         'total_payment',
     ];
 
@@ -20,9 +19,5 @@ class TransactionDetail extends Model
 
     public function transaction() {
         return $this->hasOne(Transaction::class, 'transaction_transaction_id', 'transaction_id');
-    }
-
-    public function products() {
-        return $this->belongsTo(Product::class);
     }
 }
