@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Delivery;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\TransactionDetail;
 use App\Models\TransactionStatus;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\TransactionResource;
-use App\Models\Delivery;
-use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\TransactionResource;
 
 class TransactionController extends Controller
 {
@@ -21,7 +22,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $product = Transaction::with(['users', 'transactionDetails', 'transactionStatus'])->get();
+        $product = Transaction::with(['users', 'transactionDetails.products.petType', 'transactionDetails.products.productType', 'transactionStatus'])->get();
         if ($product) {
             return TransactionResource::collection($product);
         } else {
@@ -33,11 +34,11 @@ class TransactionController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
-            'delivery_id' => 'nullable',
             'status_name' => 'required|in:complete,progress,pending,canceled',
             'total_price' => 'required|integer',
             'total_payment' => 'nullable|integer',
             'quantity' => 'nullable|integer',
+            'product_id' => 'required|integer',
             'transaction_date' => 'required|date',
         ]);
 
@@ -49,23 +50,26 @@ class TransactionController extends Controller
             ], 422);
         }
 
+        
+
         DB::beginTransaction();
         try {
             $transactionStatus = TransactionStatus::where('transaction_status_name', $request->status_name)->first();
-            // $delivery = Delivery::where('delivery_id', $request->status_name)->first();
+            $product = Product::where('product_id', $request->product_id)->first();
 
-            $transaction = Transaction::firstOrCreate([
+            $transaction = Transaction::create([
                 'transaction_date' => $request->transaction_date,
                 'total_price' => $request->total_price,
                 'user_user_id' => $request->user_id,
-                'delivery_delivery_id' => $request->delivery_id ?? 1,
+                'delivery_delivery_id' => null,
                 'transactions_transaction_status_id' => $transactionStatus->transaction_status_id
             ]);
 
             $transactionDetail = TransactionDetail::create([
                 'transaction_transaction_id' => $transaction->transaction_id,
                 'quantity' => $request->quantity,
-                'total_payment' => $request->quantity * $request->total_price
+                'total_payment' => $request->quantity * $request->total_price,
+                'product_product_id' => $request->product_id
             ]);
             DB::commit();
 
@@ -78,7 +82,8 @@ class TransactionController extends Controller
                     'user_user_id' => $transaction->user_user_id,
                     'delivery_delivery_id' => $transaction->delivery_delivery_id,
                     'transaction_status' => $transactionStatus,
-                    'transaction_detail' => $transactionDetail
+                    'transaction_detail' => $transactionDetail,
+                    'product' => $product,
                 ],
             ], 201);
         } catch (\Throwable $e) {
@@ -91,12 +96,29 @@ class TransactionController extends Controller
         }
     }
 
+    public function payment(Request $request){
+        $validator = Validator::make($request->all(), [
+            'payment_method' => 'required|in:complete,progress,pending,canceled',
+            'delivery_id' => 'nullable',
+            'status_name' => 'required|in:complete,progress,pending,canceled',
+            'total_price' => 'required|integer',
+            'total_payment' => 'nullable|integer',
+            'quantity' => 'nullable|integer',
+            'transaction_date' => 'required|date',
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Transaction $transaction)
     {
-        //
+        $product = Transaction::with(['users', 'transactionDetails', 'transactionStatus'])->get();
+        if ($product) {
+            return TransactionResource::collection($product);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('quantity')->nullable(false);
             $table->integer('total_payment')->nullable(false);
             $table->foreignId('transaction_transaction_id')->primary()->constrained('transactions', 'transaction_id')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('product_product_id')->constrained('products', 'product_id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -104,9 +104,8 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with(['productType', 'petType'])->findOrFail($id);
-        // return new ProductResource($product);
         if ($product) {
-            return ProductResource::collection($product);
+            return new ProductResource($product);
         } else {
             return response()->json(['message' => 'No Record Available'], 200);
         }

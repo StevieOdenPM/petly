@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('product_desc');
             $table->foreignId('product_product_type_id')->constrained('product_types', 'product_type_id')->default(1);
             $table->foreignId('pet_pet_types_id')->constrained('pet_types', 'pet_type_id')->default(1);
-            $table->foreignId('foreign_transaction_id')->nullable(true)->constrained('transaction_details', 'transaction_transaction_id');
             $table->string('product_image');
             $table->integer('product_stock');
             $table->integer('product_rating');

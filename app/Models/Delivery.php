@@ -24,6 +24,10 @@ class Delivery extends Model
         return $this->belongsTo(DeliveryClass::class, 'delivery_delivery_class_id', 'delivery_class_id');
     }
 
+    public function user() {
+        return $this->belongsTo(User::class, 'courier_id', 'user_id');
+    }
+
     public function courier() {
         return $this->belongsTo(Courier::class, 'courier_id', 'user_user_id');
     }

@@ -16,7 +16,7 @@ class Role extends Model
     ];
 
     protected $hidden = [
-        'role_id',
+        // 'role_id',
         'created_at',
         'updated_at'
     ];

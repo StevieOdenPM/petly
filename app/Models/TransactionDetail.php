@@ -12,6 +12,7 @@ class TransactionDetail extends Model
         'transaction_transaction_id',
         'quantity',
         'total_payment',
+        'product_product_id'
     ];
 
     protected $hidden = [
@@ -23,6 +24,6 @@ class TransactionDetail extends Model
     }
 
     public function products() {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_product_id', 'product_id');
     }
 }
