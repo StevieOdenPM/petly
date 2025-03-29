@@ -41,11 +41,6 @@ class Product extends Model
         return $this->belongsTo(ProductType::class, 'product_product_type_id', 'product_type_id');
     }
 
-    public function transactionDetail()
-    {
-        return $this->hasMany(TransactionDetail::class, 'transaction_transaction_id', 'transaction_id');
-    }
-
     public function carts()
     {
         return $this->belongsToMany(
@@ -53,7 +48,7 @@ class Product extends Model
             'cart_products',
             'foreign_product_id',
             'foreign_cart_id'
-        )->withPivot('quantity');
+        )->withPivot('quantity')->withPivot('total_price');
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filters)

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->unsignedBigInteger('transaction_id', true)->primary();
             $table->dateTime('transaction_date');
-            $table->integer('total_price');
             $table->foreignId('user_user_id')->constrained('users', "user_id");
             $table->foreignId('delivery_delivery_id')->nullable(true)->constrained('deliveries', "delivery_id");
             $table->foreignId('transactions_transaction_status_id')->constrained('transaction_statuses', "transaction_status_id");
+            $table->foreignId('foreign_cart_id')->nullable(true)->constrained('carts', "cart_id")->onDelete('set null');
             $table->timestamps();
         });
     }
