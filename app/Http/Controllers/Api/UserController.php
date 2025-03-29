@@ -80,49 +80,50 @@ class UserController extends Controller implements HasMiddleware
      */
     public function update(Request $request)
     {
-        $roleName = Role::where('role_id', $request->user()->role_id)->get('role_name');
+        try {
+            $user = $request->user();
+            $roleName = Role::where('role_id', $user->role_role_id)->first()->role_name;
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|unique:users,email' . Auth::user()->id,
-            'username' => 'required',
-            'phone_number' => 'required|numeric',
-            'address' => Rule::requiredIf($roleName == 'customer'),
-            'status' => Rule::requiredIf($roleName == 'courier'),
-        ]);
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'username' => 'required',
+                'phone_number' => 'required|numeric',
+                'address' => Rule::requiredIf($roleName == 'customer'),
+                'status' => Rule::requiredIf($roleName == 'courier'),
+            ]);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => "Validation Error",
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+            
+            $user->update([
+                'username' => $request->username,
+                'email' => $request->email,
+            ]);
+
+            if ($roleName == 'customer') {
+                Customer::where('user_user_id', $user->user_id)->update([
+                    'address' => $request->address
+                ]);
+            } elseif ($roleName == 'courier') {
+                Courier::where('user_user_id', $request->user()->user_id)->update([
+                    'status' => $request->status
+                ]);
+            }
+
             return response()->json([
-                'message' => "Validation Error",
-                'errors' => $validator->errors(),
-            ], 422);
+                'message' => 'Profile successfully updated'
+            ], 200);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Edit Profile Failed',
+                'error' => $e->getMessage()
+            ], 500);
         }
-
-        $user = $request->user();
-        $user->update([
-            'username' => $request->username,
-            'email' => $request->email,
-        ]);
-        $roleName = Role::where('role_id', $request->user()->role_id)->get('role_name');
-        if ($roleName == 'customer') {
-            Customer::where('user_id', $request->user()->user_id)->update([
-                'phone_number' => $request->phone_number,
-                'address' => $request->address
-            ]);
-        } elseif ($roleName == 'courier') {
-            Courier::where('user_id', $request->user()->user_id)->update([
-                'phone_number' => $request->phone_number,
-                'status' => $request->status
-            ]);
-        }
-
-        // $request->user()->customerDetails()->update([
-        //     'phone_number' => $request->phone_number,
-        //     'address' => $request->address
-        // ]);
-
-        return response()->json([
-            'message' => 'Profile successfully updated'
-        ], 200);
     }
 
     /**
@@ -133,7 +134,7 @@ class UserController extends Controller implements HasMiddleware
         try {
             $user->tokens()->delete();
             $user->delete();
-            
+
             return response()->json([
                 'status' => true,
                 'message' => 'Successfully Deleted User'

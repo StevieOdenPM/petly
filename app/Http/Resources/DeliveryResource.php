@@ -19,7 +19,8 @@ class DeliveryResource extends JsonResource
         return [
             'delivery_deadline' => $this->delivery_deadline,
             'delivery_address' => $this->delivery_address,
-            'courier' => new CourierResource($this->whenLoaded('courier')),
+            'courier' => new UserResource($this->whenLoaded('user')),
+            'courier_detail' => new CourierResource($this->whenLoaded('courier')),
             'delivery_class' => new DeliveryClassResource($this->whenLoaded('deliveryClass')),
         ];
     }
