@@ -332,10 +332,9 @@
                     @foreach($products['data'] as $product)
                     <!-- Product Card -->         
                     <div class="bg-white shadow-md hover:scale-102 hover:shadow-xl duration-500 rounded-xl w-full">
-                        <a href="detailproduct">
+                      <a href="{{ url('/detailproduct/' . $product['product_id']) }}">
                             <img 
-                                src="{{ $product['product_image'] ?? 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80' }}" 
-                                
+                                src="{{ $product['product_image'] ?? 'https://images.unsplash.com/photo-1526947425960-945c6e72858f?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzODM0NDU&ixlib=rb-1.2.1&q=80' }}"                                 
                                 class="h-60 w-full object-cover rounded-t-xl"
                             />
                         </a>
