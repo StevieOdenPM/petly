@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProductController;
 
 Route::get('/', function () {
     return view('home');
@@ -31,8 +32,9 @@ Route::get('/aboutus', function () {
     return view('aboutus');
 });
 
-Route::get('/detailproduct', function () {
-    return view('detailproduct');
+Route::get('/detailproduct/{id}', function ($id) {
+    $response = Http::get("http://petly.test:8080/api/products/{$id}");
+    return view('detailproduct', ['product' => $response->json()['data']]);
 });
 
 Route::get('/cart', function () {
@@ -53,6 +55,12 @@ Route::get('/product', function () {
     return view('product', ['products' => $response]);
 });
 
+Route::get('admin/product', function () {
+    $response = Http::get("http://petly.test:8080/api/products");
+    
+    return view('admin/product', ['products' => $response]);
+});
+
 Route::get('/courier-info', function () {
     return view('courier/courierInfo');
 });
@@ -69,7 +77,5 @@ Route::get('/admin/order', function () {
     return view('admin/order');
 });
 
-Route::get('/admin/product', function () {
-    return view('admin/product');
-});
+
 

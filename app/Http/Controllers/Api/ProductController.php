@@ -104,6 +104,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with(['productType', 'petType'])->findOrFail($id);
+
         if ($product) {
             return new ProductResource($product);
         } else {
@@ -112,7 +113,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specifixed resource in storage.
      */
     public function update(Request $request, Product $product)
     {
