@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Customer;
 use App\Models\Delivery;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -13,7 +15,6 @@ use App\Models\PaymentMethod;
 use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
@@ -69,7 +70,7 @@ class PaymentController extends Controller
             }
             $transactionDetail = TransactionDetail::where('transaction_transaction_id', $request->transaction_id)->first();
             $paymentMethod = PaymentMethod::where('payment_method_name', $request->payment_method)->first();
-            $product = Product::where('product_id', $transactionDetail->product_product_id)->first();
+            $cart = Cart::where('cart_id', $transaction->foreign_cart_id)->first();
             $deliveryClass = DeliveryClass::where('delivery_class_name', $request->delivery_class)->first();
 
             $payment = Payment::create([
@@ -89,9 +90,11 @@ class PaymentController extends Controller
                 'delivery_delivery_id' => $delivery->delivery_id
             ]);
 
-            $product->update([
-                'product_stock' => $product->product_stock - $transactionDetail->quantity
-            ]);
+            for ($i = 0; $i < count($cart->products); $i++) {
+                $cart->products[$i]->update([
+                    'product_stock' => $cart->products[$i]->product_stock - $cart->products[$i]->pivot->quantity
+                ]);
+            }
 
             DB::commit();
 
@@ -102,7 +105,7 @@ class PaymentController extends Controller
                     'payment_method' => $paymentMethod,
                     'transaction' => $transaction,
                     'transaction_detail' => $transactionDetail,
-                    'product' => $product,
+                    'product' => $cart->products,
                     'delivery' => $delivery
                 ],
             ], 201);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->unsignedBigInteger('cart_id', true)->primary();
-            $table->foreignId('customer_user_id')->constrained('customers', 'user_user_id')->onDelete('cascade');
+            $table->foreignId('customer_user_id')->constrained('users', 'user_id')->onDelete('cascade');
             $table->timestamps();
         });
     }

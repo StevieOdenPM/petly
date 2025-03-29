@@ -6,6 +6,7 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CartResource;
 use App\Models\Product;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +17,12 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts = Cart::with(['products'])->get();
+        if ($carts) {
+            return CartResource::collection($carts);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
     }
 
     /**
@@ -51,11 +57,12 @@ class CartController extends Controller
                         'message' => 'No product available with ' . $productId,
                     ], 422);
                 }
-                $cart->products()->attach($product->product_id, ['quantity' => $request->quantity[$inc]]);
+                $cart->products()->attach($product->product_id, [
+                    'quantity' => $request->quantity[$inc],
+                    'total_price' => $request->quantity[$inc] * $product->product_price
+                ]);
                 $inc++;
             }
-
-
 
             if (isset($validatedData['products'])) {
                 $cart->products()->sync($validatedData['products']);
@@ -83,7 +90,20 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        try {
+            $cart->load(['products']);
+            return response()->json([
+                'status' => true,
+                'message' => "Cart Found",
+                'data' => new CartResource($cart)
+            ], 201);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get Cart Failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -99,6 +119,10 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        $cart->delete();
+        return response()->json([
+            'status' => true,
+            'message' => "Delete Cart Successful",
+        ], 201);
     }
 }

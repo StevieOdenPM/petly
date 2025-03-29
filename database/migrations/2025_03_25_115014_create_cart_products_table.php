@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('foreign_cart_id')->constrained('carts', 'cart_id')->onDelete('cascade');
             $table->foreignId('foreign_product_id')->constrained('products', 'product_id')->onDelete('cascade');
             $table->integer('quantity')->default(1);
+            $table->integer('total_price')->default(0);
         });
     }
 
