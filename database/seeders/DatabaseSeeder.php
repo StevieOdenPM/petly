@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             DeliveryClassSeeder::class, 
             ProductTypeSeeder::class, 
             ProductSeeder::class,
+            PaymentMethodSeeder::class,
             TransactionStatusSeeder::class
         ]);
         // User::factory(5)->recycle([Role::all()])->create();
