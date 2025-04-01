@@ -36,6 +36,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/roles', RoleController::class);
 });
 
-
-
 Route::apiResource('/products', ProductController::class);

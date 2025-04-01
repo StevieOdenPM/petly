@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CartController;
 
 Route::get('/', function () {
     return view('home');
@@ -34,6 +36,7 @@ Route::get('/aboutus', function () {
 
 Route::get('/detailproduct/{id}', function ($id) {
     $response = Http::get("http://petly.test:8080/api/products/{$id}");
+
     return view('detailproduct', ['product' => $response->json()['data']]);
 });
 

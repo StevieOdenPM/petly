@@ -112,6 +112,7 @@ class ProductController extends Controller
         }
     }
 
+
     /**
      * Update the specifixed resource in storage.
      */
