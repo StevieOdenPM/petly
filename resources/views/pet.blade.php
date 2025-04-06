@@ -1,22 +1,23 @@
+<script src="https://unpkg.com/lucide@latest"></script>
 <x-main>
     <div class="flex gap-12 max-w-7xl w-full mt-12 mb-32 mx-auto flex-grow">
         <aside class="bg-white shadow-md rounded-xl p-6 w-80 flex flex-col items-center self-start">
             <h2 class="text-xl font-semibold text-center mb-6">User Profile</h2>
             <nav class="space-y-4 w-full">
-                <a href="#"
+                <a href="/profile"
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="user"></i> User Info
                 </a>
-                <a href="#"
+                <a href="/bank"
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
-                    <i data-lucide="banknote"></i> Bank Account
+                    <i data-lucide="landmark"></i> Bank Account
                 </a>
-                <a href="#"
+                <a href="/pet"
                     class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2 rounded-lg relative group">
-                    <i data-lucide="paw-print"></i> Add Pet
+                    <i data-lucide="dog"></i> Add Pet
                     <span class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-red-500 rounded-full"></span>
                 </a>
-                <a href="#"
+                <a href="/theme"
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="settings"></i> Settings
                 </a>

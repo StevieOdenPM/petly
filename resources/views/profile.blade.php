@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/lucide@latest"></script>
 <x-main>
 
     <!-- Layout Wrapper -->
@@ -8,17 +9,17 @@
             <h2 class="text-xl font-semibold text-center mb-6">User Profile</h2>
             
             <nav class="space-y-4 w-full">
-                <a href="#" class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2 rounded-lg relative group">
+                <a href="/profile" class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2 rounded-lg relative group">
                     <i data-lucide="user"></i> User Info
                     <span class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-red-500 rounded-full"></span>
                 </a>
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
-                    <i data-lucide="banknote"></i> Bank Account
+                <a href="/bank" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                    <i data-lucide="landmark"></i> Bank Account
                 </a>
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
-                    <i data-lucide="paw-print"></i> Add Pet
+                <a href="/pet" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                    <i data-lucide="dog"></i> Add Pet
                 </a>
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                <a href="/theme" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="settings"></i> Settings
                 </a>
             </nav>
