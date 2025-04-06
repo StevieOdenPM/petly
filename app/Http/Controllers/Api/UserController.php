@@ -67,12 +67,13 @@ class UserController extends Controller implements HasMiddleware
     public function show(Request $request)
     {
         $user = $request->user();
-        Role::where('role_id', $user->role)->first();
+        $users = User::where('user_id', $user->user_id)->with('role')->get();
+        $customer = Customer::where('user_user_id', $user->user_id)->get();
 
-        return response()->json([
-            'status' => true,
-            'user' => $user,
-        ]);
+        return [
+            'user' => $users,
+            'customer' => $customer
+        ];
     }
 
     /**

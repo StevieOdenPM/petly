@@ -18,21 +18,10 @@ class CartResource extends JsonResource
     {
         return [
             'cart_id' => $this->cart_id,
-            'products' => $this->whenLoaded('products', function() {
-                return $this->products->map(function($product) {
-                    return [
-                        'product_image' => $product->product_image,
-                        'product_name' => $product->product_name,
-                        'product_desc' => $product->product_desc,
-                        'product_stock' => $product->product_stock,
-                        'product_price' => $product->product_price,
-                        'pivot' => [
-                            'quantity' => $product->pivot->quantity,
-                            'total_price' => $product->pivot->total_price,
-                        ]
-                    ];
-                });
-            }),
+            'products' => new ProductResource($this->whenLoaded('product')),
+            'transaction' => new TransactionResource($this->whenLoaded('transaction')),
+            'quantity' => $this->quantity,
+            'total_price' => $this->total_price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
