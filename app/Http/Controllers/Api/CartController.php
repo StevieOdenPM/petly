@@ -18,7 +18,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::with(['products'])->get();
+        $carts = Cart::with(['product', 'transaction.users', 'transaction.cart', 'transaction.transactionStatus', 'transaction.transactionDetails'])->get();
         if ($carts) {
             return CartResource::collection($carts);
         } else {
@@ -30,8 +30,8 @@ class CartController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'customer_user_id' => 'required|integer',
-            'quantity' => 'required|array',
-            'product' => 'required|array'
+            'quantity' => 'required|integer',
+            'product_id' => 'required|integer'
         ]);
 
         if ($validator->fails()) {
@@ -43,28 +43,21 @@ class CartController extends Controller
         }
 
         try {
-            $cart = Cart::create([
-                'customer_user_id' => $request->customer_user_id,
-            ]);
-            $inc = 0;
-            foreach ($request->product as $productId) {
-                $product = Product::find($productId);
-                if (!$product) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => 'No product available with ' . $productId,
-                    ], 422);
-                }
-                $cart->products()->attach($product->product_id, [
-                    'quantity' => $request->quantity[$inc],
-                    'total_price' => $request->quantity[$inc] * $product->product_price
-                ]);
-                $inc++;
+            $product = Product::find($request->product_id);
+            
+            if (!$product) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'No product available with ' . $product->product_id,
+                ], 422);
             }
 
-            if (isset($validatedData['products'])) {
-                $cart->products()->sync($validatedData['products']);
-            }
+            $cart = Cart::create([
+                'customer_user_id' => $request->customer_user_id,
+                'foreign_product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+                'total_price' => $request->quantity * $product->product_price
+            ]);
 
             DB::commit();
 

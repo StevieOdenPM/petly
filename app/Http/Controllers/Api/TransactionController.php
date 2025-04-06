@@ -23,9 +23,9 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $product = Transaction::with(['users', 'transactionDetails.products.petType', 'transactionDetails.products.productType', 'transactionStatus'])->get();
-        if ($product) {
-            return TransactionResource::collection($product);
+        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails'])->get();
+        if ($transaction) {
+            return TransactionResource::collection($transaction);
         } else {
             return response()->json(['message' => 'No Record Available'], 200);
         }
@@ -36,7 +36,7 @@ class TransactionController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'status_name' => 'required|in:complete,progress,pending,canceled',
-            'cart_id' => 'required|integer',
+            'cart_id' => 'required|array',
             'transaction_date' => 'required|date',
         ]);
 
@@ -52,7 +52,7 @@ class TransactionController extends Controller
 
         DB::beginTransaction();
         try {
-            $cart = Cart::where('cart_id', $request->cart_id)->first();
+
             $transactionStatus = TransactionStatus::where('transaction_status_name', $request->status_name)->first();
 
             $transaction = Transaction::create([
@@ -60,22 +60,25 @@ class TransactionController extends Controller
                 'user_user_id' => $request->user_id,
                 'delivery_delivery_id' => null,
                 'transactions_transaction_status_id' => $transactionStatus->transaction_status_id,
-                'foreign_cart_id' => $cart->cart_id
             ]);
 
-            $totalProduct = [];
+            $totalPayment = 0;
 
-            for ($i = 0; $i < count($cart->products); $i++) {
-                $totalProduct[$i] = $cart->products[$i]->pivot->total_price;
+            foreach ($request->cart_id as $value) {
+                $cart = Cart::where('cart_id', $value)->first();
+                $cart->update([
+                    'foreign_transaction_id' => $transaction->transaction_id,
+                ]);
+                $totalPayment+=$cart->total_price;
             }
-
-            $totalPayment = array_sum($totalProduct);
 
             $transactionDetail = TransactionDetail::create([
                 'transaction_transaction_id' => $transaction->transaction_id,
                 'total_payment' => $totalPayment,
             ]);
             DB::commit();
+
+            $allProduct = Cart::where('foreign_transaction_id', $transaction->transaction_id)->get();
 
             return response()->json([
                 'status' => true,
@@ -85,7 +88,7 @@ class TransactionController extends Controller
                     'user_user_id' => $transaction->user_user_id,
                     'transaction_status' => $transactionStatus,
                     'transaction_detail' => $transactionDetail,
-                    'product' => $cart->products,
+                    'product' => $allProduct,
                 ],
             ], 201);
         } catch (\Throwable $e) {
@@ -96,19 +99,6 @@ class TransactionController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    public function payment(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'payment_method' => 'required|in:complete,progress,pending,canceled',
-            'delivery_id' => 'nullable',
-            'status_name' => 'required|in:complete,progress,pending,canceled',
-            'total_price' => 'required|integer',
-            'total_payment' => 'nullable|integer',
-            'quantity' => 'nullable|integer',
-            'transaction_date' => 'required|date',
-        ]);
     }
 
     /**

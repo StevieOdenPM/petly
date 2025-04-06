@@ -19,7 +19,7 @@ class TransactionResource extends JsonResource
         return [
             'transaction_id' => $this->transaction_id,
             'user' => new UserResource($this->whenLoaded('users')),
-            'total_price' => $this->total_price,
+            'cart' => CartResource::collection($this->whenLoaded('cart')),
             'delivery' => new DeliveryResource($this->whenLoaded('delivery')),
             'transaction_status' => new TransactionStatusResource($this->whenLoaded('transactionStatus')),
             'transaction_details' => new TransactionDetailResource($this->whenLoaded('transactionDetails')),

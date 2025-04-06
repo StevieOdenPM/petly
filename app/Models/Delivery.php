@@ -20,7 +20,7 @@ class Delivery extends Model
         'delivery_id',
     ];
 
-    public function deliveryClass(): BelongsTo{
+    public function deliveryClass() {
         return $this->belongsTo(DeliveryClass::class, 'delivery_delivery_class_id', 'delivery_class_id');
     }
 
@@ -33,6 +33,6 @@ class Delivery extends Model
     }
 
     public function transaction() {
-        return $this->hasOne(Transaction::class);
+        return $this->hasOne(Transaction::class, 'delivery_delivery_id', 'delivery_id');
     }
 }

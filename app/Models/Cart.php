@@ -12,24 +12,28 @@ class Cart extends Model
     protected $fillable = [
         'customer_user_id',
         'cart_quantity',
+        'foreign_transaction_id',
+        'foreign_product_id',
+        'quantity',
+        'total_price',
     ];
 
-    public function products()
+    public function product()
     {
-        return $this->belongsToMany(
+        return $this->belongsTo(
             Product::class,
-            'cart_products',
-            'foreign_cart_id',
-            'foreign_product_id'
-        )->withPivot('quantity')->withPivot('total_price');
+            'foreign_product_id',
+            'product_id'
+        );
     }
 
     public function transaction()
     {
-        return $this->hasOne(Transaction::class);
+        return $this->belongsTo(Transaction::class, 'foreign_transaction_id', 'transaction_id');
     }
 
-    public function users() {
+    public function users()
+    {
         return $this->belongsTo(User::class, 'customer_user_id', 'user_id');
     }
 }
