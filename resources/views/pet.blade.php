@@ -1,19 +1,24 @@
+<script src="https://unpkg.com/lucide@latest"></script>
 <x-main>
     <div class="flex gap-12 max-w-7xl w-full mt-12 mb-32 mx-auto flex-grow">
         <aside class="bg-white shadow-md rounded-xl p-6 w-80 flex flex-col items-center self-start">
             <h2 class="text-xl font-semibold text-center mb-6">User Profile</h2>
             <nav class="space-y-4 w-full">
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                <a href="/profile"
+                    class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="user"></i> User Info
                 </a>
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
-                    <i data-lucide="banknote"></i> Bank Account
+                <a href="/bank"
+                    class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                    <i data-lucide="landmark"></i> Bank Account
                 </a>
-                <a href="#" class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2 rounded-lg relative group">
-                    <i data-lucide="paw-print"></i> Add Pet
+                <a href="/pet"
+                    class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2 rounded-lg relative group">
+                    <i data-lucide="dog"></i> Add Pet
                     <span class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-red-500 rounded-full"></span>
                 </a>
-                <a href="#" class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
+                <a href="/theme"
+                    class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="settings"></i> Settings
                 </a>
             </nav>
@@ -29,7 +34,8 @@
                 <div class="bg-gray-50 p-6 rounded-lg text-center text-gray-500 border border-gray-300">
                     No pets added yet
                 </div>
-                <button onclick="showPetForm()" class="w-full mt-5 p-4 border border-gray-300 rounded-lg text-gray-700 font-semibold">
+                <button onclick="showPetForm()"
+                    class="w-full mt-5 p-4 border border-gray-300 rounded-lg text-gray-700 font-semibold">
                     Add a pet
                 </button>
             </div>
@@ -52,6 +58,7 @@
                     <button class="px-6 py-3 bg-green-500 text-white rounded-lg">Save Pet</button>
                 </div>`;
         }
+
         function showNoPets() {
             document.getElementById('pet-section').innerHTML = `
                 <h2 class="text-lg font-semibold mb-4">You don't have any pets right now</h2>
@@ -68,7 +75,7 @@
     </script>
 </x-main>
 
-<!-- <x-main>  //for the pet 
+<!-- <x-main>  //for the pet
 <body class="bg-gray-100 flex min-h-screen items-center justify-center p-6">
 
     <div class="flex gap-10 max-w-6xl w-full">

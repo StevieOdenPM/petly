@@ -49,7 +49,7 @@ Memiliki bentuk dan ukuran kibble yang disesuaikan secara khusus',
         ]);
 
         Product::create([
-            'product_name' => 'Pet Kingdom Wanpy 1.5 kg Makanan Kucing Kering Kitten grain Free Tuna Pakan Kucing Cat Food Kebutuhan Hewan Peliharaan',
+            'product_name' => 'Pet Kingdom Wanpy 1.5 kg Makanan Kucing Kering Kitten grain Free Tuna',
             'product_desc' => 'Terbuat dari bahan-bahan berkualitas
 Dilengkapi 91% protein hewani
 Grain-free (tanpa tambahan jangung, gandum, kedelai, atau kacang-kacangan)
@@ -66,7 +66,7 @@ Isi : 1.5 kg',
             'product_price' => 129900,
         ]);
         Product::create([
-            'product_name' => 'Pet Kingdom Aatas Cat 80 gr Makanan Kucing Basah Daily Defence Urinary Tract Health Pakan Kucing Cat Food Kebutuhan Hewan Peliharaan',
+            'product_name' => 'Pet Kingdom Aatas Cat 80 gr Makanan Kucing Basah Daily Defence',
             'product_desc' => 'Disajikan dalam jelly gurih untuk pengalaman makan yang nikmat
 Grain free
 Dengan kombinasi bahan berkualitas
@@ -101,7 +101,7 @@ Ukuran : S',
             'product_price' => 53940,
         ]);
         Product::create([
-            'product_name' => 'Pet Kingdom M-Pets Ukuran L Java Tempat Tidur Anjing Dengan Cushion - Abu-Abu dog bed kasur hewan peliharaan alas tidur anjing pet accessories',
+            'product_name' => 'Pet Kingdom M-Pets Ukuran L Java Tempat Tidur Anjing Dengan Cushion  ',
             'product_desc' => 'Cushion dengan kualitas bantalan empuk dan nyaman saat digunakan
 Keranjang mudah dibersihkan
 Mudah dipindahkan
@@ -130,6 +130,22 @@ Isi : 200 ml',
             'product_stock' => fake()->numberBetween(10, 100),
             'product_rating' => fake()->numberBetween(5, 10),
             'product_price' => 119900,
+        ]);
+
+        Product::create([
+            'product_name' => 'Pet Kingdom Germ Killer 500 ml Spray Disinfektan',
+            'product_desc' => 'Praktis digunakan
+Disinfektan cair premium water based
+Tersertifikasi oleh lembaga di Amerika dan Singapore
+Hospital grade Efektif membunuh 99.99999% bakteri dan virus (termasuk SARS-CoV-2, H1N1, dan patogen berbahaya lainnya)
+Mampu mencegah pertumbuhan jamur dan lumut
+Dapat menghilangkan bau',
+            'product_product_type_id' => 3, //3 = Obat, 2 = acc, 1 = food
+            'pet_pet_types_id' => 1, // 1 anjing 2 kucing 3 kelinci 4 kura2
+            'product_image' => 'https://images.tokopedia.net/img/cache/700/hDjmkQ/2025/3/6/6d530216-9e3f-45a3-a22c-cfdef9c118a7.jpg.webp?ect=4g',
+            'product_stock' => fake()->numberBetween(10, 100),
+            'product_rating' => fake()->numberBetween(5, 10),
+            'product_price' => 198000,
         ]);
     }
 }

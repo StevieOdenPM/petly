@@ -21,6 +21,7 @@ class CartResource extends JsonResource
             'products' => $this->whenLoaded('products', function() {
                 return $this->products->map(function($product) {
                     return [
+                        'product_image' => $product->product_image,
                         'product_name' => $product->product_name,
                         'product_desc' => $product->product_desc,
                         'product_stock' => $product->product_stock,
