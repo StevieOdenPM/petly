@@ -15,9 +15,7 @@ class TransactionDetailResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'quantity' => $this->quantity,
             'total_payment' => $this->total_payment,
-            'product' => new ProductResource($this->whenLoaded('products'))
         ];
     }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('user_user_id')->constrained('users', "user_id");
             $table->foreignId('delivery_delivery_id')->nullable(true)->constrained('deliveries', "delivery_id");
             $table->foreignId('transactions_transaction_status_id')->constrained('transaction_statuses', "transaction_status_id");
-            $table->foreignId('foreign_cart_id')->nullable(true)->constrained('carts', "cart_id")->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -43,12 +43,7 @@ class Product extends Model
 
     public function carts()
     {
-        return $this->belongsToMany(
-            Cart::class,
-            'cart_products',
-            'foreign_product_id',
-            'foreign_cart_id'
-        )->withPivot('quantity')->withPivot('total_price');
+        return $this->hasMany(Cart::class);
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filters)
