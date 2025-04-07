@@ -36,7 +36,7 @@ class TransactionController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required|integer',
             'status_name' => 'required|in:complete,progress,pending,canceled',
-            'cart_id' => 'required|integer',
+            'cart_id' => 'required|array',
             'transaction_date' => 'required|date',
         ]);
 
