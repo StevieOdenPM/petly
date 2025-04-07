@@ -88,6 +88,114 @@
     </section>
 
     <script>
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
+        //     const cartContainer = document.getElementById("cart-container");
+        //     const originalPriceElement = document.getElementById("original-price");
+        //     const taxElement = document.getElementById("tax");
+        //     const totalElement = document.getElementById("total");
+        //     const checkoutButton = document.getElementById("checkout-btn");
+
+        //     function fetchCart() {
+        //         fetch("http://petly.test:8080/api/customer/cart/", {
+        //                 method: "GET",
+        //                 headers: {
+        //                     Authorization: `Bearer ${token}`
+        //                 }
+        //             })
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 cartContainer.innerHTML = "";
+        //                 let originalPrice = 0; // Total price of all products
+        //                 let isCartEmpty = true;
+
+        //                 if (!data.data || data.data.length === 0) {
+        //                     cartContainer.innerHTML = "<p class='text-center py-4'>Your cart is empty</p>";
+        //                     updateReceipt(0); // Update receipt when cart is empty
+        //                     checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
+        //                     checkoutButton.setAttribute("disabled", "true"); // Disable button
+        //                     return;
+        //                 }
+
+        //                 data.data.forEach(cartItem => {
+        //                     cartItem.products.forEach(product => {
+        //                         isCartEmpty = false;
+        //                         originalPrice += product.pivot
+        //                             .total_price; // Sum all product total prices
+
+        //                         cartContainer.innerHTML += `
+    //                         <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
+    //                             <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+    //                                 <a href="#" class="shrink-0 md:order-1">
+    //                                     <img class="h-20 w-20 dark:hidden ml-2" src="${product.product_image}" alt="${product.product_name}" />
+    //                                 </a>
+    //                                 <div class="flex items-center justify-between md:order-3 md:justify-end">
+    //                                     <div class="text-end md:order-4 md:w-32">
+    //                                         <p class="text-base font-semibold text-gray-900 dark:text-white">IDR ${product.product_price.toLocaleString()}</p>
+    //                                         <p class="text-sm text-gray-500">Quantity: ${product.pivot.quantity}</p>
+    //                                         <p class="text-sm text-gray-500">Total: IDR ${product.pivot.total_price.toLocaleString()}</p>
+    //                                     </div>
+    //                                 </div>
+    //                                 <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+    //                                     <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">
+    //                                         ${product.product_name}
+    //                                     </a>
+    //                                     <div class="flex items-center gap-4 mt-4">
+    //                                         <button type="button" class="delete-btn inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" data-id="${cartItem.cart_id}">
+    //                                             <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+    //                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+    //                                             </svg>
+    //                                             Remove
+    //                                         </button>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>`;
+        //                     });
+        //                 });
+
+        //                 updateReceipt(originalPrice); // Update receipt with the new total
+        //                 attachDeleteEvent();
+
+        //                 if (isCartEmpty) {
+        //                     checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
+        //                 } else {
+        //                     checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
+        //                 }
+        //             })
+        //             .catch(error => console.error("Error fetching cart:", error));
+        //     }
+
+        //     function attachDeleteEvent() {
+        //         document.querySelectorAll(".delete-btn").forEach(button => {
+        //             button.addEventListener("click", function() {
+        //                 const cartId = this.getAttribute("data-id");
+        //                 fetch(`http://petly.test:8080/api/customer/cart/${cartId}`, {
+        //                         method: "DELETE",
+        //                         headers: {
+        //                             Authorization: `Bearer ${token}`
+        //                         }
+        //                     })
+        //                     .then(() => {
+        //                         fetchCart(); // Refresh cart after deletion
+        //                     })
+        //                     .catch(error => console.error("Error deleting item:", error));
+        //             });
+        //         });
+        //     }
+
+        //     function updateReceipt(originalPrice) {
+        //         const tax = 25000; // Fixed tax amount
+        //         const total = originalPrice + tax;
+
+        //         originalPriceElement.textContent = `IDR ${originalPrice.toLocaleString()}`;
+        //         taxElement.textContent = `IDR ${tax.toLocaleString()}`;
+        //         totalElement.textContent = `IDR ${total.toLocaleString()}`;
+        //     }
+
+        //     fetchCart();
+        // });
+
         document.addEventListener("DOMContentLoaded", function() {
             const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
             const cartContainer = document.getElementById("cart-container");
@@ -95,6 +203,9 @@
             const taxElement = document.getElementById("tax");
             const totalElement = document.getElementById("total");
             const checkoutButton = document.getElementById("checkout-btn");
+
+            // Array to track selected cart items
+            let selectedItems = [];
 
             function fetchCart() {
                 fetch("http://petly.test:8080/api/customer/cart/", {
@@ -106,7 +217,7 @@
                     .then(response => response.json())
                     .then(data => {
                         cartContainer.innerHTML = "";
-                        let originalPrice = 0; // Total price of all products
+                        selectedItems = []; // Reset selected items
                         let isCartEmpty = true;
 
                         if (!data.data || data.data.length === 0) {
@@ -120,14 +231,16 @@
                         data.data.forEach(cartItem => {
                             cartItem.products.forEach(product => {
                                 isCartEmpty = false;
-                                originalPrice += product.pivot
-                                    .total_price; // Sum all product total prices
+                                const itemId = `item-${cartItem.cart_id}`;
 
                                 cartContainer.innerHTML += `
                                 <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
                                     <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                                        <div class="flex items-center md:order-0 mr-2">
+                                            <input type="checkbox" id="${itemId}" class="cart-checkbox w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" data-id="${cartItem.cart_id}" data-price="${product.pivot.total_price}">
+                                        </div>
                                         <a href="#" class="shrink-0 md:order-1">
-                                            <img class="h-20 w-20 dark:hidden ml-2" src="https://via.placeholder.com/80" alt="${product.product_name}" />
+                                            <img class="h-20 w-20 dark:hidden ml-2" src="${product.product_image}" alt="${product.product_name}" />
                                         </a>
                                         <div class="flex items-center justify-between md:order-3 md:justify-end">
                                             <div class="text-end md:order-4 md:w-32">
@@ -154,13 +267,17 @@
                             });
                         });
 
-                        updateReceipt(originalPrice); // Update receipt with the new total
                         attachDeleteEvent();
+                        attachCheckboxEvent();
+
+                        // Set initial receipt value to zero (since no checkboxes are checked yet)
+                        updateReceipt(0);
 
                         if (isCartEmpty) {
                             checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
                         } else {
-                            checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
+                            // Still disable checkout until items are selected
+                            checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
                         }
                     })
                     .catch(error => console.error("Error fetching cart:", error));
@@ -184,6 +301,49 @@
                 });
             }
 
+            function attachCheckboxEvent() {
+                document.querySelectorAll(".cart-checkbox").forEach(checkbox => {
+                    checkbox.addEventListener("change", function() {
+                        const cartId = this.getAttribute("data-id");
+                        const price = parseFloat(this.getAttribute("data-price"));
+
+                        if (this.checked) {
+                            // Add item to selected items
+                            selectedItems.push({
+                                cart_id: cartId,
+                                price: price
+                            });
+                        } else {
+                            // Remove item from selected items
+                            selectedItems = selectedItems.filter(item => item.cart_id !== cartId);
+                        }
+                        // Calculate and update price immediately
+                        calculateTotal();
+                    });
+                });
+            }
+
+            function calculateTotal() {
+                let originalPrice = 0;
+
+                // Sum prices of selected items
+                selectedItems.forEach(item => {
+                    originalPrice += item.price;
+                });
+
+                // Update receipt with new price
+                updateReceipt(originalPrice);
+
+                // Update checkout button state
+                if (selectedItems.length > 0) {
+                    checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
+                    checkoutButton.removeAttribute("disabled");
+                } else {
+                    checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
+                    checkoutButton.setAttribute("disabled", "true");
+                }
+            }
+
             function updateReceipt(originalPrice) {
                 const tax = 25000; // Fixed tax amount
                 const total = originalPrice + tax;
@@ -192,6 +352,41 @@
                 taxElement.textContent = `IDR ${tax.toLocaleString()}`;
                 totalElement.textContent = `IDR ${total.toLocaleString()}`;
             }
+
+            // Add checkout button event listener
+            checkoutButton.addEventListener("click", function() {
+                if (selectedItems.length === 0) {
+                    return; // Don't proceed if no items selected
+                }
+
+                // Get all selected cart IDs
+                const selectedCartIds = selectedItems.map(item => item.cart_id);
+
+                // Prepare data for POST request
+                const checkoutData = {
+                    cart_ids: selectedCartIds
+                };
+
+                console.log("Sending selected items for checkout:", checkoutData);
+
+                // Uncomment the following code to enable the actual POST request:
+                /*
+                fetch("http://petly.test:8080/api/customer/checkout", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: JSON.stringify(checkoutData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Checkout response:", data);
+                    // Handle successful checkout (redirect to payment page, etc.)
+                })
+                .catch(error => console.error("Error during checkout:", error));
+                */
+            });
 
             fetchCart();
         });
