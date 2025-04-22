@@ -3,57 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class loginController extends Controller
 {
-    // Menampilkan halaman login
-    public function showLoginForm()
-    {
-        return view('login');
-    }
-
-    // Proses login untuk web
     public function login(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
         ]);
 
-        // Coba login dengan kredensial yang diberikan
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->route('dashboard'); // Redirect ke dashboard jika sukses
-        }
-
-        // Jika gagal, kembali ke login dengan pesan error
-        return back()->withErrors(['email' => 'Email atau password salah.']);
-    }
-
-    // Proses login untuk API (Postman)
-    public function apiLogin(Request $request)
-    {
-        // Validasi tetap sama
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-
-        // Coba login
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
-
+        if ($validator->fails()) {
             return response()->json([
-                'message' => 'Login berhasil!',
-                'user' => $user,
-                'token' => $token
-            ], 200);
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
         }
 
-        return response()->json([
-            'message' => 'Email atau password salah.'
-        ], 401);
+        try {
+            $response = Http::post('http://petly.test:8080/api/login', [
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
+
+            if ($response->successful()) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Login via external API successful',
+                    'data' => $response->json()
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'External API login failed',
+                    'error' => $response->body(),
+                ], $response->status());
+            }
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Request to external API failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

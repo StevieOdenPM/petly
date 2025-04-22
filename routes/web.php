@@ -99,6 +99,6 @@ Route::post('/login', [loginController::class, 'login'])->name('login.process');
 
 use App\Http\Controllers\registerController;
 
-Route::get('/register', [registerController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [registerController::class, 'register'])->name('register.process');
+Route::get('/register', [registerController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [registerController::class, 'register']);
 
