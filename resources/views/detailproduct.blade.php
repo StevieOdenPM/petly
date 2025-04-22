@@ -223,7 +223,9 @@
     <script>
         document.getElementById("addToCartForm").addEventListener("submit", async function(event) {
             event.preventDefault();
-
+            $apiToken = session('api_token');
+            
+            
             let formData = new FormData(this);
             let token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b"; // Your API token
 

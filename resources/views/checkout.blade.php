@@ -310,6 +310,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", async function() {
+            
             const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
             const apiUrl = "http://petly.test:8080/api/profile";
 
