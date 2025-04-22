@@ -93,11 +93,6 @@ class ProductController extends Controller
         }
     }
 
-    public function filter(ProductFilter $filter,Request $request){
-        $props = Product::filter($filter)->with('petType', 'productType')->paginate(40 , 'page', $request['page']);
-        return ProductPaginateResource::collection($props);
-    }
-
     /**
      * Display the specified resource.
      */
