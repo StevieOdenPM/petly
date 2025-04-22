@@ -204,8 +204,8 @@
                                 <form id="addToCartForm" @submit.prevent="submitForm($event, quantity)">
                                     @csrf
                                     <input type="hidden" name="customer_user_id" value="1">
-                                    <input type="hidden" name="product[]" value="{{ $product['product_id'] }}">
-                                    <input type="hidden" name="quantity[]" :value="quantity">
+                                    <input type="hidden" name="product_id" value="{{ $product['product_id'] }}">
+                                    <input type="hidden" name="quantity" :value="quantity">
                                     <button type="submit"
                                         class="bg-gray-800 text-white font-medium py-3 px-4 w-32 border border-gray-800 rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center text-sm">
                                         ADD TO CART
@@ -225,7 +225,7 @@
             event.preventDefault();
 
             let formData = new FormData(this);
-            let token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b"; // Your API token
+            let token = "1|CowEGhhk7E2Rfat334Rz1MeSl75J6FKbYw3I2ve9c9c7db8e"; // Your API token
 
             try {
                 let response = await fetch("http://petly.test:8080/api/customer/cart", {
