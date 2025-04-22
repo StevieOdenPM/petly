@@ -183,6 +183,7 @@
     <script>
         // Wait for the page to fully load before running our code
         document.addEventListener("DOMContentLoaded", async function() {
+
             // Get cart IDs from the URL (example: ?cart=1,2,3)
             const urlParams = new URLSearchParams(window.location.search);
             const cartParam = urlParams.get('cart');
