@@ -346,8 +346,8 @@
                     const shippingElement = orderSummary.querySelector('dl:nth-child(2) dd');
                     const totalElement = orderSummary.querySelector('dl:nth-child(4) dd');
 
-                    shippingElement.textContent = `Rp ${shippingCost}`;
-                    totalElement.textContent = `Rp ${newTotal}`;
+                    shippingElement.textContent = `${shippingCost}`;
+                    totalElement.textContent = `${newTotal}`;
                 }
 
                 // Add event listeners to shipping method radio buttons

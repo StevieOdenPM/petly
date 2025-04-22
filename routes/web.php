@@ -102,3 +102,7 @@ use App\Http\Controllers\registerController;
 Route::get('/register', [registerController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [registerController::class, 'register'])->name('register.process');
 
+use App\Http\Controllers\ProductCartController;
+Route::post('/cart/add', [ProductCartController::class, 'hello'])->name('cart.add');
+
+
