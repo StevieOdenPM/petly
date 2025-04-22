@@ -2,54 +2,8 @@
     <section class="py-10 relative">
         <form action="#">
 
-            <div class="lg:flex lg:items-start xl:gap-16  ">
+            <div class="lg:flex lg:items-start xl:gap-16">
                 <div class="min-w-0 flex-1 space-y-8">
-                    {{-- <div class="space-y-4">
-                        <h2 class="font-semibold text-2xl text-black mb-5">Delivery Details</h2>
-
-                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                            <div>
-                                <label for="your_name"
-                                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Your name
-                                </label>
-                                <input type="text" id="your_name"
-                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                            </div>
-
-                            <div>
-                                <label for="your_email"
-                                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Your email
-                                </label>
-                                <input type="email" id="your_email"
-                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                            </div>
-
-                            <div>
-                                <div class="mb-2 flex items-center gap-2">
-                                    <label for="phone-input"
-                                        class="block text-sm font-medium text-gray-900 dark:text-white"> Phone Number
-                                        (ID) </label>
-                                </div>
-                                <input type="phonenum" id="your_num"
-                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                            </div>
-
-                            <div>
-                                <label for="note"
-                                    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Note </label>
-                                <input type="note" id="note"
-                                    class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                            </div>
-
-                        </div>
-                        <div>
-                            <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-                                Address </label>
-                            <input type="address" id="address"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" />
-                        </div>
-                    </div> --}}
-
                     <div class="space-y-4">
                         <h2 class="font-semibold text-2xl text-black mb-5">Delivery Details</h2>
 
@@ -80,7 +34,7 @@
                             </div>
 
                             <div>
-                                <label for="note"
+                                <label for="your_city"
                                     class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">City</label>
                                 <input type="text" id="your_city"
                                     class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
@@ -160,7 +114,8 @@
 
                                     <div class="ms-4 text-sm">
                                         <label for="dhl"
-                                            class="font-medium leading-none text-gray-900 dark:text-white"> $15 - Fast
+                                            class="font-medium leading-none text-gray-900 dark:text-white"> 15.000 -
+                                            Fast
                                             Delivery </label>
                                         <p id="dhl-text"
                                             class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Get it by
@@ -180,7 +135,7 @@
 
                                     <div class="ms-4 text-sm">
                                         <label for="express"
-                                            class="font-medium leading-none text-gray-900 dark:text-white"> $50 -
+                                            class="font-medium leading-none text-gray-900 dark:text-white"> 50.000 -
                                             Express Delivery </label>
                                         <p id="express-text"
                                             class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Get it by
@@ -196,101 +151,18 @@
                     <p class="text-xl font-semibold text-gray-900 dark:text-white">Product Details</p>
                     <div class="mt-6 space-y-6 sm:mt-8">
                         <div class="flow-root">
-                            <div class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
-                                <!-- First item -->
-                                <div class="flex items-center justify-between py-3">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="mr-4 h-28 w-28 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                            <img src="https://images.unsplash.com/photo-1610714520720-ba92ae46e0e2?q=80&w=1769&auto=format&fit=crop&ixlib=rb-"
-                                                alt="Black T-shirt"
-                                                class="h-full w-full object-cover object-center" />
-                                        </div>
-                                        <div>
-                                            <h3 class="text-base font-medium text-gray-900 dark:text-white">Basic Tee
-                                            </h3>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Black</p>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Large</p>
-                                            <p class="mt-1 text-base font-medium text-gray-900 dark:text-white">$32.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <select class="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                                            aria-label="Quantity">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                        <button class="ml-4 text-gray-400 hover:text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                            <div id="checkout-items-container"
+                                class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
+                                <!-- Cart items will be loaded here -->
+                                <div class="flex items-center justify-center py-3">
+                                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
                                 </div>
-
-                                <!-- Second item -->
-                                <div class="flex items-center justify-between py-3">
-                                    <div class="flex items-center">
-                                        <div
-                                            class="mr-4 h-28 w-28 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                            <img src="https://images.unsplash.com/photo-1610714520720-ba92ae46e0e2?q=80&w=1769&auto=format&fit=crop&ixlib=rb-"
-                                                alt="Sienna T-shirt"
-                                                class="h-full w-full object-cover object-center" />
-                                        </div>
-                                        <div>
-                                            <h3 class="text-base font-medium text-gray-900 dark:text-white">Basic Tee
-                                            </h3>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Sienna</p>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Large</p>
-                                            <p class="mt-1 text-base font-medium text-gray-900 dark:text-white">$32.00
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <select class="rounded-lg border border-gray-300 px-3 py-2 text-sm"
-                                            aria-label="Quantity">
-                                            <option value="1">1</option>
-                                            <option value="2" selected>2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                        <button class="ml-4 text-gray-400 hover:text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Subtotal -->
-                                <dl class="flex items-center justify-between gap-2 py-3">
-                                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
-                                    <dd class="text-base font-medium text-gray-900 dark:text-white">$64.00</dd>
-                                </dl>
-
-                                <!-- Shipping -->
-                                <dl class="flex items-center justify-between gap-2 py-3">
-                                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Shipping</dt>
-                                    <dd class="text-base font-medium text-gray-900 dark:text-white">$5.00</dd>
-                                </dl>
-
-                                <!-- Taxes -->
-                                <dl class="flex items-center justify-between gap-2 py-3">
-                                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Taxes</dt>
-                                    <dd class="text-base font-medium text-gray-900 dark:text-white">$5.52</dd>
-                                </dl>
-
-                                <!-- Total -->
-                                <dl class="flex items-center justify-between gap-2 py-3">
-                                    <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-                                    <dd class="text-base font-bold text-gray-900 dark:text-white">$75.52</dd>
-                                </dl>
                             </div>
+                        </div>
+
+                        <!-- Order summary will be populated here -->
+                        <div id="order-summary" class="divide-y divide-gray-200 dark:divide-gray-800">
+                            <!-- Summary data will be inserted here -->
                         </div>
 
                         <!-- Order buttons -->
@@ -309,31 +181,190 @@
     </section>
 
     <script>
+        // Wait for the page to fully load before running our code
         document.addEventListener("DOMContentLoaded", async function() {
-            
-            const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
-            const apiUrl = "http://petly.test:8080/api/profile";
+
+            // Get cart IDs from the URL (example: ?cart=1,2,3)
+            const urlParams = new URLSearchParams(window.location.search);
+            const cartParam = urlParams.get('cart');
+            const cartIds = cartParam ? cartParam.split(',') : [];
+
+            // API information
+            const profileApiUrl = "http://petly.test:8080/api/profile";
+            const token = "1|CowEGhhk7E2Rfat334Rz1MeSl75J6FKbYw3I2ve9c9c7db8e";
+
+            // Log cart IDs for debugging purposes
+            console.log("Cart IDs to process:", cartIds);
 
             try {
-                const response = await fetch(apiUrl, {
+                // Step 1: Fetch user profile data
+                console.log("Fetching user profile...");
+                const profileResponse = await fetch(profileApiUrl, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,
                     }
                 });
 
-                if (!response.ok) throw new Error("Failed to fetch profile data");
+                if (!profileResponse.ok) {
+                    throw new Error("Failed to fetch profile data");
+                }
 
-                const data = await response.json();
+                // Step 2: Extract user data and populate form
+                const profileData = await profileResponse.json();
+                const userData = profileData.user[0];
 
-                document.getElementById("your_name").value = data.user.username || "";
-                document.getElementById("your_email").value = data.user.email || "";
-                document.getElementById("your_num").value = data.user.phone_number || "";
+                // Fill in the form with user information
+                document.getElementById("your_name").value = userData.username || "";
+                document.getElementById("your_email").value = userData.email || "";
+                document.getElementById("your_num").value = userData.phone_number || "";
+
+                // Fill address information if available
+                if (userData.address) {
+                    document.getElementById("address").value = userData.address || "";
+                    document.getElementById("your_city").value = userData.city || "";
+                }
+
+                // Step 3: Setup the checkout items container
+                const checkoutItemsContainer = document.getElementById("checkout-items-container");
+                checkoutItemsContainer.innerHTML = ''; // Clear any existing content
+
+                // Step 4: Initialize variables for order summary
+                let subtotal = 0;
+                const cartItems = [];
+
+                // Step 5: Fetch each cart item one by one
+                for (const cartId of cartIds) {
+                    try {
+                        console.log(`Fetching cart item ${cartId}...`);
+                        const cartResponse = await fetch(
+                            `http://petly.test:8080/api/customer/cart/${cartId}`, {
+                                method: "GET",
+                                headers: {
+                                    "Authorization": `Bearer ${token}`,
+                                }
+                            });
+
+                        if (!cartResponse.ok) {
+                            throw new Error(`Failed to fetch cart ${cartId}: ${cartResponse.status}`);
+                        }
+
+                        const cartData = await cartResponse.json();
+
+                        // Step 6: Process cart item if data is valid
+                        if (cartData.status && cartData.data) {
+                            // Use price directly from API (assumed to be in IDR cents)
+                            // Divide by 100 to convert cents to whole IDR
+                            const price = cartData.data.products.product_price;
+                            const totalPrice = cartData.data.total_price;
+
+                            // Create item object with all needed information
+                            const item = {
+                                id: cartData.data.cart_id,
+                                name: cartData.data.products.product_name,
+                                price: price,
+                                quantity: cartData.data.quantity,
+                                image: cartData.data.products.product_image,
+                                totalPrice: totalPrice
+                            };
+
+                            // Add item to our list and update subtotal
+                            cartItems.push(item);
+                            subtotal += totalPrice;
+                        }
+                    } catch (error) {
+                        console.error(`Error fetching cart ${cartId}:`, error);
+                    }
+                }
+
+                // Step 7: Display cart items
+                cartItems.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'flex items-center justify-between py-3';
+                    itemElement.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="mr-4 h-28 w-28 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                            <img src="${item.image}"
+                                alt="${item.name}"
+                                class="h-full w-full object-cover object-center" />
+                        </div>
+                        <div class="item-details">
+                            <h3 class="text-base font-medium text-gray-900 dark:text-white">${item.name}</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <p class="mt-1 text-base font-medium text-gray-900 dark:text-white">IDR ${item.totalPrice.toLocaleString()}</p>
+                    </div>
+                `;
+                    checkoutItemsContainer.appendChild(itemElement);
+                });
+
+                // Step 8: Calculate order summary
+                const shipping = 15000; // Default shipping cost in IDR
+                const tax = 25000; // Flat tax of 25000 IDR
+                const total = subtotal + shipping + tax;
+
+                // Step 9: Update order summary section with IDR currency
+                const orderSummary = document.getElementById("order-summary");
+                orderSummary.innerHTML = `
+                <!-- Subtotal -->
+                <dl class="flex items-center justify-between gap-2 py-3">
+                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
+                    <dd class="text-base font-medium text-gray-900 dark:text-white">IDR ${subtotal.toLocaleString()}</dd>
+                </dl>
+
+                <!-- Shipping -->
+                <dl class="flex items-center justify-between gap-2 py-3">
+                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Shipping Fee</dt>
+                    <dd class="text-base font-medium text-gray-900 dark:text-white">IDR ${shipping.toLocaleString()}</dd>
+                </dl>
+
+                <!-- Taxes -->
+                <dl class="flex items-center justify-between gap-2 py-3">
+                    <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Flat Tax</dt>
+                    <dd class="text-base font-medium text-gray-900 dark:text-white">IDR ${tax.toLocaleString()}</dd>
+                </dl>
+
+                <!-- Total -->
+                <dl class="flex items-center justify-between gap-2 py-3">
+                    <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                    <dd class="text-base font-bold text-gray-900 dark:text-white">IDR ${total.toLocaleString()}</dd>
+                </dl>
+            `;
+
+                // Step 10: Add listeners to update shipping cost when delivery method changes
+                const dhlRadio = document.getElementById('dhl');
+                const expressRadio = document.getElementById('express');
+
+                function updateShipping() {
+                    // Regular shipping: Rp 15.000
+                    // Express shipping: Rp 50.000
+                    const shippingCost = expressRadio.checked ? 50000 : 15000;
+                    const newTotal = subtotal + shippingCost + tax;
+
+                    // Find and update the shipping and total elements in the summary
+                    const shippingElement = orderSummary.querySelector('dl:nth-child(2) dd');
+                    const totalElement = orderSummary.querySelector('dl:nth-child(4) dd');
+
+                    shippingElement.textContent = `${shippingCost}`;
+                    totalElement.textContent = `${newTotal}`;
+                }
+
+                // Add event listeners to shipping method radio buttons
+                dhlRadio.addEventListener('change', updateShipping);
+                expressRadio.addEventListener('change', updateShipping);
 
             } catch (error) {
-                console.error("Error fetching profile:", error);
+                // Step 11: Handle and display any errors
+                console.error("Error in checkout process:", error);
+                document.getElementById("checkout-items-container").innerHTML = `
+            <div class="py-3 text-center text-red-500">
+                <p>Terjadi kesalahan dalam memuat data. Silakan coba lagi nanti.</p>
+                <p class="mt-2">Detail error: ${error.message}</p>
+            </div>
+        `;
             }
         });
     </script>
-
 </x-main>

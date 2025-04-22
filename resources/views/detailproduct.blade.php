@@ -175,7 +175,6 @@
                         <p class="text-gray-900 text-2xl font-semibold mb-6">IDR
                             {{ number_format($product['product_price'], 0, ',') }}</p>
 
-
                         <div x-data="{ quantity: 1 }" class="flex flex-col gap-4">
                             <div class="flex items-center gap-4">
                                 <button type="button" @click="quantity > 1 ? quantity-- : quantity"
@@ -201,57 +200,31 @@
                             </div>
 
                             <div class="flex gap-5 mt-6">
-                                <form id="addToCartForm" @submit.prevent="submitForm($event, quantity)">
+                                <form action="{{ route('cart.add') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="customer_user_id" value="1">
-                                    <input type="hidden" name="product[]" value="{{ $product['product_id'] }}">
-                                    <input type="hidden" name="quantity[]" :value="quantity">
+                                    <input type="hidden" name="product_id" value="{{ $product['product_id'] }}">
+                                    <input type="hidden" name="quantity" value="1" x-bind:value="quantity">
                                     <button type="submit"
                                         class="bg-gray-800 text-white font-medium py-3 px-4 w-32 border border-gray-800 rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center text-sm">
                                         ADD TO CART
                                     </button>
                                 </form>
-
-                                <div id="cartMessage" class="mt-4"></div>
                             </div>
 
+                            @if (session('success'))
+                                <div class="mt-4 text-green-600">✅ {{ session('success') }}</div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="mt-4 text-red-600">❌ {{ session('error') }}</div>
+                            @endif
+
+                            <div id="cartMessage" class="mt-4"></div>
                         </div>
+
                     </div>
                 </div>
+            </div>
     </section>
-
-    <script>
-        document.getElementById("addToCartForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-            $apiToken = session('api_token');
-            
-            
-            let formData = new FormData(this);
-            let token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b"; // Your API token
-
-            try {
-                let response = await fetch("http://petly.test:8080/api/customer/cart", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    body: formData
-                });
-
-                let data = await response.json();
-                let messageDiv = document.getElementById("cartMessage");
-
-                if (data.status) {
-                    messageDiv.innerHTML = `<p class="text-green-600">✅ ${data.message}</p>`;
-                } else {
-                    messageDiv.innerHTML = `<p class="text-red-600">❌ ${data.message}</p>`;
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                document.getElementById("cartMessage").innerHTML =
-                    `<p class="text-red-600">❌ Failed to add to cart</p>`;
-            }
-        });
-    </script>
-
 </x-main>
