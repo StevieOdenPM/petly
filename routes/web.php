@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\CartController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/register', function () {
     return view('register');
@@ -74,7 +74,7 @@ Route::get('/parcel-tracking', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('admin/dashboard'); 
-});
+})->name('home-admin');
 
 Route::get('/admin/order', function () {
     return view('admin/order');
@@ -95,14 +95,13 @@ Route::get('/theme', function () {
 use App\Http\Controllers\loginController;
 
 Route::get('/login', [loginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [loginController::class, 'login'])->name('login.process');
+Route::post('/login', [loginController::class, 'login']);
 
 use App\Http\Controllers\registerController;
 
-Route::get('/register', [registerController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [registerController::class, 'register'])->name('register.process');
+Route::get('/register', [registerController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [registerController::class, 'register']);
 
 use App\Http\Controllers\ProductCartController;
 Route::post('/cart/add', [ProductCartController::class, 'hello'])->name('cart.add');
-
 

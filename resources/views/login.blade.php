@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <div class="min-h-screen flex justify-center items-center bg-gray-100">
         <div class="w-3/4 bg-white rounded-2xl shadow-xl flex overflow-hidden">
@@ -24,29 +26,39 @@
                         {{ $errors->first() }}
                     </div>
                 @endif
-                
+
                 <!-- Form Login -->
-                <form action="{{ route('login.process') }}" method="POST">
+                <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <!-- Box Metode Login -->
                     <div class="flex gap-3 mb-3">
-                        <button type="button" class="w-1/2 flex items-center justify-center py-2 border rounded-lg bg-gray-100">
+                        <button type="button"
+                            class="w-1/2 flex items-center justify-center py-2 border rounded-lg bg-gray-100">
                             <i class="fab fa-google mr-2"></i> Google
                         </button>
-                        <button type="button" class="w-1/2 flex items-center justify-center py-2 border rounded-lg bg-gray-100">
+                        <button type="button"
+                            class="w-1/2 flex items-center justify-center py-2 border rounded-lg bg-gray-100">
                             <i class="fab fa-facebook mr-2"></i> Facebook
                         </button>
                     </div>
-                    
+
                     <div class="relative my-3 text-center">
                         <span class="bg-white px-2 text-gray-600">or continue with email</span>
                     </div>
-                    
-                    <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300" required>
-                    <div class="relative">
-                        <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 rounded-lg border border-gray-300" required>
+
+                    <input type="email"
+                        class="form-control @error('email') is-invalid @enderror w-full px-4 py-2 mb-2 rounded-lg border border-gray-300"
+                        id="email" name="email" value="{{ old('email') }}" placeholder="Email" required>
+
+                    <input type="password"
+                        class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300 form-control @error('password') is-invalid @enderror"
+                        id="password" name="password" placeholder="Password" required>
+
+                    {{-- <div class="relative">
+                        <input type="password" name="password" placeholder="Password"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300" required>
                         <i class="fas fa-eye absolute right-3 top-3 text-gray-500"></i>
-                    </div>
+                    </div> --}}
 
                     <div class="flex justify-between text-xs text-gray-600 my-3">
                         <label>
@@ -55,20 +67,24 @@
                         <a href="#" class="text-[#FF9494] font-semibold">Forgot Password?</a>
                     </div>
 
-                    <button type="submit" class="w-full bg-[#FF9494] text-white py-2 rounded-lg font-semibold">Log In</button>
+                    <button type="submit"
+                        class="button w-full bg-[#FF9494] text-white py-2 rounded-lg font-semibold">Log
+                        In</button>
                 </form>
 
                 <p class="text-center text-gray-600 mt-3">
-                    Don't have an account? 
+                    Don't have an account?
                     <a href="/register" class="text-[#FF9494]">Create an account</a>
                 </p>
             </div>
-            
+
             <!-- Kanan: Gambar -->
             <div class="w-2/3 flex justify-center items-center p-1">
-                <img class="rounded-xl object-cover w-4/4" src="{{ URL('img/registercat1.png') }}" alt="image description">
+                <img class="rounded-xl object-cover w-4/4" src="{{ URL('img/registercat1.png') }}"
+                    alt="image description">
             </div>
         </div>
     </div>
 </body>
+
 </html>

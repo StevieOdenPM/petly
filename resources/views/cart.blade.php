@@ -90,6 +90,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const token = "1|CowEGhhk7E2Rfat334Rz1MeSl75J6FKbYw3I2ve9c9c7db8e";
+
             const cartContainer = document.getElementById("cart-container");
             const originalPriceElement = document.getElementById("original-price");
             const taxElement = document.getElementById("tax");
@@ -149,6 +150,7 @@
                                     <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
                                         <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">
                                             ${product.product_name}
+
                                         </a>
                                         <div class="flex items-center gap-4 mt-4">
                                             <button type="button" class="delete-btn inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" data-id="${cartItem.cart_id}">
@@ -169,6 +171,7 @@
 
                         attachDeleteEvent();
                         attachCheckboxEvent();
+
 
                         if (isCartEmpty) {
                             checkoutButton.classList.add("opacity-50", "cursor-not-allowed");

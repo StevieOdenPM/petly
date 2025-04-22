@@ -31,7 +31,6 @@ class User extends Authenticatable
         // 'user_id',
         'password',
         'token',
-        'role_role_id',
         'created_at',
         'updated_at'
     ];

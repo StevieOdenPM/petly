@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use App\Http\Resources\ProductResource;
+use App\Models\Role;
+use Illuminate\Support\Facades\Validator;
 
 class loginController extends Controller
 {
@@ -17,43 +21,45 @@ class loginController extends Controller
     public function login(Request $request)
     {
         // Validasi input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
         ]);
 
-        // Coba login dengan kredensial yang diberikan
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->route('dashboard'); // Redirect ke dashboard jika sukses
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator);
         }
 
-        // Jika gagal, kembali ke login dengan pesan error
-        return back()->withErrors(['email' => 'Email atau password salah.']);
-    }
+        try {
+            // Make API request to the registration endpoint
+            $response = Http::post('http://petly.test:8080/api/login', [
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
 
-    // Proses login untuk API (Postman)
-    public function apiLogin(Request $request)
-    {
-        // Validasi tetap sama
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+            $data = $response->json();
+            
+            // Check if the registration was successful
+            if ($response->successful()) {
+                // You might want to handle login automatically or redirect with a success message
+               
+                if ($data['data']['role_role_id'] == 1) {
+                    return redirect()->route('home')->with('success', 'Login successful!');
+                }else if ($data['data']['role_role_id'] == 2) {
+                    // return redirect()->route('home')->with('success', 'Login successful!');
+                }else {
+                    return redirect()->route('home-admin')->with('success', 'Login successful!');
+                }
+                
+            }
 
-        // Coba login
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
-
-            return response()->json([
-                'message' => 'Login berhasil!',
-                'user' => $user,
-                'token' => $token
-            ], 200);
+            return redirect()->back()
+                ->withErrors($data['errors'] ?? ['Something went wrong with login.' . json_encode($data)]);
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withErrors(['api_error' => $e->getMessage()])
+            ;
         }
-
-        return response()->json([
-            'message' => 'Email atau password salah.'
-        ], 401);
     }
 }
