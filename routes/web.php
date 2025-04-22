@@ -97,7 +97,6 @@ use App\Http\Controllers\loginController;
 Route::get('/login', [loginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [loginController::class, 'login'])->name('login.process');
 
-
 use App\Http\Controllers\registerController;
 
 Route::get('/register', [registerController::class, 'showRegistrationForm'])->name('register');

@@ -63,7 +63,7 @@
                         </dl>
                     </div>
 
-                    <a href="checkout" id="checkout-btn"
+                    <a id="checkout-btn"
                         class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]">
                         Proceed to Checkout
                     </a>
@@ -88,123 +88,15 @@
     </section>
 
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
-        //     const cartContainer = document.getElementById("cart-container");
-        //     const originalPriceElement = document.getElementById("original-price");
-        //     const taxElement = document.getElementById("tax");
-        //     const totalElement = document.getElementById("total");
-        //     const checkoutButton = document.getElementById("checkout-btn");
-
-        //     function fetchCart() {
-        //         fetch("http://petly.test:8080/api/customer/cart/", {
-        //                 method: "GET",
-        //                 headers: {
-        //                     Authorization: `Bearer ${token}`
-        //                 }
-        //             })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 cartContainer.innerHTML = "";
-        //                 let originalPrice = 0; // Total price of all products
-        //                 let isCartEmpty = true;
-
-        //                 if (!data.data || data.data.length === 0) {
-        //                     cartContainer.innerHTML = "<p class='text-center py-4'>Your cart is empty</p>";
-        //                     updateReceipt(0); // Update receipt when cart is empty
-        //                     checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
-        //                     checkoutButton.setAttribute("disabled", "true"); // Disable button
-        //                     return;
-        //                 }
-
-        //                 data.data.forEach(cartItem => {
-        //                     cartItem.products.forEach(product => {
-        //                         isCartEmpty = false;
-        //                         originalPrice += product.pivot
-        //                             .total_price; // Sum all product total prices
-
-        //                         cartContainer.innerHTML += `
-    //                         <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-    //                             <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-    //                                 <a href="#" class="shrink-0 md:order-1">
-    //                                     <img class="h-20 w-20 dark:hidden ml-2" src="${product.product_image}" alt="${product.product_name}" />
-    //                                 </a>
-    //                                 <div class="flex items-center justify-between md:order-3 md:justify-end">
-    //                                     <div class="text-end md:order-4 md:w-32">
-    //                                         <p class="text-base font-semibold text-gray-900 dark:text-white">IDR ${product.product_price.toLocaleString()}</p>
-    //                                         <p class="text-sm text-gray-500">Quantity: ${product.pivot.quantity}</p>
-    //                                         <p class="text-sm text-gray-500">Total: IDR ${product.pivot.total_price.toLocaleString()}</p>
-    //                                     </div>
-    //                                 </div>
-    //                                 <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-    //                                     <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">
-    //                                         ${product.product_name}
-    //                                     </a>
-    //                                     <div class="flex items-center gap-4 mt-4">
-    //                                         <button type="button" class="delete-btn inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" data-id="${cartItem.cart_id}">
-    //                                             <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-    //                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-    //                                             </svg>
-    //                                             Remove
-    //                                         </button>
-    //                                     </div>
-    //                                 </div>
-    //                             </div>
-    //                         </div>`;
-        //                     });
-        //                 });
-
-        //                 updateReceipt(originalPrice); // Update receipt with the new total
-        //                 attachDeleteEvent();
-
-        //                 if (isCartEmpty) {
-        //                     checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
-        //                 } else {
-        //                     checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
-        //                 }
-        //             })
-        //             .catch(error => console.error("Error fetching cart:", error));
-        //     }
-
-        //     function attachDeleteEvent() {
-        //         document.querySelectorAll(".delete-btn").forEach(button => {
-        //             button.addEventListener("click", function() {
-        //                 const cartId = this.getAttribute("data-id");
-        //                 fetch(`http://petly.test:8080/api/customer/cart/${cartId}`, {
-        //                         method: "DELETE",
-        //                         headers: {
-        //                             Authorization: `Bearer ${token}`
-        //                         }
-        //                     })
-        //                     .then(() => {
-        //                         fetchCart(); // Refresh cart after deletion
-        //                     })
-        //                     .catch(error => console.error("Error deleting item:", error));
-        //             });
-        //         });
-        //     }
-
-        //     function updateReceipt(originalPrice) {
-        //         const tax = 25000; // Fixed tax amount
-        //         const total = originalPrice + tax;
-
-        //         originalPriceElement.textContent = `IDR ${originalPrice.toLocaleString()}`;
-        //         taxElement.textContent = `IDR ${tax.toLocaleString()}`;
-        //         totalElement.textContent = `IDR ${total.toLocaleString()}`;
-        //     }
-
-        //     fetchCart();
-        // });
-
         document.addEventListener("DOMContentLoaded", function() {
-            const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
+            const token = "1|CowEGhhk7E2Rfat334Rz1MeSl75J6FKbYw3I2ve9c9c7db8e";
             const cartContainer = document.getElementById("cart-container");
             const originalPriceElement = document.getElementById("original-price");
             const taxElement = document.getElementById("tax");
             const totalElement = document.getElementById("total");
             const checkoutButton = document.getElementById("checkout-btn");
 
-            // Array to track selected cart items
+            // Array to keep track of selected items
             let selectedItems = [];
 
             function fetchCart() {
@@ -217,70 +109,78 @@
                     .then(response => response.json())
                     .then(data => {
                         cartContainer.innerHTML = "";
-                        selectedItems = []; // Reset selected items
+                        let originalPrice = 0; // Total price of all products
                         let isCartEmpty = true;
+
+                        console.log("Cart data:", data); // Debug line
 
                         if (!data.data || data.data.length === 0) {
                             cartContainer.innerHTML = "<p class='text-center py-4'>Your cart is empty</p>";
                             updateReceipt(0); // Update receipt when cart is empty
                             checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
-                            checkoutButton.setAttribute("disabled", "true"); // Disable button
                             return;
                         }
 
                         data.data.forEach(cartItem => {
-                            cartItem.products.forEach(product => {
-                                isCartEmpty = false;
-                                const itemId = `item-${cartItem.cart_id}`;
+                            isCartEmpty = false;
+                            const product = cartItem.products; // Direct reference, not an array
+                            const quantity = cartItem.quantity; // Quantity is at cartItem level now
+                            const totalPrice = cartItem
+                                .total_price; // Total price is at cartItem level now
 
-                                cartContainer.innerHTML += `
-                                <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-                                    <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                                        <div class="flex items-center md:order-0 mr-2">
-                                            <input type="checkbox" id="${itemId}" class="cart-checkbox w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" data-id="${cartItem.cart_id}" data-price="${product.pivot.total_price}">
-                                        </div>
-                                        <a href="#" class="shrink-0 md:order-1">
-                                            <img class="h-20 w-20 dark:hidden ml-2" src="${product.product_image}" alt="${product.product_name}" />
-                                        </a>
-                                        <div class="flex items-center justify-between md:order-3 md:justify-end">
-                                            <div class="text-end md:order-4 md:w-32">
-                                                <p class="text-base font-semibold text-gray-900 dark:text-white">IDR ${product.product_price.toLocaleString()}</p>
-                                                <p class="text-sm text-gray-500">Quantity: ${product.pivot.quantity}</p>
-                                                <p class="text-sm text-gray-500">Total: IDR ${product.pivot.total_price.toLocaleString()}</p>
-                                            </div>
-                                        </div>
-                                        <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-                                            <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">
-                                                ${product.product_name}
-                                            </a>
-                                            <div class="flex items-center gap-4 mt-4">
-                                                <button type="button" class="delete-btn inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" data-id="${cartItem.cart_id}">
-                                                    <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                                    </svg>
-                                                    Remove
-                                                </button>
-                                            </div>
+                            cartContainer.innerHTML += `
+                            <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
+                                <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
+                                    <div class="flex items-center md:order-0 mr-2">
+                                        <input type="checkbox" class="cart-checkbox h-5 w-5 rounded border-gray-300" 
+                                            data-id="${cartItem.cart_id}" 
+                                            data-price="${totalPrice}">
+                                    </div>
+                                    <a href="#" class="shrink-0 md:order-1">
+                                        <img class="h-20 w-20 dark:hidden ml-2" src="${product.product_image}" alt="${product.product_name}" />
+                                    </a>
+                                    <div class="flex items-center justify-between md:order-3 md:justify-end">
+                                        <div class="text-end md:order-4 md:w-32">
+                                            <p class="text-base font-semibold text-gray-900 dark:text-white">IDR ${product.product_price.toLocaleString()}</p>
+                                            <p class="text-sm text-gray-500">Quantity: ${quantity}</p>
+                                            <p class="text-sm text-gray-500">Total: IDR ${totalPrice.toLocaleString()}</p>
                                         </div>
                                     </div>
-                                </div>`;
-                            });
+                                    <div class="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
+                                        <a href="#" class="text-base font-medium text-gray-900 hover:underline dark:text-white">
+                                            ${product.product_name}
+                                        </a>
+                                        <div class="flex items-center gap-4 mt-4">
+                                            <button type="button" class="delete-btn inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500" data-id="${cartItem.cart_id}">
+                                                <svg class="me-1.5 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                                                </svg>
+                                                Remove
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
                         });
+
+                        // Clear selected items when refreshing cart
+                        selectedItems = [];
+                        updateReceipt(0); // Reset receipt to zero until items are selected
 
                         attachDeleteEvent();
                         attachCheckboxEvent();
 
-                        // Set initial receipt value to zero (since no checkboxes are checked yet)
-                        updateReceipt(0);
-
                         if (isCartEmpty) {
                             checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
                         } else {
-                            // Still disable checkout until items are selected
-                            checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
+                            checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
                         }
                     })
-                    .catch(error => console.error("Error fetching cart:", error));
+                    .catch(error => {
+                        console.error("Error fetching cart:", error);
+                        cartContainer.innerHTML =
+                            "<p class='text-center py-4 text-red-500'>Error loading cart. Please try again.</p>";
+                    });
             }
 
             function attachDeleteEvent() {
@@ -293,10 +193,9 @@
                                     Authorization: `Bearer ${token}`
                                 }
                             })
-                            .then(() => {
+                            .then(response => {
                                 fetchCart(); // Refresh cart after deletion
                             })
-                            .catch(error => console.error("Error deleting item:", error));
                     });
                 });
             }
@@ -306,7 +205,6 @@
                     checkbox.addEventListener("change", function() {
                         const cartId = this.getAttribute("data-id");
                         const price = parseFloat(this.getAttribute("data-price"));
-
                         if (this.checked) {
                             // Add item to selected items
                             selectedItems.push({
@@ -326,69 +224,58 @@
             function calculateTotal() {
                 let originalPrice = 0;
 
-                // Sum prices of selected items
+                // Sum up prices of all selected items
                 selectedItems.forEach(item => {
                     originalPrice += item.price;
                 });
 
-                // Update receipt with new price
                 updateReceipt(originalPrice);
 
-                // Update checkout button state
+                // Enable/disable checkout button based on selection
                 if (selectedItems.length > 0) {
                     checkoutButton.classList.remove("opacity-50", "cursor-not-allowed");
-                    checkoutButton.removeAttribute("disabled");
                 } else {
                     checkoutButton.classList.add("opacity-50", "cursor-not-allowed");
-                    checkoutButton.setAttribute("disabled", "true");
                 }
             }
 
             function updateReceipt(originalPrice) {
                 const tax = 25000; // Fixed tax amount
-                const total = originalPrice + tax;
+                const total = originalPrice + (selectedItems.length > 0 ? tax :
+                    0); // Only add tax if items are selected
 
                 originalPriceElement.textContent = `IDR ${originalPrice.toLocaleString()}`;
-                taxElement.textContent = `IDR ${tax.toLocaleString()}`;
+                taxElement.textContent = `IDR ${(selectedItems.length > 0 ? tax : 0).toLocaleString()}`;
                 totalElement.textContent = `IDR ${total.toLocaleString()}`;
             }
 
-            // Add checkout button event listener
+            fetchCart();
+
+            // Add event listener
+            // for checkout button to process only selected items
             checkoutButton.addEventListener("click", function() {
                 if (selectedItems.length === 0) {
-                    return; // Don't proceed if no items selected
+                    alert("Please select at least one item to checkout.");
+                    return;
                 }
 
-                // Get all selected cart IDs
+                // Get all cart_ids of selected items
                 const selectedCartIds = selectedItems.map(item => item.cart_id);
 
-                // Prepare data for POST request
-                const checkoutData = {
-                    cart_ids: selectedCartIds
-                };
+                // Here you can implement the checkout functionality for selected items
+                console.log("Proceeding to checkout with items:", selectedCartIds);
 
-                console.log("Sending selected items for checkout:", checkoutData);
+                // Example API call for checkout (you'll need to implement this)
+                // checkoutSelectedItems(selectedCartIds);
 
-                // Uncomment the following code to enable the actual POST request:
-                /*
-                fetch("http://petly.test:8080/api/customer/checkout", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`
-                    },
-                    body: JSON.stringify(checkoutData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Checkout response:", data);
-                    // Handle successful checkout (redirect to payment page, etc.)
-                })
-                .catch(error => console.error("Error during checkout:", error));
-                */
+                // Create a URL with query parameters
+                const url = `/checkout?cart=${selectedCartIds}`;
+
+                // Redirect using href
+                window.location.href = url;
+
+                // window.location.href = "/checkout";
             });
-
-            fetchCart();
         });
     </script>
 </x-main>
