@@ -97,8 +97,11 @@ use App\Http\Controllers\loginController;
 Route::get('/login', [loginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [loginController::class, 'login']);
 
-
 use App\Http\Controllers\registerController;
 
 Route::get('/register', [registerController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [registerController::class, 'register']);
+
+use App\Http\Controllers\ProductCartController;
+Route::post('/cart/add', [ProductCartController::class, 'hello'])->name('cart.add');
+

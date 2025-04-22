@@ -82,7 +82,7 @@ class CartController extends Controller
     public function show(Cart $cart)
     {
         try {
-            $cart->load(['products']);
+            $cart->load(['product']);
             return response()->json([
                 'status' => true,
                 'message' => "Cart Found",
