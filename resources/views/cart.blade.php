@@ -197,7 +197,7 @@
         // });
 
         document.addEventListener("DOMContentLoaded", function() {
-            const token = "2|jinetLTQG4J7H8MLTtEvd9CmmIqk44OsAY1WElByc722155b";
+            const token = "1|yqRnhDHiWhgwQ75DBi2BTi2PrNaovVzegA6Dh6Zbe1920269";
             const cartContainer = document.getElementById("cart-container");
             const originalPriceElement = document.getElementById("original-price");
             const taxElement = document.getElementById("tax");
