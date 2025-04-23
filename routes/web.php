@@ -108,6 +108,7 @@ Route::post('/cart', [ProductCartController::class, 'store'])->name('cart.add');
 use App\Http\Controllers\CartsController;
 // Route::middleware(['auth'])->group(function () {
     Route::get('/cart', [CartsController::class, 'index'])->name('cart.index');
+    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
 // });
 
