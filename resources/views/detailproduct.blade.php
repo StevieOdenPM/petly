@@ -39,95 +39,6 @@
         </ol>
     </nav>
 
-    {{-- <section class="relative py-10">
-        <div class="w-full mx-auto px-4 sm:px-6 lg:px-0">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2">
-                <div class="img">
-                    <div class="img-box h-full max-lg:mx-auto">
-                        <img src="{{ $product['product_image'] }}" alt="Pedigree Dog Dry Food package"
-                            class="max-lg:mx-auto lg:ml-auto h-full w-full object-cover max-h-[600px] rounded-lg shadow-sm">
-                    </div>
-                </div>
-                <div
-                    class="data w-full lg:pr-8 pr-0 xl:justify-start justify-center flex items-center max-lg:pb-10 xl:my-2 lg:my-5 my-0">
-                    <div class="data w-full max-w-xl" x-data="{ quantity: 2 }">
-                        <p class="text-lg uppercase font-light leading-8 text-[#000000] mb-4">Pet
-                            {{ $product['product_type']['product_type_name'] }}</p>
-                        <h2 class="font-sans font-medium text-4xl leading-10 text-gray-900 mb-2">
-                            {{ $product['product_name'] }}</h2>
-
-                        <div class="flex items-center mb-6">
-                            <div class="flex items-center gap-1 mt-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    class="w-6 h-6 text-yellow-400">
-                                    <path fill-rule="evenodd"
-                                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-lg font-medium">9/10</span>
-                            </div>
-                        </div>
-
-                        <p class="text-[#505050] text-base font-normal mb-8">
-                            Made with real meat and essential nutrients for a healthy, happy dog. High in protein,
-                            grain-free, and enriched with Omega-3 & 6 for a shiny coat. Supports digestion and immune
-                            health with prebiotics and vitamins. Perfect for all breeds!
-                        </p>
-
-                        <div class="grid grid-cols-2 gap-2 mb-8 max-w-xs">
-                            <div class="border border-gray-200 rounded-lg p-3">
-                                <p class="text-[#FF9494] text-sm mb-1">Weight</p>
-                                <p class="text-gray-800 font-medium">50 gram</p>
-                            </div>
-                            <div class="border border-gray-200 rounded-lg p-3">
-                                <p class="text-[#FF9494] text-sm mb-1">Stock</p>
-                                <p class="text-gray-800 font-medium">{{ $product['product_stock'] }}</p>
-                            </div>
-                        </div>
-
-                        <p class="text-gray-900 text-2xl font-semibold mb-6">IDR {{ $product['product_price'] }}</p>
-
-                        <div x-data="{ quantity: 1 }" class="mb-8">
-                            <div class="flex items-center gap-4">
-                                <button @click="quantity > 1 ? quantity-- : quantity"
-                                    class="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-
-                                <span x-text="quantity" class="text-gray-900 font-medium text-xl">1</span>
-
-                                <button @click="quantity++"
-                                    class="flex items-center justify-center w-10 h-10 rounded-md border border-gray-300 bg-white text-gray-500 hover:bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="flex gap-5">
-                            <button
-                                class="bg-white text-gray-800 font-medium py-3 px-4 w-32 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-200 flex items-center justify-center text-sm">
-                                ADD TO CART
-                            </button>
-                            <button
-                                class="bg-gray-800 text-white font-medium py-3 px-4 w-32 border border-gray-800 rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center text-sm">
-                                BUY NOW
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <section class="relative py-10">
         <div class="w-full mx-auto px-4 sm:px-6 lg:px-0">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mx-auto max-md:px-2">
@@ -214,10 +125,6 @@
 
                             @if (session('success'))
                                 <div class="mt-4 text-green-600">✅ {{ session('success') }}</div>
-                            @endif
-
-                            @if (session('error'))
-                                <div class="mt-4 text-red-600">❌ {{ session('error') }}</div>
                             @endif
 
                             <div id="cartMessage" class="mt-4"></div>
