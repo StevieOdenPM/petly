@@ -10,16 +10,20 @@
             <div class="text-red-500 mb-4">{{ $error }}</div>
         @endif
 
+
         <div class="flex flex-col lg:flex-row gap-10">
             <div class="w-full lg:w-2/3 space-y-6">
                 @forelse($items as $item)
                     <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800">
                         <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                             <!-- Checkbox -->
-                            <div class="flex items-center md:order-0 mr-2">
-                                <input type="checkbox" class="cart-checkbox h-5 w-5 rounded border-gray-300"
-                                    data-id="{{ $item['cart_id'] }}" data-price="{{ $item['total_price'] }}">
-                            </div>
+                            <form action="{{ route('cart.index') }}" method="get" id="cart-form">
+                                <div class="flex items-center md:order-0 mr-2">
+                                    <input type="checkbox" name="selected_items[]" value="{{ $item['cart_id'] }}"
+                                        class="h-5 w-5 rounded border-gray-300"
+                                        @if (in_array($item['cart_id'], $selectedItems ?? [])) checked @endif onChange="this.form.submit()">
+                                </div>
+                            </form>
 
                             <!-- Product Image -->
                             <a href="#" class="shrink-0 md:order-1">
@@ -66,6 +70,7 @@
                             </div>
                         </div>
                     </div>
+
                 @empty
                     <p class="text-center text-gray-500">Your cart is empty.</p>
                 @endforelse
@@ -107,3 +112,35 @@
         </div>
     </section>
 </x-main>
+
+<script>
+    let selectedItems = [];
+
+    // Saat checkbox dicentang/dibatalkan
+    document.querySelectorAll('.item-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const value = this.value;
+
+            if (this.checked) {
+                // Tambahkan kalau belum ada
+                if (!selectedItems.includes(value)) {
+                    selectedItems.push(value);
+                }
+            } else {
+                // Hapus dari array kalau tidak dicentang
+                selectedItems = selectedItems.filter(item => item !== value);
+            }
+
+            console.log('Selected Items:', selectedItems); // bisa dilihat di console
+        });
+    });
+
+    function handleSubmit() {
+        // Contoh: submit lewat AJAX, atau masukkan ke hidden input
+        console.log('Final submit with:', selectedItems);
+        
+        // Atau kalau mau masukkan ke hidden input:
+        // document.getElementById('hiddenInput').value = JSON.stringify(selectedItems);
+        // document.getElementById('formId').submit();
+    }
+</script>
