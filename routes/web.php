@@ -103,5 +103,12 @@ Route::get('/register', [registerController::class, 'showRegisterForm'])->name('
 Route::post('/register', [registerController::class, 'register']);
 
 use App\Http\Controllers\ProductCartController;
-Route::post('/cart/add', [ProductCartController::class, 'hello'])->name('cart.add');
+Route::post('/cart', [ProductCartController::class, 'store'])->name('cart.add');
+
+use App\Http\Controllers\CartsController;
+// Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartsController::class, 'index'])->name('cart.index');
+    Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
+// });
+
 
