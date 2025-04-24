@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -80,6 +81,10 @@ Route::get('/admin/order', function () {
     return view('admin/order');
 });
 
+Route::get('/admin/addproduct', function () {
+    return view('admin/addproduct');
+});
+
 Route::get('/bank', function () {
     return view('bank');
 });
@@ -113,3 +118,6 @@ use App\Http\Controllers\CartsController;
 // });
 
 
+use App\Http\Controllers\addProductController;
+Route::get('/admin/product/add', [addProductController::class, 'showForm'])->name('product.add');
+Route::post('/admin/product/add', [addProductController::class, 'store'])->name('product.store');
