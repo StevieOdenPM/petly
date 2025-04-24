@@ -8,8 +8,8 @@
                 Pet, Love With <span class="text-[#ff9395]">PETLY</span>
             </h1>
             <p class="text-gray-600 mt-6 text-lg">
-                lorem ipsum is simply dummy text of the<br>
-                printing and typesetting industry.
+                Your one-stop shop for pet care essentials, <br>
+                made with love for every paw, tail, and whisker.
             </p>
             <a href="home"
                 class="inline-block mt-8 px-10 bg-red-400 hover:bg-red-500 text-white font-medium py-3 px-8 rounded-full transition duration-300">
@@ -25,77 +25,30 @@
     <div class="w-full p-10 text-center bg-[#ffe7e7]">
         <h2 class="text-[#FF9494] text-3xl italic font-[Brillotus]">Our Shop</h2>
         <h1 class="text-3xl font-bold text-gray-800">Shop Our Products</h1>
-        <p class="text-gray-600 mt-2">Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p class="text-gray-600 mt-2">Find everything your pets need — from tasty treats to cozy essentials, all in one
+            place!</p>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6 px-10">
             <!-- Product Card -->
-            <div class="bg-white p-6 rounded-lg shadow-lg relative">
-                <img src="https://cppetindo.com/wp-content/uploads/33.png" alt="Product"
-                    class="w-full h-60 object-cover rounded">
-                <div class="text-left mt-4">
-                    <h3 class="text-xl font-semibold">Soma Slim XS</h3>
-                    <p class="text-gray-500">Medicine</p>
+            @foreach (collect($products['data'])->take(4) as $product)
+                <div class="bg-white p-6 rounded-lg shadow-lg relative">
+                    <img src="{{ $product['product_image'] ?? 'https://via.placeholder.com/300' }}"
+                        class="w-full h-60 object-cover rounded">
+                    <div class="text-left mt-4">
+                        <h3 class="text-xl font-semibold"> {{ $product['product_name'] }}</h3>
+                        <p class="text-gray-500 uppercase">{{ $product['product_type']['product_type_name'] }}</p>
+                    </div>
+                    <div class="flex justify-between items-center mt-4">
+                        <p class="text-gray-900 font-bold text-lg">IDR
+                            {{ number_format($product['product_price'], 0, ',') }}</p>
+                        <button
+                            class="w-10 h-10 bg-[#fe9494] flex items-center justify-center rounded-full shadow-md hover:bg-[#f57373] transition">
+                            <i class="fi fi-rr-shopping-basket text-white text-lg"></i>
+                        </button>
+                    </div>
                 </div>
-                <!-- Price & Basket Button -->
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-gray-900 font-bold text-lg">$699.00</p>
-                    <button
-                        class="w-10 h-10 bg-[#fe9494] flex items-center justify-center rounded-full shadow-md hover:bg-[#f57373] transition">
-                        <i class="fi fi-rr-shopping-basket text-white text-lg"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Repeat Product Cards -->
-            <div class="bg-white p-6 rounded-lg shadow-lg relative">
-                <img src="https://cppetindo.com/wp-content/uploads/33.png" alt="Product"
-                    class="w-full h-60 object-cover rounded">
-                <div class="text-left mt-4">
-                    <h3 class="text-xl font-semibold">Soma Slim XS</h3>
-                    <p class="text-gray-500">Medicine</p>
-                </div>
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-gray-900 font-bold text-lg">$699.00</p>
-                    <button
-                        class="w-10 h-10 bg-[#fe9494] flex items-center justify-center rounded-full shadow-md hover:bg-[#f57373] transition">
-                        <i class="fi fi-rr-shopping-basket text-white text-lg"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-lg relative">
-                <img src="https://cppetindo.com/wp-content/uploads/33.png" alt="Product"
-                    class="w-full h-60 object-cover rounded">
-                <div class="text-left mt-4">
-                    <h3 class="text-xl font-semibold">Soma Slim XS</h3>
-                    <p class="text-gray-500">Medicine</p>
-                </div>
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-gray-900 font-bold text-lg">$699.00</p>
-                    <button
-                        class="w-10 h-10 bg-[#fe9494] flex items-center justify-center rounded-full shadow-md hover:bg-[#f57373] transition">
-                        <i class="fi fi-rr-shopping-basket text-white text-lg"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-lg relative">
-                <img src="https://cppetindo.com/wp-content/uploads/33.png" alt="Product"
-                    class="w-full h-60 object-cover rounded">
-                <div class="text-left mt-4">
-                    <h3 class="text-xl font-semibold">Soma Slim XS</h3>
-                    <p class="text-gray-500">Medicine</p>
-                </div>
-                <div class="flex justify-between items-center mt-4">
-                    <p class="text-gray-900 font-bold text-lg">$699.00</p>
-                    <button
-                        class="w-10 h-10 bg-[#fe9494] flex items-center justify-center rounded-full shadow-md hover:bg-[#f57373] transition">
-                        <i class="fi fi-rr-shopping-basket text-white text-lg"></i>
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
-
         <a href="product"
             class="inline-block mt-8 px-10 bg-red-400 hover:bg-red-500 text-white font-medium py-3 px-8 rounded-full transition duration-300">
             Visit Shop
@@ -111,7 +64,8 @@
                         class="fi fi-rr-scissors"></i> </div>
                 <div class='w-3/4'>
                     <h3 class="text-lg font-semibold">Grooming</h3>
-                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and typesetting
+                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and
+                        typesetting
                         industry.</p>
                 </div>
             </div>
@@ -122,7 +76,8 @@
                 </div>
                 <div class='w-3/4'>
                     <h3 class="text-lg font-semibold">Care</h3>
-                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and typesetting
+                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and
+                        typesetting
                         industry.</p>
                 </div>
             </div>
@@ -132,7 +87,8 @@
                         class="fi fi-rr-store-alt"></i> </div>
                 <div class='w-3/4'>
                     <h3 class="text-lg font-semibold">Store</h3>
-                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and typesetting
+                    <p class="text-sm text-gray-500">Lorem ipsum is simply dummy text of the printing and
+                        typesetting
                         industry.</p>
                 </div>
             </div>
@@ -193,8 +149,9 @@
             <div class="w-1/2 p-8">
                 <h3 class="text-[#FF9494] text-3xl italic font-[Brillotus]">Meet With Us</h3>
                 <h2 class="text-3xl font-bold mt-4">Book Your Visit Today</h2>
-                <p class="text-gray-700 mt-6 text-lg">Lorem ipsum is simply dummy text of the printing and typesetting
-                    industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                <p class="text-gray-700 mt-6 text-lg">Looking for expert vet care or a fresh grooming session for your
+                    furry friend? Book your visit today and let our friendly team take care of your pet’s health and
+                    happiness!</p>
                 <a href="services"
                     class="inline-block mt-8 px-10 bg-red-400 hover:bg-red-500 text-white font-medium py-3 px-8 rounded-full transition duration-300">
                     Book Now

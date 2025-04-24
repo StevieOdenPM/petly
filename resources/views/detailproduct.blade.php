@@ -113,7 +113,7 @@
                             <div class="flex gap-5 mt-6">
                                 <form action="{{ route('cart.add') }}" method="POST">
                                     @csrf
-                                    <input type="hidden" name="customer_user_id" value="1">
+                                    <input type="hidden" name="customer_user_id" value="">
                                     <input type="hidden" name="product_id" value="{{ $product['product_id'] }}">
                                     <input type="hidden" name="quantity" value="1" x-bind:value="quantity">
                                     <button type="submit"

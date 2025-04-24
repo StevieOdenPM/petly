@@ -112,35 +112,3 @@
         </div>
     </section>
 </x-main>
-
-<script>
-    let selectedItems = [];
-
-    // Saat checkbox dicentang/dibatalkan
-    document.querySelectorAll('.item-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function () {
-            const value = this.value;
-
-            if (this.checked) {
-                // Tambahkan kalau belum ada
-                if (!selectedItems.includes(value)) {
-                    selectedItems.push(value);
-                }
-            } else {
-                // Hapus dari array kalau tidak dicentang
-                selectedItems = selectedItems.filter(item => item !== value);
-            }
-
-            console.log('Selected Items:', selectedItems); // bisa dilihat di console
-        });
-    });
-
-    function handleSubmit() {
-        // Contoh: submit lewat AJAX, atau masukkan ke hidden input
-        console.log('Final submit with:', selectedItems);
-        
-        // Atau kalau mau masukkan ke hidden input:
-        // document.getElementById('hiddenInput').value = JSON.stringify(selectedItems);
-        // document.getElementById('formId').submit();
-    }
-</script>
