@@ -7,7 +7,9 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
 
 Route::get('/', function () {
-    return view('home');
+    $response = Http::get("http://petly.test:8080/api/products");
+    
+    return view('/home', ['products' => $response]);
 })->name('home');
 
 Route::get('/register', function () {
@@ -19,7 +21,9 @@ Route::get('/login', function () {
 });
 
 Route::get('/home', function () {
-    return view('home');
+    $response = Http::get("http://petly.test:8080/api/products");
+    
+    return view('/home', ['products' => $response]);
 }); 
 
 Route::get('/profile', function () {
@@ -62,7 +66,7 @@ Route::get('admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
     
     return view('admin/product', ['products' => $response]);
-});
+}); 
 
 Route::get('/courier-info', function () {
     return view('courier/courierInfo');
@@ -74,7 +78,7 @@ Route::get('/parcel-tracking', function () {
 
 Route::get('/admin/dashboard', function () {
     return view('admin/dashboard'); 
-})->name('home-admin');
+});
 
 Route::get('/admin/order', function () {
     return view('admin/order');
@@ -112,4 +116,9 @@ use App\Http\Controllers\CartsController;
     Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
 // });
 
+use App\Http\Controllers\ProductsController;
+Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
+use App\Http\Controllers\ProfileController;
+Route::get('/profile', [ProfileController::class, 'getProfile']);
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');

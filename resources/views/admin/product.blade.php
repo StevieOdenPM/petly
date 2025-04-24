@@ -1,6 +1,6 @@
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
 
 
@@ -10,7 +10,7 @@
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
                 <a href="/">
-                <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
+                    <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
                 </a>
             </div>
             <div class="flex flex-col items-center gap-8">
@@ -31,23 +31,28 @@
             </div>
         </div>
 
-        
+
 
         <div class="mx-auto mt-10 bg-gray-100 min-h-screen">
             <div class="flex items-center justify-between mb-5">
                 <div class="relative w-1/3">
-                    <input type="text" placeholder="Search" class="w-full border rounded-lg p-3 pl-10 shadow-sm focus:ring-2 focus:ring-gray-300">
-                    <svg class="absolute left-3 top-3 text-gray-400 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M10 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14z" />
+                    <input type="text" placeholder="Search"
+                        class="w-full border rounded-lg p-3 pl-10 shadow-sm focus:ring-2 focus:ring-gray-300">
+                    <svg class="absolute left-3 top-3 text-gray-400 w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35M10 17a7 7 0 1 1 0-14 7 7 0 0 1 0 14z" />
                     </svg>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <button class="flex items-center px-4 py-2 bg-gray-200 rounded-lg shadow-sm">
-                        <svg class="w-5 h-5 mr-1 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    {{-- <button class="flex items-center px-4 py-2 bg-gray-200 rounded-lg shadow-sm">
+                        <svg class="w-5 h-5 mr-1 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
                         Filter
-                    </button>
+                    </button> --}}
                     <button class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
                         Add New Product
                     </button>
@@ -69,21 +74,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($products['data'] as $product)
-                        <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $product['product_name'] }}</td>
-                            <td class="px-6 py-4">#{{ $product['product_id'] }}</td>
-                            <td class="px-6 py-4">IDR {{ $product['product_price'] }}</td>
-                            <td class="px-6 py-4">{{ $product['product_stock'] }} pcs</td>
-                            <td class="px-6 py-4 font-semibold {{ $product['product_stock'] > 0 ? 'text-green-600' : 'text-red-500' }}">
-                                {{ $product['product_stock'] > 0 ? 'Available' : 'Out of Stock' }}
-                            </td>
-                            <td class="px-8 py-4">
-                                <button class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
+                        @foreach ($products['data'] as $product)
+                            <tr class="border-b last:border-b-0 hover:bg-gray-100">
+                                <td class="px-6 py-4">{{ $product['product_name'] }}</td>
+                                <td class="px-6 py-4">#{{ $product['product_id'] }}</td>
+                                <td class="px-6 py-4">IDR {{ $product['product_price'] }}</td>
+                                <td class="px-6 py-4">{{ $product['product_stock'] }} pcs</td>
+                                <td
+                                    class="px-6 py-4 font-semibold {{ $product['product_stock'] > 0 ? 'text-green-600' : 'text-red-500' }}">
+                                    {{ $product['product_stock'] > 0 ? 'Available' : 'Out of Stock' }}
+                                </td>
+                                <td class="px-8 py-4">
+                                    <form action="{{ route('products.destroy', $product['product_id']) }}"
+                                        method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md"
+                                            onclick="return confirm('Are you sure you want to delete this product?')">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,14 +104,9 @@
 
             <div class="mt-4 flex justify-center space-x-2">
                 <button class="px-4 py-2 bg-gray-200 rounded-lg">Previous</button>
-                <button class="px-4 py-2 bg-red-400 text-white rounded-lg">01</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">02</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">03</button>
-                <span class="px-4 py-2">...</span>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">15</button>
                 <button class="px-4 py-2 bg-gray-200 rounded-lg">Next</button>
             </div>
         </div>
 
-</div>
+    </div>
 </body>
