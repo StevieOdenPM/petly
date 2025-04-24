@@ -45,19 +45,17 @@
                     </svg>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <button class="flex items-center px-4 py-2 bg-gray-200 rounded-lg shadow-sm">
+                    {{-- <button class="flex items-center px-4 py-2 bg-gray-200 rounded-lg shadow-sm">
                         <svg class="w-5 h-5 mr-1 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
                         Filter
+                    </button> --}}
+                    <button class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
+                        Add New Product
                     </button>
-                    <a href="{{  route('product.add') }}"><button
-                            class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
-                            Add New Product
-                        </button></a>
-
                 </div>
             </div>
 
@@ -87,10 +85,16 @@
                                     {{ $product['product_stock'] > 0 ? 'Available' : 'Out of Stock' }}
                                 </td>
                                 <td class="px-8 py-4">
-                                    <button
-                                        class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md">
-                                        Delete
-                                    </button>
+                                    <form action="{{ route('products.destroy', $product['product_id']) }}"
+                                        method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md"
+                                            onclick="return confirm('Are you sure you want to delete this product?')">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -100,11 +104,6 @@
 
             <div class="mt-4 flex justify-center space-x-2">
                 <button class="px-4 py-2 bg-gray-200 rounded-lg">Previous</button>
-                <button class="px-4 py-2 bg-red-400 text-white rounded-lg">01</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">02</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">03</button>
-                <span class="px-4 py-2">...</span>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">15</button>
                 <button class="px-4 py-2 bg-gray-200 rounded-lg">Next</button>
             </div>
         </div>

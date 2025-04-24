@@ -39,22 +39,20 @@ class loginController extends Controller
             ]);
 
             $data = $response->json();
-            session(['api_token' => $data['token']]);
+            session(['api_token' => $data['token'], 'user_id' => $data['data']['user_id']]);
 
             // $apiToken = session('api_token'); -> untuk ambil token global
             
             // Check if the registration was successful
             if ($response->successful()) {
-                // You might want to handle login automatically or redirect with a success message
-                
+                // You might want to handle login automatically or redirect with a success message               
                 if ($data['data']['role_role_id'] == 1) {
                     return redirect()->route('home')->with('success', 'Login successful!');
                 }else if ($data['data']['role_role_id'] == 2) {
                     // return redirect()->route('home')->with('success', 'Login successful!');
                 }else {
                     return redirect()->route('home-admin')->with('success', 'Login successful!');
-                }
-                
+                } 
             }
 
             return redirect()->back()

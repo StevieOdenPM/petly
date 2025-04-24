@@ -14,7 +14,6 @@ class CartsController extends Controller
         $response = Http::withToken($apiToken)
             ->get('http://petly.test:8080/api/customer/cart');
 
-
         // Check if the request was successful
         if ($response->successful()) {
             // Get cart items from the response
@@ -34,13 +33,10 @@ class CartsController extends Controller
                         $selectedTotal += floatval($item['total_price']);
                     }
                 }
-
-                // Apply flat tax of IDR 25,000 if any items are selected
                 $tax = 25000;
                 $total = $selectedTotal + $tax;
             }
         }
-
 
         return view('cart', compact('items', 'selectedTotal', 'tax', 'total', 'selectedItems'));
     }
