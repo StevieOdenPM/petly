@@ -6,7 +6,6 @@
 
 <body class="h-full">
     <div class="flex min-h-screen bg-gray-100">
-        <!-- Sidebar -->
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
                 <a href="/">
@@ -14,9 +13,9 @@
                 </a>
             </div>
             <div class="flex flex-col items-center gap-8">
-                {{-- <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-pie-chart-line text-gray-400 text-xl"></i>
-                </a> --}}
+                </a>
                 <a href="/admin/product" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
                     <i class="ri-shopping-bag-3-line text-pink-400  text-xl"></i>
                 </a>
@@ -28,14 +27,13 @@
                 </a>
             </div>
             <div class="mt-auto">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                        <i class="ri-logout-box-r-line text-red-500 text-xl"></i>
-                    </button>
-                </form>
+                <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="ri-settings-line text-gray-400 text-xl"></i>
+                </a>
             </div>
         </div>
+
+
 
         <div class="mx-auto mt-10 bg-gray-100 min-h-screen">
             <div class="flex items-center justify-between mb-5">
@@ -57,51 +55,46 @@
                         </svg>
                         Filter
                     </button> --}}
-                    <a href="/admin/addproduct"
-                        class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
-                        Add New Product
-                    </a>
+
                 </div>
             </div>
 
-            <h2 class="text-2xl font-bold text-gray-800 mb-5">Product Management Dashboard</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-5">User Management Dashboard</h2>
 
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <table class="w-full text-left">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="pr-10 pl-6 py-3 text-gray-600">Product Name</th>
-                            <th class="pr-10 pl-6 py-3 text-gray-600">Product ID</th>
-                            <th class="pr-10 pl-6 py-3 text-gray-600">Price</th>
-                            <th class="pr-10 pl-6 py-3 text-gray-600">Stock</th>
-                            <th class="pr-10 pl-8 py-3 text-gray-600">Status</th>
-                            <th class="pr-10 pl-10 py-3 text-gray-600">Action</th>
+                            <th class="pr-10 pl-6 py-3 text-gray-600">User ID</th>
+                            <th class="pr-10 pl-6 py-3 text-gray-600">User Name</th>
+                            <th class="pr-10 pl-6 py-3 text-gray-600">Phone Number</th>
+                            <th class="pr-10 pl-6 py-3 text-gray-600">Email</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($products['data'] as $product)
-                            <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                                <td class="px-6 py-4">{{ $product['product_name'] }}</td>
-                                <td class="px-6 py-4">#{{ $product['product_id'] }}</td>
-                                <td class="px-6 py-4">IDR {{ $product['product_price'] }}</td>
-                                <td class="px-6 py-4">{{ $product['product_stock'] }} pcs</td>
-                                <td
-                                    class="px-6 py-4 font-semibold {{ $product['product_stock'] > 0 ? 'text-green-600' : 'text-red-500' }}">
-                                    {{ $product['product_stock'] > 0 ? 'Available' : 'Out of Stock' }}
-                                </td>
-                                <td class="px-8 py-4">
-                                    <form action="{{ route('products.destroy', $product['product_id']) }}"
-                                        method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
+
+                        @foreach ($users as $user)
+                        <tr class="border-b last:border-b-0 hover:bg-gray-100">
+                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">{{ $user->username }}</td>
+                            <td class="px-6 py-4">{{ $user->phone_number }}</td>
+                            <td class="px-6 py-4">{{ $user->email }}</td>
+
+                            <td class="px-8 py-4">
+                                <form action="{{ route('user.destroy', $user->user_id) }}" 
+                                    method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
                                             class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md"
-                                            onclick="return confirm('Are you sure you want to delete this product?')">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
+                                            onclick="return confirm('Are you sure you want to delete this user?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        
                         @endforeach
                     </tbody>
                 </table>
