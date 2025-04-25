@@ -20,13 +20,22 @@
                     <i class="ri-shopping-bag-3-line text-gray-400 text-xl"></i>
                 </a>
                 <a href="/admin/order" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
-                    <i class="ri-group-line text-pink-400 text-xl"></i>
+                    <i class="ri-shopping-cart-line text-pink-400 text-xl"></i>
+                </a>
+                <a href="/admin/user" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="ri-group-line text-gray-400 text-xl"></i>
                 </a>
             </div>
             <div class="mt-auto">
-                <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-settings-line text-gray-400 text-xl"></i>
-                </a>
+                </a> --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="ri-logout-box-r-line text-red-500 text-xl"></i>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -71,34 +80,35 @@
                             <th class="pr-10 pl-6 py-3 text-gray-600">Total Price</th>
                             <th class="pr-10 pl-6 py-3 text-gray-600">Total Items</th>
                             <th class="pr-10 pl-8 py-3 text-gray-600">Status</th>
-                            <th class="pr-12 pl-8 py-3 text-gray-600">Action</th>
+                            <th class="pr-10 pl-8 py-3 text-gray-600">TransactionDate</th>
+                            {{-- <th class="pr-12 pl-8 py-3 text-gray-600">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($products as $product) --}}
-                        {{-- <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $product->name }}</td>
-                            <td class="px-6 py-4">#{{ $product->id }}</td>
-                            <td class="px-6 py-4">IDR {{ number_format($product->price, 0, ',', '.') }}</td>
-                            <td class="px-6 py-4">{{ $product->stock }} pcs</td>
-                            <td class="px-6 py-4 font-semibold {{ $product->stock > 0 ? 'text-green-600' : 'text-red-500' }}">
-                                {{ $product->stock > 0 ? 'Available' : 'Out of Stock' }}
-                            </td>
-                            <td class="px-6 py-4">...</td>
-                        </tr> --}}
-                        <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">Duri</td>
-                            <td class="px-6 py-4">#123333</td>
-                            <td class="px-6 py-4">IDR 1232333</td>
-                            <td class="px-6 py-4">5 pcs</td>
-                            <td class="px-6 py-4 font-semibold text-green-600">
-                                Completed
-                            </td>
-                            <td class="px-8 py-4">....</td>
-                        </tr>
-                        {{-- @endforeach --}}
+                        @if (!empty($transactions))
+                            @foreach ($transactions as $transaction)
+                                <tr class="border-b last:border-b-0 hover:bg-gray-100">
+                                    <td class="px-6 py-4">{{ $transaction['user']['username'] }}</td>
+                                    <td class="px-6 py-4">
+                                        {{ $transaction['transaction_id'] }}</td>
+                                    <td class="px-6 py-4">IDR
+                                        {{ number_format($transaction['transaction_details']['total_payment'], 0, ',') }}
+                                    </td>
+                                    <td class="px-6 py-4">{{ $transaction['cart']['quantity'] }} pcs</td>
+                                    <td class="uppercase px-6 py-4 font-semibold">
+                                        {{ $transaction['transaction_status']['transaction_status_name'] }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $transaction['transaction_date'] }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
                     </tbody>
+                    <p class="text-center text-gray-500">No Data Available</p>
+                    @endif
                 </table>
+
             </div>
 
             <!-- Pagination -->

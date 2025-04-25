@@ -49,7 +49,7 @@ class loginController extends Controller
                 if ($data['data']['role_role_id'] == 1) {
                     return redirect()->route('home')->with('success', 'Login successful!');
                 }else if ($data['data']['role_role_id'] == 2) {
-                    // return redirect()->route('home')->with('success', 'Login successful!');
+                    return redirect()->route('home-courier')->with('success', 'Login successful!');
                 }else {
                     return redirect()->route('home-admin')->with('success', 'Login successful!');
                 } 

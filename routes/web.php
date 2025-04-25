@@ -29,6 +29,7 @@ Route::get('/history', function () {
     return view('history');
 });
 
+
 Route::get('/aboutus', function () {
     session()->flush();
     return view('aboutus');
@@ -58,11 +59,11 @@ Route::get('/product', function () {
     return view('product', ['products' => $response]);
 });
 
-Route::get('admin/product', function () {
+Route::get('/admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
 
     return view('admin/product', ['products' => $response]);
-});
+})->name('home-admin'); 
 
 Route::get('/courier-info', function () {
     return view('courier/courierInfo');
@@ -72,9 +73,9 @@ Route::get('/parcel-tracking', function () {
     return view('courier/parcelTracking');
 });
 
-Route::get('/admin', function () {
-    return view('admin/dashboard');
-})->name('home-admin');
+// Route::get('/admin', function () {
+//     return view('admin/product'); 
+// })->name('home-admin');
 
 Route::get('/admin/order', function () {
     return view('admin/order');
@@ -83,6 +84,11 @@ Route::get('/admin/order', function () {
 Route::get('/admin/addproduct', function () {
     return view('admin/addproduct');
 });
+
+use App\Http\Controllers\UserController;
+Route::get('/admin/user', [UserController::class, 'show']);
+Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
 
 Route::get('/bank', function () {
     return view('bank');
@@ -95,6 +101,10 @@ Route::get('/pet', function () {
 Route::get('/theme', function () {
     return view('theme');
 });
+
+Route::get('/courier', function () {
+    return view('courier/courierInfo'); 
+})->name('home-courier');
 
 use App\Http\Controllers\loginController;
 
@@ -141,3 +151,6 @@ use App\Http\Controllers\CheckoutController;
 
 Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('checkout');
 Route::post('/checkout/add', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+
+use App\Http\Controllers\OrderManagementController;
+Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
