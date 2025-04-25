@@ -22,7 +22,7 @@ class CheckoutController extends Controller
                 'cart_id' => $selectedItems,
                 'transaction_date' => $transactionDate,
             ]);
-        dd($response->body());
+        // dd($response->body());
         $subtotal = array_sum(array_column($selectedItems, 'total_price'));
         $taxAmount = 25000;
         $total = $subtotal + $taxAmount;

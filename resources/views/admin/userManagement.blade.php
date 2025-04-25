@@ -13,23 +13,26 @@
                 </a>
             </div>
             <div class="flex flex-col items-center gap-8">
-                <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                {{-- <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-pie-chart-line text-gray-400 text-xl"></i>
-                </a>
-                <a href="/admin/product" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
-                    <i class="ri-shopping-bag-3-line text-pink-400  text-xl"></i>
+                </a> --}}
+                <a href="/admin/product" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="ri-shopping-bag-3-line text-gray-400 text-xl"></i>
                 </a>
                 <a href="/admin/order" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="ri-group-line text-gray-400 text-xl"></i>
+                    <i class="ri-shopping-cart-line text-gray-400 text-xl"></i>
                 </a>
-                <a href="/admin/user" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="ri-group-line text-gray-400 text-xl"></i>
+                <a href="/admin/user" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                    <i class="ri-group-line  text-pink-400  text-xl"></i>
                 </a>
             </div>
             <div class="mt-auto">
-                <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <i class="ri-settings-line text-gray-400 text-xl"></i>
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="ri-logout-box-r-line text-red-500 text-xl"></i>
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -69,32 +72,31 @@
                             <th class="pr-10 pl-6 py-3 text-gray-600">User Name</th>
                             <th class="pr-10 pl-6 py-3 text-gray-600">Phone Number</th>
                             <th class="pr-10 pl-6 py-3 text-gray-600">Email</th>
+                            <th class="pr-10 pl-10 py-3 text-gray-600">Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($users as $user)
-                        <tr class="border-b last:border-b-0 hover:bg-gray-100">
-                            <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4">{{ $user->username }}</td>
-                            <td class="px-6 py-4">{{ $user->phone_number }}</td>
-                            <td class="px-6 py-4">{{ $user->email }}</td>
+                            <tr class="border-b last:border-b-0 hover:bg-gray-100">
+                                <td class="px-6 py-4">{{ $user->user_id }}</td>
+                                <td class="px-6 py-4">{{ $user->username }}</td>
+                                <td class="px-6 py-4">{{ $user->phone_number }}</td>
+                                <td class="px-6 py-4">{{ $user->email }}</td>
 
-                            <td class="px-8 py-4">
-                                <form action="{{ route('user.destroy', $user->user_id) }}" 
-                                    method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
+                                <td class="px-8 py-4">
+                                    <form action="{{ route('user.destroy', $user->user_id) }}" method="POST"
+                                        class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
                                             class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md"
                                             onclick="return confirm('Are you sure you want to delete this user?')">
-                                        Delete
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-
-                        
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
