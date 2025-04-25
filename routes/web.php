@@ -36,6 +36,7 @@ Route::get('/history', function () {
 });
 
 Route::get('/aboutus', function () {
+    session()->flush();
     return view('aboutus');
 });
 
@@ -77,9 +78,9 @@ Route::get('/parcel-tracking', function () {
     return view('courier/parcelTracking');
 });
 
-Route::get('/admin/dashboard', function () {
+Route::get('/admin', function () {
     return view('admin/dashboard'); 
-});
+})->name('home-admin');
 
 Route::get('/admin/order', function () {
     return view('admin/order');
@@ -129,5 +130,9 @@ Route::get('/profile', [ProfileController::class, 'getProfile']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 use App\Http\Controllers\addProductController;
+
 Route::get('/admin/product/add', [addProductController::class, 'showForm'])->name('product.add');
 Route::post('/admin/product/add', [addProductController::class, 'store'])->name('product.store');
+
+use App\Http\Controllers\CheckoutController;
+Route::post('/checkout/add', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');

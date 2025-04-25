@@ -91,10 +91,16 @@
                     <span>Total</span>
                     <span>IDR {{ number_format($total) }}</span>
                 </div>
-                <a id="checkout-btn"
-                    class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]">
-                    Proceed to Checkout
-                </a>
+                <form action="{{ route('checkout.store') }}" method="POST">
+                    @csrf
+                    @foreach ($selectedItems ?? [] as $cartId)
+                        <input type="hidden" name="selected_items[]" value="{{ $cartId }}">
+                    @endforeach
+                    <button type="submit"
+                        class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]">
+                        Proceed to Checkout
+                    </button>
+                </form>
                 <div class="flex items-center justify-center gap-2">
                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400"> or </span>
                     <a href="product" title=""
