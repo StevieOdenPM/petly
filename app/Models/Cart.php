@@ -29,7 +29,7 @@ class Cart extends Model
 
     public function transaction()
     {
-        return $this->belongsTo(Transaction::class, 'foreign_transaction_id', 'transaction_id');
+        return $this->hasOne(Transaction::class, 'foreign_cart_id', 'cart_id');
     }
 
     public function users()
