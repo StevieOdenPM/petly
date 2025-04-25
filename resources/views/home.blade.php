@@ -11,7 +11,7 @@
                 Your one-stop shop for pet care essentials, <br>
                 made with love for every paw, tail, and whisker.
             </p>
-            <a href="home"
+            <a href="/"
                 class="inline-block mt-8 px-10 bg-red-400 hover:bg-red-500 text-white font-medium py-3 px-8 rounded-full transition duration-300">
                 Get Started
             </a>

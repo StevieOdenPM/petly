@@ -2,15 +2,6 @@
     <section class="py-10 relative">
         <h2 class="font-semibold text-2xl text-black mb-5">Shopping Cart</h2>
 
-        @if (session('success'))
-            <div class="text-green-500 mb-4">{{ session('success') }}</div>
-        @endif
-
-        @if (isset($error))
-            <div class="text-red-500 mb-4">{{ $error }}</div>
-        @endif
-
-
         <div class="flex flex-col lg:flex-row gap-10">
             <div class="w-full lg:w-2/3 space-y-6">
                 @forelse($items as $item)
