@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\TransactionResource;
 use App\Models\Cart;
+use App\Models\Customer;
 
 class TransactionController extends Controller
 {
@@ -63,13 +64,13 @@ class TransactionController extends Controller
             ], 422);
         }
 
-        $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->first();
-        if ($checkCart) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Your cart already in transaction',
-            ]);
-        }
+        // $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->first();
+        // if ($checkCart) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'Your cart already in transaction',
+        //     ]);
+        // }
 
         DB::beginTransaction();
         try {
@@ -92,6 +93,9 @@ class TransactionController extends Controller
                 'transaction_transaction_id' => $transaction->transaction_id,
                 'total_payment' => $totalPayment,
             ]);
+            $user = User::where('user_id', $transaction->user_user_id)->first();
+            $product = Product::where('product_id', $cart->foreign_product_id)->first();
+            $userCustomer = Customer::where('user_user_id', $transaction->user_user_id)->first();
             DB::commit();
 
             return response()->json([
@@ -99,10 +103,12 @@ class TransactionController extends Controller
                 'message' => 'Transaction successfully added',
                 'data' => [
                     'transaction' => $transaction,
-                    'user_user_id' => $transaction->user_user_id,
+                    'user' => $user,
+                    'user_detail' => $userCustomer,
                     'transaction_status' => $transactionStatus,
                     'transaction_detail' => $transactionDetail,
                     'cart' => $cart,
+                    'product' => $product
                 ],
             ], 201);
         } catch (\Throwable $e) {

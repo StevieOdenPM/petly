@@ -109,7 +109,7 @@ class PaymentController extends Controller
                 ]);
             }
 
-            Cart::where('foreign_transaction_id', $transaction->transaction_id)->delete();
+            Cart::where('cart_id', $transaction->foreign_cart_id)->delete();
 
             DB::commit();
 
