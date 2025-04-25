@@ -68,8 +68,6 @@ class AuthController extends Controller
 
             DB::commit();
 
-            // $token = $user->createToken('auth_token')->plainTextToken;
-
             return response()->json([
                 'status' => true,
                 'message' => 'User registered successfully',
