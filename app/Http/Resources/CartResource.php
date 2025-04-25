@@ -19,7 +19,7 @@ class CartResource extends JsonResource
         return [
             'cart_id' => $this->cart_id,
             'products' => new ProductResource($this->whenLoaded('product')),
-            'transaction' => new TransactionResource($this->whenLoaded('transaction')),
+            // 'transaction' => new TransactionResource($this->whenLoaded('transaction')),
             'quantity' => $this->quantity,
             'total_price' => $this->total_price,
             'created_at' => $this->created_at,
