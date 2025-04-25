@@ -23,7 +23,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails'])->get();
+        $user = auth('sanctum')->user();
+        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails'])
+        ->where('user_user_id', $user->user_id)
+        ->get();
         if ($transaction) {
             return TransactionResource::collection($transaction);
         } else {
