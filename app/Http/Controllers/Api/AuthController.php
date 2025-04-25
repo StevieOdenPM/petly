@@ -135,7 +135,7 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         $request->user()->update([
-            'token' => ''
+            'token' => null
         ]);
 
         return response()->json([
