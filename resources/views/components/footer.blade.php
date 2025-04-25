@@ -20,12 +20,12 @@
             <div class="lg:mx-auto text-left ">
                 <h4 class="text-lg text-[#FBFCFF] font-medium mb-7">Petly</h4>
                 <ul class="text-sm  transition-all duration-500">
-                    <li class="mb-5"><a href="home" class="text-[#FBFCFF] hover:text-gray-900">Home</a></li>
-                    <li class="mb-5"><a href="javascript:;" class=" text-[#FBFCFF] hover:text-gray-900">About Us</a>
+                    <li class="mb-5"><a href="/" class="text-[#FBFCFF] hover:text-gray-900">Home</a></li>
+                    <li class="mb-5"><a href="aboutus" class=" text-[#FBFCFF] hover:text-gray-900">About Us</a>
                     </li>
-                    <li class="mb-5"><a href="javascript:;" class=" text-[#FBFCFF] hover:text-gray-900">Products</a>
+                    <li class="mb-5"><a href="product" class=" text-[#FBFCFF] hover:text-gray-900">Products</a>
                     </li>
-                    <li><a href="javascript:;" class=" text-[#FBFCFF] hover:text-gray-900">Services</a></li>
+                    <li><a href="services" class=" text-[#FBFCFF] hover:text-gray-900">Services</a></li>
                 </ul>
             </div>
             <!--End Col-->

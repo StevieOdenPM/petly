@@ -21,12 +21,6 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/home', function () {
-    $response = Http::get("http://petly.test:8080/api/products");
-    
-    return view('/home', ['products' => $response]);
-}); 
-
 Route::get('/profile', function () {
     return view('profile');
 });
@@ -36,6 +30,7 @@ Route::get('/history', function () {
 });
 
 Route::get('/aboutus', function () {
+    session()->flush();
     return view('aboutus');
 });
 
@@ -115,18 +110,21 @@ use App\Http\Controllers\ProductCartController;
 Route::post('/cart', [ProductCartController::class, 'store'])->name('cart.add');
 
 use App\Http\Controllers\CartsController;
-// Route::middleware(['auth'])->group(function () {
-    Route::get('/cart', [CartsController::class, 'index'])->name('cart.index');
-    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
-// });
+Route::get('/cart', [CartsController::class, 'index'])->name('cart.index');
+Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
 
 use App\Http\Controllers\ProductsController;
-Route::delete('/products/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
+Route::delete('/admin/product/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
 use App\Http\Controllers\ProfileController;
 Route::get('/profile', [ProfileController::class, 'getProfile']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+use App\Http\Controllers\LogoutController;
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+use App\Http\Controllers\HistoryController;
+Route::get('/history', [HistoryController::class, 'getHistory']);
 
 use App\Http\Controllers\addProductController;
 Route::get('/admin/product/add', [addProductController::class, 'showForm'])->name('product.add');

@@ -110,24 +110,32 @@
                                 </button>
                             </div>
 
-                            <div class="flex gap-5 mt-6">
-                                <form action="{{ route('cart.add') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="customer_user_id" value="">
-                                    <input type="hidden" name="product_id" value="{{ $product['product_id'] }}">
-                                    <input type="hidden" name="quantity" value="1" x-bind:value="quantity">
-                                    <button type="submit"
+                            @if (session()->has('api_token'))
+                                <div class="flex gap-5 mt-6">
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="customer_user_id" value="">
+                                        <input type="hidden" name="product_id" value="{{ $product['product_id'] }}">
+                                        <input type="hidden" name="quantity" value="1"
+                                            x-bind:value="quantity">
+                                        <button type="submit"
+                                            class="bg-gray-800 text-white font-medium py-3 px-4 w-32 border border-gray-800 rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center text-sm">
+                                            ADD TO CART
+                                        </button>
+                                    </form>
+                                </div>
+
+                                @if (session('success'))
+                                    <div class="mt-4 text-green-600">✅ {{ session('success') }}</div>
+                                @endif
+                            @else
+                                <div class="flex gap-5 mt-6">
+                                    <button type="button" onclick="alert('You need Login First')"
                                         class="bg-gray-800 text-white font-medium py-3 px-4 w-32 border border-gray-800 rounded-lg shadow-sm hover:bg-gray-700 transition-all duration-200 flex items-center justify-center text-sm">
                                         ADD TO CART
                                     </button>
-                                </form>
-                            </div>
-
-                            @if (session('success'))
-                                <div class="mt-4 text-green-600">✅ {{ session('success') }}</div>
+                                </div>
                             @endif
-
-                            <div id="cartMessage" class="mt-4"></div>
                         </div>
 
                     </div>
