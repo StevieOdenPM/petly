@@ -20,5 +20,14 @@ class UserSeeder extends Seeder
             'phone_number' => '081949742576',
             'email' => 'admin@gmail.com',
         ]);
+
+        User::create([
+            'username' => 'courier',
+            'role_role_id' => 2,
+            'password' => 'courier1234',
+            'phone_number' => '081223388991',
+            'email' => 'salikinsalimin@gmail.com',
+        ]);
     }
+    
 }
