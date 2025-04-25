@@ -14,8 +14,8 @@ class LogoutController extends Controller
             ->post('http://petly.test:8080/api/logout');
                 
         if ($response->successful()) {
-            return view('login');
             session()->flush('api_token');
+            return redirect()->route('login')->with('message', 'You have been logged out successfully');
         }
     }
 }

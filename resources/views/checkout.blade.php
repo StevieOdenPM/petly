@@ -154,15 +154,62 @@
                             <div id="checkout-items-container"
                                 class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
                                 <!-- Cart items will be loaded here -->
-                                <div class="flex items-center justify-center py-3">
-                                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+                                @foreach ($cartIds as $item)
+                                
+                                @endforeach
+                                <div class="flex items-center">
+                                    <div
+                                        class="mr-4 h-28 w-28 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                        <img src="${item.image}" alt="${item.name}"
+                                            class="h-full w-full object-cover object-center" />
+                                    </div>
+                                    <div class="item-details">
+                                        <h3 class="text-base font-medium text-gray-900 dark:text-white">${item.name}
+                                        </h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">Quantity: ${item.quantity}
+                                        </p>
+                                    </div>
                                 </div>
+                                <div class="flex items-center">
+                                    <p class="mt-1 text-base font-medium text-gray-900 dark:text-white">IDR
+                                        ${item.totalPrice.toLocaleString()}</p>
+                                </div>
+                                {{-- <div class="flex items-center justify-center py-3">
+                                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+                                </div> --}}
                             </div>
                         </div>
 
                         <!-- Order summary will be populated here -->
                         <div id="order-summary" class="divide-y divide-gray-200 dark:divide-gray-800">
                             <!-- Summary data will be inserted here -->
+                            <!-- Subtotal -->
+                            <dl class="flex items-center justify-between gap-2 py-3">
+                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">IDR
+                                    ${subtotal.toLocaleString()}</dd>
+                            </dl>
+
+                            <!-- Shipping -->
+                            <dl class="flex items-center justify-between gap-2 py-3">
+                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Shipping Fee</dt>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">IDR
+                                    ${shipping.toLocaleString()}</dd>
+                            </dl>
+
+                            <!-- Taxes -->
+                            <dl class="flex items-center justify-between gap-2 py-3">
+                                <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Flat Tax</dt>
+                                <dd class="text-base font-medium text-gray-900 dark:text-white">IDR
+                                    ${tax.toLocaleString()}</dd>
+                            </dl>
+
+                            <!-- Total -->
+                            <dl class="flex items-center justify-between gap-2 py-3">
+                                <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                                <dd class="text-base font-bold text-gray-900 dark:text-white">IDR
+                                    ${total.toLocaleString()}</dd>
+                            </dl>
                         </div>
 
                         <!-- Order buttons -->
@@ -191,7 +238,7 @@
 
             // API information
             const profileApiUrl = "http://petly.test:8080/api/profile";
-            const token = "1|CowEGhhk7E2Rfat334Rz1MeSl75J6FKbYw3I2ve9c9c7db8e";
+            const apiToken = session('api_token');
 
             // Log cart IDs for debugging purposes
             console.log("Cart IDs to process:", cartIds);
@@ -202,7 +249,7 @@
                 const profileResponse = await fetch(profileApiUrl, {
                     method: "GET",
                     headers: {
-                        "Authorization": `Bearer ${token}`,
+                        "Authorization": `Bearer ${apiToken}`,
                     }
                 });
 
@@ -241,7 +288,7 @@
                             `http://petly.test:8080/api/customer/cart/${cartId}`, {
                                 method: "GET",
                                 headers: {
-                                    "Authorization": `Bearer ${token}`,
+                                    "Authorization": `Bearer ${apiToken}`,
                                 }
                             });
 

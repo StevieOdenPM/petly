@@ -12,6 +12,7 @@ class Transaction extends Model
         'transaction_date',
         'user_user_id',
         'delivery_delivery_id',
+        'foreign_cart_id',
         'transactions_transaction_status_id',
     ];
 
@@ -20,7 +21,7 @@ class Transaction extends Model
     }
 
     public function cart() {
-        return $this->hasMany(Cart::class, 'foreign_transaction_id' ,'transaction_id');
+        return $this->hasOne(Cart::class, 'foreign_cart_id' ,'cart_id');
     }
 
     public function delivery() {
