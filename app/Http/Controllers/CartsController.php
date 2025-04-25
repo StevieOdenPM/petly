@@ -10,36 +10,32 @@ class CartsController extends Controller
 
     public function index(Request $request)
     {
-        dd(session('api_token'));
         $apiToken = session('api_token');
         $response = Http::withToken($apiToken)
             ->get('http://petly.test:8080/api/customer/cart');
 
-        // Check if the request was successful
+        // Initialize values
+        $items = [];
+        $selectedTotal = 0;
+        $tax = 0;
+        $total = 0;
+        $selectedCartId = $request->input('selected_item');
+
         if ($response->successful()) {
-            // Get cart items from the response
             $items = $response->json('data') ?? [];
 
-            $selectedItems = $request->input('selected_items', []);
-
-            // Initialize values
-            $selectedTotal = 0;
-            $tax = 0;
-            $total = 0;
-
-            // Only calculate if there are selected items
-            if (!empty($selectedItems)) {
+            if ($selectedCartId) {
                 foreach ($items as $item) {
-                    if (in_array($item['cart_id'], $selectedItems)) {
-                        $selectedTotal += floatval($item['total_price']);
+                    if ($item['cart_id'] == $selectedCartId) {
+                        $selectedTotal = floatval($item['total_price']);
+                        break;
                     }
                 }
                 $tax = 25000;
                 $total = $selectedTotal + $tax;
             }
         }
-
-        return view('cart', compact('items', 'selectedTotal', 'tax', 'total', 'selectedItems'));
+        return view('cart', compact('items', 'selectedTotal', 'tax', 'total', 'selectedCartId'));
     }
 
     public function destroy($id)

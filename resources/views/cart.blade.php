@@ -7,12 +7,13 @@
                 @forelse($items as $item)
                     <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800">
                         <div class="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-                            <!-- Checkbox -->
+                            <!-- Radio button instead of checkbox -->
                             <form action="{{ route('cart.index') }}" method="get" id="cart-form">
                                 <div class="flex items-center md:order-0 mr-2">
-                                    <input type="checkbox" name="selected_items[]" value="{{ $item['cart_id'] }}"
+                                    <input type="radio" name="selected_item" value="{{ $item['cart_id'] }}"
                                         class="h-5 w-5 rounded border-gray-300"
-                                        @if (in_array($item['cart_id'], $selectedItems ?? [])) checked @endif onChange="this.form.submit()">
+                                        @if (isset($selectedCartId) && $selectedCartId == $item['cart_id']) checked @endif 
+                                        onChange="this.form.submit()">
                                 </div>
                             </form>
 
@@ -84,11 +85,12 @@
                 </div>
                 <form action="{{ route('checkout.store') }}" method="POST">
                     @csrf
-                    @foreach ($selectedItems ?? [] as $cartId)
-                        <input type="hidden" name="selected_items[]" value="{{ $cartId }}">
-                    @endforeach
+                    @if(isset($selectedCartId) && $selectedCartId)
+                        <input type="hidden" name="selected_item" value="{{ $selectedCartId }}">
+                    @endif
                     <button type="submit"
-                        class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]">
+                        class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]"
+                        @if(!isset($selectedCartId) || !$selectedCartId) disabled @endif>
                         Proceed to Checkout
                     </button>
                 </form>
