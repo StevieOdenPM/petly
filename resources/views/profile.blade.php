@@ -29,10 +29,15 @@
             </nav>
 
             <div class="border-t w-full mt-6 pt-4">
-                <a href="#" class="flex items-center gap-2 text-red-500 font-semibold px-4 py-2">
-                    <i data-lucide="log-out"></i> Logout
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="cursor-pointer flex items-center gap-2 text-red-500 font-semibold px-4 py-2">
+                        <i data-lucide="log-out"></i> Logout
+                    </button>
+                </form>
             </div>
+
         </aside>
 
         <!-- Profile Container -->

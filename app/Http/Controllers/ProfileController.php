@@ -45,9 +45,7 @@ class ProfileController extends Controller
         ]);
 
         if ($response->successful()) {
-            return back()->with('success');
-        } else {
-            return back()->with('error');
+            return back();
         }
     }
 }
