@@ -21,7 +21,7 @@ class Transaction extends Model
     }
 
     public function cart() {
-        return $this->hasOne(Cart::class, 'foreign_cart_id' ,'cart_id');
+        return $this->belongsTo(Cart::class, 'foreign_cart_id' ,'cart_id');
     }
 
     public function delivery() {

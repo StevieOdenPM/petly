@@ -63,7 +63,7 @@ class TransactionController extends Controller
             ], 422);
         }
 
-        $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->get();
+        $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->first();
         if ($checkCart) {
             return response()->json([
                 'status' => false,
