@@ -51,9 +51,10 @@
                         </svg>
                         Filter
                     </button> --}}
-                    <button class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
+                    <a href="/admin/addproduct"
+                        class="px-4 py-2 bg-red-400 text-white rounded-lg shadow-sm hover:bg-red-500">
                         Add New Product
-                    </button>
+                    </a>
                 </div>
             </div>
 
