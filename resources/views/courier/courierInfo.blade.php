@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,103 +8,101 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="flex min-h-screen bg-gray-100">
-<!-- Sidebar -->
-<div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
-    <div class="mb-8">
-        <a href="/">
-        <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
-        </a>
-    </div>
-    <div class="flex flex-col items-center gap-8">
-        <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        <!-- Sidebar -->
+        <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
+            <div class="mb-8">
+                <a href="/">
+                    <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
+                </a>
+            </div>
+            <div class="flex flex-col items-center gap-8">
+                {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <i class="ri-file-list-line text-gray-400 text-xl"></i>
-        </a>
-        <a href="/parcel-tracking" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-            <i class="ri-truck-line text-gray-400 text-xl"></i>
-        </a>
-        <a href="/" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
-            <i class="ri-user-line text-pink-400 text-xl"></i>
-        </a>
-    </div>
-    <div class="mt-auto">
-        <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
-            <i class="ri-settings-line text-gray-400 text-xl"></i>
-        </a>
-    </div>
-</div>
+        </a> --}}
+                <a href="/" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                    <i class="ri-user-line text-pink-400 text-xl"></i>
+                </a>
+                <a href="/parcel-tracking" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="ri-truck-line text-gray-400 text-xl"></i>
+                </a>
+            </div>
+            <div class="mt-auto">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="ri-logout-box-r-line text-red-500 text-xl"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <!-- Main Content -->
         <div class="flex-1 p-4 mx-auto max-w-7xl mt-6 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-<!-- Profile Card -->
-<div class="bg-white rounded-lg p-8 shadow-sm">
-    <div class="flex flex-col items-center mb-3">
-        <div class="w-12 h-12 rounded-full bg-pink-100 p-0.5 mb-1.5">
-            <img 
-                src="/img/courier1.png"
-                alt="Profile" 
-                class="w-full h-full rounded-full object-cover"
-            >
-        </div>
-        <h2 class="text-base font-semibold text-gray-800">Salikin Salimin Sakimin</h2>
-        <p class="text-sm text-gray-500">Active Courier</p>
-    </div>
+                <!-- Profile Card -->
 
-    <div class="space-y-4">
-        <div class="mt-4">
-            <label class="block text-md font-medium text-gray-700 mb-1">Your Email</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="ri-mail-line text-gray-400 text-sm"></i>
+
+
+                <div class="bg-white rounded-lg p-8 shadow-sm">
+                    <div class="flex flex-col items-center mb-3">
+                        <div class="w-14 h-14 rounded-full bg-pink-100 p-0.5 mb-1.5">
+                            <img src="/img/courier1.png" alt="Profile" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-800">James Alexander Scott
+                        </h2>
+                        <p class="text-sm text-gray-500">Active Courier</p>
+                    </div>
+
+
+                    <div>
+                        <label class="block text-md font-medium text-gray-700 mb-1">Username</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                <i class="ri-lock-line text-gray-400 text-sm"></i>
+                            </div>
+                            <input type="text"
+                                class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-md"
+                                placeholder="8467017971">
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="mt-4">
+                            <label class="block text-md font-medium text-gray-700 mb-1">Your Email</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                    <i class="ri-mail-line text-gray-400 text-sm"></i>
+                                </div>
+                                <input type="email"
+                                    class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-md"
+                                    placeholder="salikinsalimin@gmail.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-md font-medium text-gray-700 mb-1">Phone Number</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                                    <i class="ri-phone-line text-gray-400 text-sm"></i>
+                                </div>
+                                <input type="tel"
+                                    class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-md"
+                                    placeholder="+621234567890">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="mt-3 text-center">
+                        <button class="text-gray-500 text-xs hover:text-pink-500 transition-colors">
+                            Show More
+                        </button>
+                    </div>
                 </div>
-                <input
-                    type="email"
-                    class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-sm"
-                    placeholder="salikinsalimin@gmail.com"
-                    readonly
-                >
-            </div>
-        </div>
-
-        <div>
-            <label class="block text-md font-medium text-gray-700 mb-1">Phone Number</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="ri-phone-line text-gray-400 text-sm"></i>
-                </div>
-                <input
-                    type="tel"
-                    class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-sm"
-                    placeholder="+621234567890"
-                    readonly
-                >
-            </div>
-        </div>
-
-        <div>
-            <label class="block text-md font-medium text-gray-700 mb-1">Bank Number</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                    <i class="ri-lock-line text-gray-400 text-sm"></i>
-                </div>
-                <input
-                    type="text"
-                    class="block w-full pl-7 pr-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-sm"
-                    placeholder="8467017971"
-                    readonly
-                >
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-3 text-center">
-        <button class="text-gray-500 text-xs hover:text-pink-500 transition-colors">
-            Show More
-        </button>
-    </div>
-</div>
                 <!-- Weather and Stats Cards -->
                 <div class="space-y-4">
                     <!-- Weather Card -->
@@ -158,11 +157,12 @@
 
                     <!-- Income Card -->
                     <div class="bg-white rounded-lg p-4 shadow-sm relative">
-                        <div class="absolute top-3 right-3 bg-pink-100 text-pink-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                        <div
+                            class="absolute top-3 right-3 bg-pink-100 text-pink-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
                             <span>3</span>
                         </div>
-                        <h2 class="text-2xl font-normal text-gray-800">IDR 125.000</h2>
-                        <p class="text-gray-500 text-sm mt-0.5">Today's Income</p>
+                        <h2 class="text-2xl font-normal text-gray-800">Mitsubishi Colt L300</h2>
+                        <p class="text-gray-500 text-sm mt-0.5">Vehicle Information</p>
                     </div>
 
                     <!-- Bonus Card -->
@@ -170,8 +170,8 @@
                         <div class="absolute top-3 right-3 text-pink-300">
                             <i class="ri-gift-line text-lg"></i>
                         </div>
-                        <h2 class="text-2xl font-normal text-gray-800">IDR 25.000</h2>
-                        <p class="text-gray-500 text-sm mt-0.5">Today's Bonus</p>
+                        <h2 class="text-2xl font-normal text-gray-800">B 1127 AL</h2>
+                        <p class="text-gray-500 text-sm mt-0.5">Plate Number</p>
                     </div>
                 </div>
             </div>
@@ -275,5 +275,5 @@
         </div>
     </div>
 </body>
-</html>
 
+</html>

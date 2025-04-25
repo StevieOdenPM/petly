@@ -40,43 +40,43 @@
                         viewBox="0 0 1216 2" fill="none">
                         <path d="M0 1H1216" stroke="#D1D5DB" />
                     </svg>
-                    @foreach ($transaction['cart'] as $cart)
-                        <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
-                            <div class="grid grid-cols-4 w-full">
-                                <div class="col-span-4 sm:col-span-1">
-                                    <img src="{{ $cart['products']['product_image'] }}" alt=""
-                                        class="max-sm:mx-auto object-cover">
-                                </div>
-                                <div
-                                    class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
-                                    <h6 class="font-semibold text-xl text-black mb-2">
-                                        {{ $cart['products']['product_name'] }}
-                                    </h6>
-                                    <p class="text-md leading-8 text-gray-500 mb-8 whitespace-nowrap">Type: Dust Studios
-                                    </p>
-                                    <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
-                                        <span class="text-lg leading-8 text-gray-500 whitespace-nowrap">Quantity:
-                                            {{ $cart['quantity'] }}</span>
-                                    </div>
-                                </div>
+                    {{-- @foreach ($transaction['cart'] as $cart) --}}
+                    <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
+                        <div class="grid grid-cols-4 w-full">
+                            <div class="col-span-4 sm:col-span-1">
+                                <img src="{{ $transaction['cart']['products']['product_image'] }}" alt=""
+                                    class="max-sm:mx-auto object-cover">
                             </div>
-                            <div class="flex items-center justify-around w-full sm:pl-28 lg:pl-0">
-                                <div class="flex flex-col justify-center items-start max-sm:items-center">
-                                    <p class="text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">PRICE
-                                    </p>
-                                    <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
-                                        IDR
-                                        {{ $cart['products']['product_price'] }}</p>
+                            <div
+                                class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
+                                <h6 class="font-semibold text-xl text-black mb-2">
+                                    {{ $transaction['cart']['products']['product_name'] }}
+                                </h6>
+                                {{-- <p class="text-md leading-8 text-gray-500 mb-8 whitespace-nowrap">Type: Dust Studios
+                                </p> --}}
+                                <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
+                                    <span class="text-lg leading-8 text-gray-500 whitespace-nowrap">Quantity:
+                                        {{ $transaction['cart']['quantity'] }}</span>
                                 </div>
                             </div>
                         </div>
+                        <div class="flex items-center justify-around w-full sm:pl-28 lg:pl-0">
+                            <div class="flex flex-col justify-center items-start max-sm:items-center">
+                                <p class="text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">PRICE
+                                </p>
+                                <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
+                                    IDR
+                                    {{ $transaction['cart']['products']['product_price'] }}</p>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="px-3 md:px-11 py-8 flex justify-end">
-                            <p class="font-medium text-xl leading-8 text-black">Total Price:
-                                <span class="text-gray-500"> {{ $cart['total_price'] }}</span>
-                            </p>
-                        </div>
-                    @endforeach
+                    <div class="px-3 md:px-11 py-8 flex justify-end">
+                        <p class="font-medium text-xl leading-8 text-black">Total Price:
+                            <span class="text-gray-500"> {{ $transaction['cart']['total_price'] }}</span>
+                        </p>
+                    </div>
+                    {{-- @endforeach --}}
                 </div>
             @endforeach
         @else
