@@ -13,9 +13,9 @@
                 </a>
             </div>
             <div class="flex flex-col items-center gap-8">
-                <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                {{-- <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-pie-chart-line text-gray-400 text-xl"></i>
-                </a>
+                </a> --}}
                 <a href="/admin/product" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-shopping-bag-3-line text-gray-400 text-xl"></i>
                 </a>

@@ -10,6 +10,7 @@ class CartsController extends Controller
 
     public function index(Request $request)
     {
+        dd(session('api_token'));
         $apiToken = session('api_token');
         $response = Http::withToken($apiToken)
             ->get('http://petly.test:8080/api/customer/cart');

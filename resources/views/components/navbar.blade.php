@@ -7,7 +7,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="{{ url('/home') }}"
+                        <a href="{{ url('/') }}"
                             class="rounded-md px-3 py-2 text-md font-medium text-[#9C9C9C] hover:text-[#FE9494]"
                             aria-current="page">Home</a>
                         <a href="{{ url('/product') }}"
@@ -75,15 +75,22 @@
                                     tabindex="-1" id="user-menu-item-0">Your Profile</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
                                     tabindex="-1" id="user-menu-item-1">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                    tabindex="-1" id="user-menu-item-2">Sign out</a>
+                                {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-2">Sign out</a> --}}
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="cursor-pointer block px-4 py-2 text-sm text-gray-700"
+                                        role="menuitem" tabindex="-1" id="user-menu-item-2">
+                                        Sign out
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     @else
                         <!-- Login button for guests -->
                         <div class="ml-3">
                             <a href="{{ route('login') }}"
-                                class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-[#FE9494] rounded-md hover:bg-[#FE7A7A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FE9494]">
+                                class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-[#FE9494] rounded-md hover:bg-[#FE7A7A]">
                                 Login
                             </a>
                         </div>
@@ -138,7 +145,7 @@
                     class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
                 <a href="#"
                     class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign
-                    out</a>
+                    Out</a>
             </div>
         </div>
 

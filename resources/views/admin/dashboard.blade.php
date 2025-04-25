@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +15,13 @@
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
                 <a href="/">
-                <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
+                    <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
                 </a>
             </div>
             <div class="flex flex-col items-center gap-8">
-                <a href="/admin/dashboard" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                {{-- <a href="/admin/dashboard" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
                     <i class="ri-pie-chart-line text-pink-400 text-gray-400 text-xl"></i>
-                </a>
+                </a> --}}
                 <a href="/admin/product" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-shopping-bag-3-line text-gray-400 text-xl"></i>
                 </a>
@@ -35,10 +36,10 @@
             </div>
         </div>
 
-    
+
         <div class="mx-auto mt-10">
             <h1 class="text-2xl font-bold mb-4 ml-3">Overview</h1>
-            
+
             <div class="grid lg:grid-cols-5 gap-10 mb-6">
                 <div class="bg-white p-4 rounded-lg shadow">
                     <p class="text-gray-500">Today's Revenue</p>
@@ -61,12 +62,12 @@
                     <p class="text-xl font-bold">xxxx</p>
                 </div>
             </div>
-            
+
             <div class="bg-white p-4 rounded-lg shadow mb-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-3">Quantity of Products Sold</h2>
                 <canvas id="salesChart"></canvas>
             </div>
-            
+
             <div class="bg-white shadow rounded-lg p-4 overflow-x-auto">
                 <h2 class="text-xl font-semibold text-gray-800 mb-3">Transaction History</h2>
                 <table class="w-full border-collapse">
@@ -84,33 +85,36 @@
                             <td class="py-3 px-4">xxx xx, xxx</td>
                             <td class="py-3 px-4">xxxxx</td>
                             <td class="py-3 px-4">
-                                <span class="bg-red-100 text-red-600 text-xs font-semibold px-3 py-1 rounded-full">In Progress</span>
+                                <span class="bg-red-100 text-red-600 text-xs font-semibold px-3 py-1 rounded-full">In
+                                    Progress</span>
                             </td>
                         </tr>
                         <tr class="border-b hover:bg-gray-100">
-                        <td class="py-3 px-4">TRxxx</td>
+                            <td class="py-3 px-4">TRxxx</td>
                             <td class="py-3 px-4">xxx xx, xxx</td>
                             <td class="py-3 px-4">xxxxx</td>
                             <td class="py-3 px-4">
-                                <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">Confirmed</span>
+                                <span
+                                    class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">Confirmed</span>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-100">
-                        <td class="py-3 px-4">TRxxx</td>
+                            <td class="py-3 px-4">TRxxx</td>
                             <td class="py-3 px-4">xxx xx, xxx</td>
                             <td class="py-3 px-4">xxxxx</td>
                             <td class="py-3 px-4">
-                                <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">Confirmed</span>
+                                <span
+                                    class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">Confirmed</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", function() {
                 fetch('/api/line-chart')
                     .then(response => response.json())
                     .then(data => {
@@ -134,6 +138,7 @@
 </body>
 
 <body class="bg-gray-100 p-6">
-    
+
 </body>
+
 </html>
