@@ -27,15 +27,22 @@ class UserController extends Controller implements HasMiddleware
         ];
     }
 
+    public function indexAll(Request $request){
+        $users = User::with('role')->get();
+        if ($users) {
+            return UserResource::collection($users);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         $users = User::with('role')->get();
-        if ($users) {
-            return UserResource::collection($users);
-        } else {
+        if (!$users) {
             return response()->json(['message' => 'No Record Available'], 200);
         }
 
@@ -55,10 +62,7 @@ class UserController extends Controller implements HasMiddleware
                 break;
         }
 
-        return response()->json([
-            'status' => true,
-            'user' => $user,
-        ]);
+        return UserResource::collection($users);
     }
 
     /**

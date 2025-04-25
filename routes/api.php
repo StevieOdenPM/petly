@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('admin')->middleware(['req' => "App\Http\Middleware\CheckRole:admin"])->group(function () {
         Route::post('/add-products', [ProductController::class, 'store']);
+        Route::get('/transaction', [TransactionController::class, 'index']);
+        Route::get('/get-all-user', [UserController::class, 'index']);
         Route::delete('/delete-user/{user}', [UserController::class, 'destroy']);
     });
 
