@@ -22,6 +22,14 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'username' => 'courier',
+            'role_role_id' => 2,
+            'password' => 'courier1234',
+            'phone_number' => '081223388991',
+            'email' => 'salikinsalimin@gmail.com',
+        ]);
+      
+        User::create([
             'username' => 'Johnny',
             'role_role_id' => 3,
             'password' => 'Johnny1234',
@@ -69,4 +77,5 @@ class UserSeeder extends Seeder
             'email' => 'Budi@gmail.com',
         ]);
     }
+    
 }

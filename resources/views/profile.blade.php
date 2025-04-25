@@ -2,7 +2,7 @@
 <x-main>
 
     <!-- Layout Wrapper -->
-    <div class="flex gap-12 max-w-7xl w-full mt-12 mb-22">
+    <div class="flex gap-12 max-w-7xl w-full mt-12 mb-32 mx-auto flex-grow">
 
         <!-- User Profile Sidebar (Same Style as Profile Container) -->
         <aside class="bg-white shadow-md rounded-xl p-6 w-80 flex flex-col items-center self-start">
@@ -18,10 +18,10 @@
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="landmark"></i> Bank Account
                 </a>
-                <a href="/pet"
+                {{-- <a href="/pet"
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="dog"></i> Add Pet
-                </a>
+                </a> --}}
                 <a href="/theme"
                     class="flex items-center gap-2 text-gray-700 hover:text-red-500 font-medium px-4 py-2 rounded-lg">
                     <i data-lucide="settings"></i> Settings

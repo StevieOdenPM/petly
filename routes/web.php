@@ -59,11 +59,11 @@ Route::get('/product', function () {
     return view('product', ['products' => $response]);
 });
 
-Route::get('admin/product', function () {
+Route::get('/admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
     
     return view('admin/product', ['products' => $response]);
-}); 
+})->name('home-admin'); 
 
 Route::get('/courier-info', function () {
     return view('courier/courierInfo');
@@ -73,9 +73,9 @@ Route::get('/parcel-tracking', function () {
     return view('courier/parcelTracking');
 });
 
-Route::get('/admin', function () {
-    return view('admin/dashboard'); 
-})->name('home-admin');
+// Route::get('/admin', function () {
+//     return view('admin/product'); 
+// })->name('home-admin');
 
 Route::get('/admin/order', function () {
     return view('admin/order');
@@ -101,6 +101,10 @@ Route::get('/pet', function () {
 Route::get('/theme', function () {
     return view('theme');
 });
+
+Route::get('/courier', function () {
+    return view('courier/courierInfo'); 
+})->name('home-courier');
 
 use App\Http\Controllers\loginController;
 
@@ -139,3 +143,6 @@ Route::post('/admin/product/add', [addProductController::class, 'store'])->name(
 
 use App\Http\Controllers\CheckoutController;
 Route::post('/checkout/add', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+
+use App\Http\Controllers\OrderManagementController;
+Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
