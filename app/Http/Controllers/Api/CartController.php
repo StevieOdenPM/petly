@@ -16,9 +16,21 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $carts = Cart::with(['product', 'transaction.users', 'transaction.cart', 'transaction.transactionStatus', 'transaction.transactionDetails'])->get();
+        $user = auth('sanctum')->user();
+
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Unauthenticated'
+            ], 401);
+        }
+
+        $carts = Cart::with(['product', 'transaction.users', 'transaction.cart', 'transaction.transactionStatus', 'transaction.transactionDetails'])
+        ->where('customer_user_id', $user->user_id)
+        ->get();
+
         if ($carts) {
             return CartResource::collection($carts);
         } else {
@@ -26,7 +38,7 @@ class CartController extends Controller
         }
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'customer_user_id' => 'required|integer',
@@ -44,7 +56,7 @@ class CartController extends Controller
 
         try {
             $product = Product::find($request->product_id);
-            
+
             if (!$product) {
                 return response()->json([
                     'status' => false,
