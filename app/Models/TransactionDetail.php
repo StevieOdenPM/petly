@@ -11,6 +11,8 @@ class TransactionDetail extends Model
     protected $fillable = [
         'transaction_transaction_id',
         'total_payment',
+        'foreign_product_id',
+        'quantity'
     ];
 
     protected $hidden = [
@@ -19,5 +21,9 @@ class TransactionDetail extends Model
 
     public function transaction() {
         return $this->hasOne(Transaction::class, 'transaction_transaction_id', 'transaction_id');
+    }
+
+    public function product() {
+        return $this->belongsTo(Product::class, 'foreign_product_id', 'product_id');
     }
 }
