@@ -138,7 +138,6 @@ use App\Http\Controllers\LogoutController;
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\HistoryController;
-
 Route::get('/history', [HistoryController::class, 'getHistory']);
 
 use App\Http\Controllers\addProductController;
