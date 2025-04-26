@@ -81,7 +81,6 @@
                             <th class="pr-10 pl-6 py-3 text-gray-600">Total Items</th>
                             <th class="pr-10 pl-8 py-3 text-gray-600">Status</th>
                             <th class="pr-10 pl-8 py-3 text-gray-600">TransactionDate</th>
-                            {{-- <th class="pr-12 pl-8 py-3 text-gray-600">Action</th> --}}
                         </tr>
                     </thead>
                     <tbody>

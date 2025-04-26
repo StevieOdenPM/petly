@@ -9,65 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <style>
-        .route-line {
-            border-top: 2px dashed #FF9999;
-            position: absolute;
-            top: 50%;
-            left: 100px;
-            /* Increased from 80px */
-            width: 60%;
-            /* Changed from calc(100% - 160px) to a percentage */
-            height: 0 !important;
-            z-index: 0 !important;
-        }
-
-        .no-destination .route-line {
-            width: 50%;
-            /* Shorter for no destination */
-        }
-
-        .route-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #FF9999;
-            position: relative;
-            z-index: 1;
-        }
-
-        .route-dot.start {
-            background-color: #FF9999;
-            padding-right: 8px;
-        }
-
-        .route-dot.end {
-            background-color: white;
-            border: 2px solid #FF9999;
-            padding-left: 8px;
-        }
-
-        .map-placeholder {
-            background-color: #f0f0f0;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .map-placeholder::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%),
-                linear-gradient(45deg, #e0e0e0 25%, transparent 25%, transparent 75%, #e0e0e0 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            opacity: 0.3;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -114,118 +55,43 @@
             <div class="flex flex-col lg:flex-row gap-4">
                 <!-- Shipping Cards Column -->
                 <div class="w-full lg:w-2/5 space-y-4">
-                    <?php
-                    $shippings = [
-                        [
-                            'id' => '#731845',
-                            'status' => 'On Delivery',
-                            'status_class' => 'bg-green-100 text-green-600',
-                            'time' => '13:50',
-                            'date' => 'Dec 25, 2025',
-                            'origin' => 'Petty Kemangisan',
-                            'destination' => 'BINUS University',
-                            'client' => 'Salimin Saputro',
-                            'active' => true
-                        ],
-                        [
-                            'id' => '#123245',
-                            'status' => 'On Hold',
-                            'status_class' => 'bg-yellow-100 text-yellow-600',
-                            'time' => '—',
-                            'date' => 'Dec 25, 2025',
-                            'origin' => 'Petty Kemangisan',
-                            'destination' => 'Melrose Place Residence',
-                            'client' => 'Sadikin',
-                            'active' => false
-                        ],
-                        [
-                            'id' => '#553423',
-                            'status' => 'On Delivery With Another Courier',
-                            'status_class' => 'bg-green-100 text-green-600',
-                            'time' => '12.10',
-                            'date' => 'Dec 25, 2025',
-                            'origin' => 'Petty Kemangisan',
-                            'destination' => 'Kost 555 - Jalan U21 Puri Indah',
-                            'client' => 'Joni Sina',
-                            'active' => false
-                        ],
-                        [
-                            'id' => '#5232213',
-                            'status' => 'Cancelled',
-                            'status_class' => 'bg-red-100 text-red-600',
-                            'time' => '—',
-                            'date' => 'Dec 25, 2025',
-                            'origin' => '',
-                            'destination' => '',
-                            'client' => '',
-                            'active' => false
-                        ]
-                    ];
-
-                    foreach ($shippings as $shipping) {
-                        $timeLabel = isset($shipping['time_label']) ? $shipping['time_label'] : 'Estimated Time of Arrival';
-                        if ($shipping['status'] == 'Delivered') {
-                            $timeLabel = 'Arrived At';
-                        }
-                    ?>
                     <div class="bg-white rounded-xl p-4 shadow-sm">
                         <div class="flex justify-between items-center mb-2">
                             <div>
-                                <span class="text-gray-700 font-medium">Shipping ID : <?php echo $shipping['id']; ?></span>
+                                <span class="text-gray-700 font-medium">Shipping ID : #731845</span>
                             </div>
                             <div>
-                                <span class="px-3 py-1 rounded-full text-xs <?php echo $shipping['status_class']; ?>">
-                                    <?php echo $shipping['status']; ?>
+                                <span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-600">
+                                    On Delivery
                                 </span>
                             </div>
                         </div>
 
                         <div class="flex justify-between items-center mb-3">
                             <div>
-                                <p class="text-xs text-gray-500"><?php echo $timeLabel; ?></p>
-                                <p class="text-xl font-semibold"><?php echo $shipping['time']; ?></p>
+                                <p class="text-xs text-gray-500">Estimated Time of Arrival</p>
+                                <p class="text-xl font-semibold">13:50</p>
                             </div>
-                            <div class="text-right">
-                                <p class="text-sm text-gray-500"><?php echo $shipping['date']; ?></p>
-                            </div>
+                            {{-- <div class="text-right">
+                                <p class="text-sm text-gray-500">Dec 25, 2025</p>
+                            </div> --}}
                         </div>
 
-                        <div class="relative flex items-center justify-between py-2 mb-3 <?php echo empty($shipping['destination']) ? 'no-destination' : ''; ?>">
-                            <div class="route-line"></div>
+                        <div class="relative flex items-center justify-between py-2 mb-3">
                             <div class="flex items-center">
-                                <div class="route-dot start"></div>
-                                <div class="ml-2">
-                                    <p class="text-xs font-medium">Petty</p>
-                                    <p class="text-xs text-gray-500">Kemangisan</p>
-                                </div>
+                                <p class="text-md font-medium mx-2">Petly</p>
                             </div>
+                            <div class="flex-grow border-t border-gray-300 mx-2"></div>
                             <div class="flex items-center">
-                                <div class="route-dot end"></div>
-                                <div class="ml-2">
-                                    <p class="text-xs font-medium"><?php echo explode(' - ', $shipping['destination'])[0]; ?></p>
-                                    <?php if (strpos($shipping['destination'], ' - ') !== false): ?>
-                                    <p class="text-xs text-gray-500"><?php echo explode(' - ', $shipping['destination'])[1]; ?></p>
-                                    <?php endif; ?>
-                                </div>
+                                <p class="text-md font-medium mx-2">Kemangisan</p>
                             </div>
                         </div>
-
-                        <div class="flex items-center">
-                            <div class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center">
-                                <i class="ri-user-line text-pink-500 text-sm"></i>
-                            </div>
-                            <div class="ml-2">
-                                <p class="text-sm"><?php echo $shipping['client']; ?></p>
-                                <p class="text-xs text-gray-500">Client</p>
-                            </div>
-                            <div class="ml-auto">
-                                <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                                    <i class="ri-chat-1-line text-gray-500 text-sm"></i>
-                                </button>
-                            </div>
+                        <div class="mt-5">
+                            <button class="w-full bg-pink-400 text-white py-2 rounded-lg transition-colors">
+                                Finish Delivery
+                            </button>
                         </div>
                     </div>
-                    <?php } ?>
                 </div>
 
                 <!-- Delivery Details -->
@@ -291,7 +157,7 @@
                                         <i class="ri-user-line text-pink-400"></i>
                                     </div>
                                     <div>
-                                        <p class="font-medium">Salikin Sadikin</p>
+                                        <p class="font-medium">James Alexander Scott</p>
                                         <p class="text-sm text-gray-500">Driver</p>
                                     </div>
                                 </div>
@@ -302,7 +168,7 @@
                                     </div>
                                     <div class="text-right">
                                         <p class="text-xs text-gray-500">EMAIL ADDRESS</p>
-                                        <p class="text-sm">salikin95@gmail.com</p>
+                                        <p class="text-sm">salikinsalimin@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -330,16 +196,6 @@
             <p class="text-gray-500">Great Job!</p>
         </div>
     </div>
-
-    <script>
-        function showSuccessModal() {
-            document.getElementById('successModal').classList.remove('hidden');
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.add('hidden');
-        }
-    </script>
 
 </body>
 </body>
