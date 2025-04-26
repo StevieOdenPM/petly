@@ -25,7 +25,7 @@ class Transaction extends Model
     }
 
     public function delivery() {
-        return $this->hasOne(Delivery::class, 'delivery_delivery_id', 'delivery_id')->withDefault();
+        return $this->belongsTo(Delivery::class, 'delivery_delivery_id', 'delivery_id')->withDefault();
     }
 
     public function transactionStatus() {
