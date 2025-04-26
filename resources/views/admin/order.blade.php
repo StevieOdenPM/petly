@@ -94,7 +94,7 @@
                                     <td class="px-6 py-4">IDR
                                         {{ number_format($transaction['transaction_details']['total_payment'], 0, ',') }}
                                     </td>
-                                    <td class="px-6 py-4">{{ $transaction['cart']['quantity'] }} pcs</td>
+                                    <td class="px-6 py-4">{{ $transaction['transaction_details']['quantity'] }} pcs</td>
                                     <td class="uppercase px-6 py-4 font-semibold">
                                         {{ $transaction['transaction_status']['transaction_status_name'] }}
                                     </td>

@@ -25,7 +25,7 @@ class TransactionController extends Controller
     public function index()
     {
         $user = auth('sanctum')->user();
-        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails'])
+        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])
         ->where('user_user_id', $user->user_id)
         ->get();
         if ($transaction) {
@@ -37,7 +37,7 @@ class TransactionController extends Controller
 
     public function indexAll()
     {
-        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails'])->get();
+        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])->get();
         if ($transaction) {
             return TransactionResource::collection($transaction);
         } else {
@@ -91,7 +91,9 @@ class TransactionController extends Controller
 
             $transactionDetail = TransactionDetail::create([
                 'transaction_transaction_id' => $transaction->transaction_id,
-                'total_payment' => $totalPayment,
+                'foreign_product_id' => $cart->foreign_product_id,
+                'quantity' => $cart->quantity,
+                'total_payment' => $totalPayment + 25000,
             ]);
             $user = User::where('user_id', $transaction->user_user_id)->first();
             $product = Product::where('product_id', $cart->foreign_product_id)->first();

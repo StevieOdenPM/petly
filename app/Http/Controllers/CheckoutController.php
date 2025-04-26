@@ -168,7 +168,6 @@ class CheckoutController extends Controller
             'transaction_id' => $request->transaction_id,
         ]);
         $value = $response->body();
-        dump($value);
         if (!$value) {
             return redirect()->back();
         }else{

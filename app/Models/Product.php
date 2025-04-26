@@ -46,6 +46,10 @@ class Product extends Model
         return $this->hasMany(Cart::class);
     }
 
+    public function transactionDetail() {
+        return $this->hasOne(TransactionDetail::class, 'foreign_product_id', 'product_id');
+    }
+
     public function scopeFilter(Builder $builder, QueryFilter $filters)
     {
         return $filters->apply($builder);
