@@ -16,6 +16,8 @@ class TransactionDetailResource extends JsonResource
     {
         return [
             'total_payment' => $this->total_payment,
+            'quantity' => $this->quantity,
+            'product' => new ProductResource($this->whenLoaded('product'))
         ];
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DeliveryResource;
 use App\Models\Courier;
 use App\Models\DeliveryClass;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
@@ -96,7 +97,41 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, Delivery $delivery)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'courier_id' => 'required|integer',
+            'delivery_id' => 'required|integer'
+        ]);
+
+        $courier = Courier::where('user_user_id', $request->courier_id)->first();
+
+        if ($validator->fails() && !$courier) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $delivery = Delivery::where('delivery_id', $request->delivery_id)->first();
+
+        $delivery->update([
+            'courier_id' => $request->courier_id
+        ]);
+
+        $transaction = Transaction::where('delivery_delivery_id', $request->delivery_id)->first();
+        $transaction->update([
+            'transactions_transaction_status_id' => 1
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Delivery update successfull',
+            'data' => [
+                'delivery' => $delivery,
+                'courier' => $request->courier_id,
+                'transaction' => $transaction,
+            ],
+        ], 200);
     }
 
     /**
