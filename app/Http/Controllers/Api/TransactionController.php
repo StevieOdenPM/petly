@@ -138,7 +138,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        $product = Transaction::with(['users', 'transactionDetails', 'transactionStatus'])->get();
+        $product = Transaction::with(['users', 'delivery.deliveryClass', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])->get();
         if ($product) {
             return TransactionResource::collection($product);
         } else {

@@ -154,7 +154,6 @@ class CheckoutController extends Controller
         $apiToken = session('api_token');
         $checkoutData = Session::get('checkout_data');
 
-        // dump($checkoutData['user_detail']['address']);
         // Check if address exists in form data
         if (!$checkoutData['user_detail']['address']) {
             return redirect()->back()->with('alert', 'Input your address first!!!');
