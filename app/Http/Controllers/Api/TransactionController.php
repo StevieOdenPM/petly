@@ -26,8 +26,20 @@ class TransactionController extends Controller
     {
         $user = auth('sanctum')->user();
         $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])
-        ->where('user_user_id', $user->user_id)
-        ->get();
+            ->where('user_user_id', $user->user_id)
+            ->get();
+        if ($transaction) {
+            return TransactionResource::collection($transaction);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
+    }
+
+    public function indexWithStatusProgress()
+    {
+        $transaction = Transaction::with(['users', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])
+            ->where('transactions_transaction_status_id', 2)
+            ->get();
         if ($transaction) {
             return TransactionResource::collection($transaction);
         } else {
@@ -54,8 +66,6 @@ class TransactionController extends Controller
             'transaction_date' => 'required|date',
         ]);
 
-        
-
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
@@ -64,13 +74,13 @@ class TransactionController extends Controller
             ], 422);
         }
 
-        // $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->first();
-        // if ($checkCart) {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'Your cart already in transaction',
-        //     ]);
-        // }
+        $checkCart = Transaction::where('foreign_cart_id', $request->cart_id)->first();
+        if ($checkCart) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Your cart already in transaction',
+            ]);
+        }
 
         DB::beginTransaction();
         try {
@@ -87,7 +97,7 @@ class TransactionController extends Controller
 
             $totalPayment = 0;
             $cart = Cart::where('cart_id', $request->cart_id)->first();
-            $totalPayment+=$cart->total_price;
+            $totalPayment += $cart->total_price;
 
             $transactionDetail = TransactionDetail::create([
                 'transaction_transaction_id' => $transaction->transaction_id,
@@ -139,9 +149,33 @@ class TransactionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'transaction_id' => 'required|integer',
+            'status_name' => 'required|in:complete,progress,pending,canceled',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validation Error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $transaction = Transaction::where('transaction_id', $request->transaction_id)->first();
+        $transaction->update([
+            'transactions_transaction_status_id' => 4
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Transaction successfully update',
+            'data' => [
+                'transaction' => $transaction,
+            ],
+        ], 200);
     }
 
     /**
