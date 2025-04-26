@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\CartController;
 
 Route::get('/', function () {
     $response = Http::get("http://petly.test:8080/api/products");
-    
+
     return view('/home', ['products' => $response]);
 })->name('home');
 
@@ -45,9 +45,9 @@ Route::get('/cart', function () {
     return view('cart');
 });
 
-Route::get('/checkout', function () {
-    return view('checkout');
-});
+// Route::get('/checkout', function () {
+//     return view('checkout');
+// });
 
 Route::get('/services', function () {
     return view('services');
@@ -55,13 +55,13 @@ Route::get('/services', function () {
 
 Route::get('/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
-    
+
     return view('product', ['products' => $response]);
 });
 
 Route::get('/admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
-    
+
     return view('admin/product', ['products' => $response]);
 })->name('home-admin'); 
 
@@ -85,10 +85,9 @@ Route::get('/admin/addproduct', function () {
     return view('admin/addproduct');
 });
 
-use App\Http\Controllers\UserController;
-Route::get('/admin/user', [UserController::class, 'show']);
-Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
+use App\Http\Controllers\UserManagementController;
+Route::get('/admin/user', [UserManagementController::class, 'show']);
+Route::delete('/admin/user/{id}', [UserManagementController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/bank', function () {
     return view('bank');
@@ -117,23 +116,29 @@ Route::get('/register', [registerController::class, 'showRegisterForm'])->name('
 Route::post('/register', [registerController::class, 'register']);
 
 use App\Http\Controllers\ProductCartController;
+
 Route::post('/cart', [ProductCartController::class, 'store'])->name('cart.add');
 
 use App\Http\Controllers\CartsController;
+
 Route::get('/cart', [CartsController::class, 'index'])->name('cart.index');
 Route::delete('/cart/{id}', [CartsController::class, 'destroy'])->name('cart.destroy');
 
 use App\Http\Controllers\ProductsController;
+
 Route::delete('/admin/product/{product}', [ProductsController::class, 'destroy'])->name('products.destroy');
 
 use App\Http\Controllers\ProfileController;
+
 Route::get('/profile', [ProfileController::class, 'getProfile']);
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
 use App\Http\Controllers\LogoutController;
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\HistoryController;
+
 Route::get('/history', [HistoryController::class, 'getHistory']);
 
 use App\Http\Controllers\addProductController;
@@ -142,7 +147,12 @@ Route::get('/admin/product/add', [addProductController::class, 'showForm'])->nam
 Route::post('/admin/product/add', [addProductController::class, 'store'])->name('product.store');
 
 use App\Http\Controllers\CheckoutController;
-Route::post('/checkout/add', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+
+Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+Route::post('/checkout/update-shipping', [CheckoutController::class, 'updateShipping'])->name('checkout.update-shipping');
 
 use App\Http\Controllers\OrderManagementController;
+
 Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
+
