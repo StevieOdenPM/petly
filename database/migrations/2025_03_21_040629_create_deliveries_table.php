@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('delivery_id', true)->primary();
             $table->dateTime('delivery_deadline')->nullable(false);
             $table->string('delivery_address', 255)->nullable(false);
-            $table->foreignId('courier_id')->constrained('users', 'user_id')->onDelete('cascade');
+            $table->foreignId('courier_id')->nullable(true)->constrained('users', 'user_id')->onDelete('cascade');
             // $table->foreignId('courier_id')->constrained('couriers', 'user_user_id')->onDelete('cascade');
             $table->foreignId('delivery_delivery_class_id')->constrained('delivery_classes', 'delivery_class_id');
             $table->timestamps();

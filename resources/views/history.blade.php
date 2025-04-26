@@ -44,19 +44,19 @@
                     <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
                         <div class="grid grid-cols-4 w-full">
                             <div class="col-span-4 sm:col-span-1">
-                                <img src="{{ $transaction['cart']['products']['product_image'] }}" alt=""
-                                    class="max-sm:mx-auto object-cover">
+                                {{-- <img src="{{ $transaction['cart']['products']['product_image'] }}" alt="sdawdadaw"
+                                    class="max-sm:mx-auto object-cover"> --}}
                             </div>
                             <div
                                 class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
                                 <h6 class="font-semibold text-xl text-black mb-2">
-                                    {{ $transaction['cart']['products']['product_name'] }}
+                                    {{-- {{ $transaction['cart']['products']['product_name'] }} --}}
                                 </h6>
                                 {{-- <p class="text-md leading-8 text-gray-500 mb-8 whitespace-nowrap">Type: Dust Studios
                                 </p> --}}
                                 <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
                                     <span class="text-lg leading-8 text-gray-500 whitespace-nowrap">Quantity:
-                                        {{ $transaction['cart']['quantity'] }}</span>
+                                        {{-- {{ $transaction['cart']['quantity'] }}</span> --}}
                                 </div>
                             </div>
                         </div>
@@ -66,15 +66,15 @@
                                 </p>
                                 <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
                                     IDR
-                                    {{ $transaction['cart']['products']['product_price'] }}</p>
+                                    {{-- {{ $transaction['cart']['products']['product_price'] }}</p> --}}
                             </div>
                         </div>
                     </div>
 
                     <div class="px-3 md:px-11 py-8 flex justify-end">
-                        <p class="font-medium text-xl leading-8 text-black">Total Price:
+                        {{-- <p class="font-medium text-xl leading-8 text-black">Total Price:
                             <span class="text-gray-500"> {{ $transaction['cart']['total_price'] }}</span>
-                        </p>
+                        </p> --}}
                     </div>
                     {{-- @endforeach --}}
                 </div>

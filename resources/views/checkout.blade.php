@@ -8,9 +8,9 @@
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <label for="your_name"
-                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your
+                                class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your Name
                             </label>
-                            <input type="text" id="your_name" value="{{ $user['username'] }}"
+                            <input type="text" name="your_name" id="your_name" value="{{ $user['username'] }}" disabled
                                 class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
                         </div>
 
@@ -18,7 +18,8 @@
                             <label for="your_email"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your
                                 email</label>
-                            <input type="email" id="your_email" value="{{ $user['email'] }}"
+                            <input type="email" name="your_email" id="your_email" value="{{ $user['email'] }}"
+                                disabled
                                 class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
                         </div>
 
@@ -26,7 +27,8 @@
                             <label for="your_num"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Phone
                                 Number</label>
-                            <input type="tel" id="your_num" value="{{ $user['phone_number'] }}"
+                            <input type="tel" name="your_num" id="your_num" value="{{ $user['phone_number'] }}"
+                                disabled
                                 class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
                         </div>
                         @php
@@ -37,7 +39,8 @@
                         <div>
                             <label for="your_city"
                                 class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">City</label>
-                            <input type="text" id="your_city" value="{{ $city }}"
+                            <input type="text" name="your_city" id="your_city" value="{{ trim(end($addressParts)) }}"
+                                disabled
                                 class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
                         </div>
                     </div>
@@ -45,7 +48,8 @@
                     <div>
                         <label for="address"
                             class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                        <input type="text" id="address" value="{{ $fullAddress }}"
+                        <input type="text" name="address_input" id="address_input"
+                            value="{{ trim($addressParts[0]) }}" disabled
                             class="block w-full p-2.5 text-sm rounded-lg border border-gray-300 bg-gray-50 text-gray-900 outline-none transition focus:border-blue-500 focus:ring focus:ring-blue-500" />
                     </div>
                 </div>
@@ -106,51 +110,55 @@
                 {{-- Payment in the checkout view --}}
                 <div class="space-y-4">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Payment Methods</h3>
+                    <form method="POST" action="{{ route('checkout.update-payment') }}">
+                        @csrf
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                            <div
+                                class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
+                                <div class="flex items-start">
+                                    <div class="flex h-5 items-center">
+                                        <input id="credit-card" aria-describedby="credit-card-text" type="radio"
+                                            name="payment_method" value="credit_card" onchange="this.form.submit()"
+                                            {{ $paymentMethod == 'credit_card' ? 'checked' : '' }}
+                                            class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                                    </div>
 
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div
-                            class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
-                            <div class="flex items-start">
-                                <div class="flex h-5 items-center">
-                                    <input id="credit-card" aria-describedby="credit-card-text" type="radio"
-                                        name="payment-method" value=""
-                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
-                                        checked />
+                                    <div class="ms-4 text-sm">
+                                        <label for="credit-card"
+                                            class="font-medium leading-none text-gray-900 dark:text-white"> Credit Card
+                                        </label>
+                                        <p id="credit-card-text"
+                                            class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Pay with
+                                            your credit card</p>
+                                    </div>
                                 </div>
 
-                                <div class="ms-4 text-sm">
-                                    <label for="credit-card"
-                                        class="font-medium leading-none text-gray-900 dark:text-white"> Credit Card
-                                    </label>
-                                    <p id="credit-card-text"
-                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Pay with
-                                        your credit card</p>
+                            </div>
+
+                            <div
+                                class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
+                                <div class="flex items-start">
+                                    <div class="flex h-5 items-center">
+                                        <input id="pay-on-delivery" aria-describedby="pay-on-delivery-text"
+                                            type="radio" name="payment_method" value="cod"
+                                            onchange="this.form.submit()"
+                                            {{ $paymentMethod == 'cod' ? 'checked' : '' }}
+                                            class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                                    </div>
+
+                                    <div class="ms-4 text-sm">
+                                        <label for="pay-on-delivery"
+                                            class="font-medium leading-none text-gray-900 dark:text-white"> Payment on
+                                            delivery </label>
+                                        <p id="pay-on-delivery-text"
+                                            class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Pay with
+                                            cash on delivery</p>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-
-                        <div
-                            class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
-                            <div class="flex items-start">
-                                <div class="flex h-5 items-center">
-                                    <input id="pay-on-delivery" aria-describedby="pay-on-delivery-text" type="radio"
-                                        name="payment-method" value=""
-                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
-                                </div>
-
-                                <div class="ms-4 text-sm">
-                                    <label for="pay-on-delivery"
-                                        class="font-medium leading-none text-gray-900 dark:text-white"> Payment on
-                                        delivery </label>
-                                    <p id="pay-on-delivery-text"
-                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Pay with
-                                        cash on delivery</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    </form>
                 </div>
 
                 {{-- <div class="space-y-4">
@@ -228,15 +236,10 @@
                                     </p>
                                 </div>
                             </div>
-                            {{-- <div class="flex items-center justify-center py-3">
-                                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-                                </div> --}}
                         </div>
                     </div>
 
-                    <!-- Order summary will be populated here -->
                     <div id="order-summary" class="divide-y divide-gray-200 dark:divide-gray-800">
-                        <!-- Summary data will be inserted here -->
                         <!-- Subtotal -->
                         <dl class="flex items-center justify-between gap-2 py-3">
                             <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
@@ -265,52 +268,45 @@
                                 {{ number_format($total) }}</dd>
                         </dl>
                     </div>
+                    @if (session('failed'))
+                        <div class="mt-4 text-red-600">❌ {{ session('failed') }}</div>
+                    @endif
+
 
                     <!-- Order buttons -->
+                    @if (session('alert'))
+                        <script>
+                            if (confirm('{{ session('alert') }}')) {
+                                // User clicked YES
+                                window.location.href = "{{ route('profile') }}";
+                            } else {
+                                // User clicked NO
+                                console.log('User canceled!');
+                            }
+                        </script>
+                    @endif
                     <div class="space-y-2">
-                        <button type="submit"
-                            class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2 text-base font-medium text-white ">Confirm
-                            order</button>
-                        <button type="cancel"
-                            class="flex w-full items-center justify-center rounded-lg border border-red-400 bg-white px-5 py-2 text-base font-medium text-red-500 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200">Cancel
-                            order</button>
+                        <form method="POST" action="{{ route('checkout.payment') }}">
+                            @csrf
+
+                            <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
+                            <input type="hidden" name="delivery_class"
+                                value="{{ $shippingFee == 50000 ? 'express' : 'standard' }}">
+                            <input type="hidden" name="transaction_id" value="{{ $transactionId }}">
+                            <button type="submit"
+                                class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2 text-base font-medium text-white">Confirm
+                                order</button>
+                        </form>
+                        <form method="POST" action="{{ route('checkout.payment') }}">
+                            @csrf
+                            <button type="cancel" onclick="route('cart.index')"
+                                class="flex w-full items-center justify-center rounded-lg border border-red-400 bg-white px-5 py-2 text-base font-medium text-red-500 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200">Cancel
+                                order</button>
+                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
-    <script>
-        // Initialize with current values
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get shipping method from localStorage or use default
-            const savedMethod = localStorage.getItem('shipping_method') || 'fast';
-            const savedFee = parseInt(localStorage.getItem('shipping_fee') || 15000);
-
-            // Update UI to reflect saved values
-            document.querySelector('input[value="' + savedMethod + '"]').checked = true;
-            updateDisplayedPrices(savedFee);
-        });
-
-        function updateShippingMethod(method, fee) {
-            // Save to localStorage
-            localStorage.setItem('shipping_method', method);
-            localStorage.setItem('shipping_fee', fee);
-
-            // Update displayed prices
-            updateDisplayedPrices(fee);
-        }
-
-        function updateDisplayedPrices(shippingFee) {
-            // Get the current subtotal and tax values
-            const subtotal = {{ $subtotal }};
-            const taxAmount = {{ $taxAmount }};
-
-            // Calculate new total
-            const total = subtotal + taxAmount + shippingFee;
-
-            // Update the displayed shipping fee and total
-            document.getElementById('shipping-fee').innerText = 'IDR ' + shippingFee.toLocaleString();
-            document.getElementById('total-amount').innerText = 'IDR ' + total.toLocaleString();
-        }
-    </script>
 </x-main>

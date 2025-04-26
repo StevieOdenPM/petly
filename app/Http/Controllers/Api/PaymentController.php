@@ -52,14 +52,15 @@ class PaymentController extends Controller
                 'status' => false,
                 'message' => 'Transaction Not Found',
             ], 422);
-        }else if ($transaction->transactions_transaction_status_id == 2) {
+        } else if ($transaction->transactions_transaction_status_id == 2) {
             return response()->json([
                 'status' => false,
                 'message' => 'Payment is Completed',
             ], 422);
         }
-        
+
         DB::beginTransaction();
+        
         try {
             $userCustomer = Customer::where('user_user_id', $transaction->user_user_id)->first();
             if (!$transaction) {
@@ -67,7 +68,8 @@ class PaymentController extends Controller
                     'status' => false,
                     'message' => 'No transaction with this id',
                 ], 422);
-            }elseif (!$userCustomer->address) {
+            }
+            if (!$userCustomer->address) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Please input your address first',
@@ -75,7 +77,7 @@ class PaymentController extends Controller
             }
             $transactionDetail = TransactionDetail::where('transaction_transaction_id', $request->transaction_id)->first();
             $paymentMethod = PaymentMethod::where('payment_method_name', $request->payment_method)->first();
-            $cart = Cart::where('foreign_transaction_id', $transaction->transaction_id)->get();
+            
             $deliveryClass = DeliveryClass::where('delivery_class_name', $request->delivery_class)->first();
 
             $payment = Payment::create([
@@ -88,11 +90,10 @@ class PaymentController extends Controller
             } else {
                 $delivery_deadline = Carbon::parse($payment->created_at)->addDays(2);
             }
-            
 
             $delivery = Delivery::create([
                 'delivery_address' => $userCustomer->address,
-                'courier_id' => $transaction->user_user_id,
+                'courier_id' => null,
                 'delivery_deadline' => $delivery_deadline,
                 'delivery_delivery_class_id' => $deliveryClass->delivery_class_id
             ]);
@@ -101,13 +102,13 @@ class PaymentController extends Controller
                 'transactions_transaction_status_id' => 2,
                 'delivery_delivery_id' => $delivery->delivery_id
             ]);
+            $cart = Cart::where('cart_id', $transaction->foreign_cart_id)->first();
 
-            foreach ($cart as $cart_item) {
-                $product = Product::where('product_id', $cart_item->foreign_product_id)->first();
-                $product->update([
-                    'product_stock' => $product->product_stock - $cart_item->quantity
-                ]);
-            }
+            $product = Product::where('product_id', $cart->foreign_product_id)->first();
+           
+            $product->update([
+                'product_stock' => $product->product_stock - $cart->quantity
+            ]);
 
             Cart::where('cart_id', $transaction->foreign_cart_id)->delete();
 
@@ -129,7 +130,6 @@ class PaymentController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Input Payment Failed',
-                // 'message' => $transaction,
                 'error' => $e->getMessage()
             ], 500);
         }
