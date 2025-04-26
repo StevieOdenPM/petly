@@ -50,8 +50,62 @@
                     </div>
                 </div>
 
+                {{-- Shipping in the checkout view --}}
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Payment</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Delivery Methods</h3>
+
+                    <form method="POST" action="{{ route('checkout.update-shipping') }}">
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                            @csrf
+                            <div class="rounded-lg border border-gray-200 p-7 ps-4 {{ $shippingFee == 15000 }}">
+                                <div class="flex items-start">
+                                    <div class="flex h-5 items-center">
+                                        <input id="regular" aria-describedby="regular-text" type="radio"
+                                            name="shipping_fee" value="15000" onchange="this.form.submit()"
+                                            {{ $shippingFee == 15000 ? 'checked' : '' }}
+                                            class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                                    </div>
+
+                                    <div class="ms-4 text-sm">
+                                        <label for="regular"
+                                            class="font-medium leading-none text-gray-900 dark:text-white">
+                                            15.000 - Regular Delivery
+                                        </label>
+                                        <p id="regular-text"
+                                            class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                                            Get it by 2 up to 4 days
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border border-gray-200 p-7 ps-4 {{ $shippingFee == 50000 }}">
+                                <div class="flex items-start">
+                                    <div class="flex h-5 items-center">
+                                        <input id="express" aria-describedby="express-text" type="radio"
+                                            name="shipping_fee" value="50000" onchange="this.form.submit()"
+                                            {{ $shippingFee == 50000 ? 'checked' : '' }}
+                                            class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                                    </div>
+
+                                    <div class="ms-4 text-sm">
+                                        <label for="express"
+                                            class="font-medium leading-none text-gray-900 dark:text-white">
+                                            50.000 - Express Delivery
+                                        </label>
+                                        <p id="express-text"
+                                            class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                                            Get it by 1 up to 2 days
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {{-- Payment in the checkout view --}}
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Payment Methods</h3>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div
@@ -99,60 +153,30 @@
                     </div>
                 </div>
 
-                <div class="space-y-4">
+                {{-- <div class="space-y-4">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Delivery Methods</h3>
 
-
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <form method="POST" action="{{ route('checkout.store') }}">
-                            @csrf
-                        
-                            {{-- Radio Button 1 - Regular Delivery --}}
-                            <div class="rounded-lg border p-4 mb-2 {{ $shippingFee == 15000 ? 'bg-blue-100' : 'bg-gray-50' }}">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" name="shipping_fee" value="15000" 
-                                           onchange="this.form.submit()" 
-                                           {{ $shippingFee == 15000 ? 'checked' : '' }}
-                                           class="h-4 w-4 text-blue-600 border-gray-300">
-                                    <span class="ml-2 text-gray-900">Regular Delivery - IDR 15.000</span>
-                                </label>
-                            </div>
-                        
-                            {{-- Radio Button 2 - Express Delivery --}}
-                            <div class="rounded-lg border p-4 {{ $shippingFee == 50000 ? 'bg-blue-100' : 'bg-gray-50' }}">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" name="shipping_fee" value="50000" 
-                                           onchange="this.form.submit()" 
-                                           {{ $shippingFee == 50000 ? 'checked' : '' }}
-                                           class="h-4 w-4 text-blue-600 border-gray-300">
-                                    <span class="ml-2 text-gray-900">Express Delivery - IDR 50.000</span>
-                                </label>
-                            </div>
-                        </form>
-                        
-                        {{-- Display Selected Shipping Fee --}}
-                        <p class="mt-4 text-lg font-semibold">
-                            Shipping Fee: IDR {{ number_format($shippingFee, 0, ',', '.') }}
-                        </p>
-                        
-                        {{-- <div
+                        <div
                             class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
                             <div class="flex items-start">
                                 <div class="flex h-5 items-center">
-                                    <input id="fast-delivery" type="radio" name="shipping_method" value="fast"
-                                        onchange="updateShippingMethod(this.value, 15000)"
-                                        {{ $shippingMethod == 'fast' ? 'checked' : '' }}
-                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600" />
+                                    <input id="dhl" aria-describedby="dhl-text" type="radio"
+                                        name="delivery-method" value=""
+                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                                        checked />
                                 </div>
 
                                 <div class="ms-4 text-sm">
-                                    <label for="fast-delivery"
+                                    <label for="dhl"
                                         class="font-medium leading-none text-gray-900 dark:text-white">
-                                        15.000 - Fast Delivery
-                                    </label>
-                                    <p class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
-                                        Get it by 2 up to 4 days
-                                    </p>
+                                        15.000 -
+                                        Fast
+                                        Delivery </label>
+                                    <p id="dhl-text"
+                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                                        Get it by
+                                        2 up to 4 days</p>
                                 </div>
                             </div>
                         </div>
@@ -161,25 +185,25 @@
                             class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
                             <div class="flex items-start">
                                 <div class="flex h-5 items-center">
-                                    <input id="express-delivery" type="radio" name="shipping_method" value="express"
-                                        onchange="updateShippingMethod(this.value, 50000)"
-                                        {{ $shippingMethod == 'express' ? 'checked' : '' }}
-                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600" />
+                                    <input id="express" aria-describedby="express-text" type="radio"
+                                        name="delivery-method" value=""
+                                        class="h-4 w-4 border-gray-300 bg-white text-primary-600 focus:ring-2 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
                                 </div>
 
                                 <div class="ms-4 text-sm">
-                                    <label for="express-delivery"
+                                    <label for="express"
                                         class="font-medium leading-none text-gray-900 dark:text-white">
-                                        50.000 - Express Delivery
-                                    </label>
-                                    <p class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
-                                        Get it by 1 up to 2 days
-                                    </p>
+                                        50.000 -
+                                        Express Delivery </label>
+                                    <p id="express-text"
+                                        class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">Get it by
+                                        1 up to 2 days</p>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
-                </div>
+                </div> --}}
+
             </div>
 
             <div class="bg-white rounded-lg border border-gray-200 overflow-hidden p-6 max-w-1/3 w-full">

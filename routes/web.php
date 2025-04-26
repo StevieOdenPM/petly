@@ -85,10 +85,9 @@ Route::get('/admin/addproduct', function () {
     return view('admin/addproduct');
 });
 
-use App\Http\Controllers\UserController;
-Route::get('/admin/user', [UserController::class, 'show']);
-Route::delete('/admin/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
+use App\Http\Controllers\UserManagementController;
+Route::get('/admin/user', [UserManagementController::class, 'show']);
+Route::delete('/admin/user/{id}', [UserManagementController::class, 'destroy'])->name('user.destroy');
 
 Route::get('/bank', function () {
     return view('bank');
@@ -150,7 +149,10 @@ Route::post('/admin/product/add', [addProductController::class, 'store'])->name(
 use App\Http\Controllers\CheckoutController;
 
 Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('checkout');
-Route::post('/checkout/add', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+Route::post('/checkout', [CheckoutController::class, 'storeCheckout'])->name('checkout.store');
+Route::post('/checkout/update-shipping', [CheckoutController::class, 'updateShipping'])->name('checkout.update-shipping');
 
 use App\Http\Controllers\OrderManagementController;
+
 Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
+
