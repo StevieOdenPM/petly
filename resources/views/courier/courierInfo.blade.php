@@ -146,7 +146,7 @@
                     <div class="bg-white rounded-lg p-4 shadow-sm relative">
                         <div class="flex justify-between">
                             <div>
-                                <h2 class="text-2xl font-normal text-gray-800">25</h2>
+                                <h2 class="text-2xl font-normal text-gray-800">{{ count($couriers) }}</h2>
                                 <p class="text-gray-500 text-sm mt-0.5">Total Delivery</p>
                             </div>
                             <div class="text-pink-300">
