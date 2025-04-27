@@ -431,13 +431,6 @@
                     document.querySelector(`#${service}`).closest('.service-box').classList.add('border-red-400');
                 },
             
-                setTime(time) {
-                    this.selectedTime = time;
-                    // Add highlight to selected time button
-                    event.target.classList.remove('border-gray-200');
-                    event.target.classList.add('border-red-400');
-                },
-            
                 redirectToWhatsApp() {
                     let message = `Hey Petly! \nI want to book an appointment:\n` +
                         `• *Service:* ${this.serviceSelected === 'grooming' ? 'Grooming' : 'Veterinary Care'}\n` +

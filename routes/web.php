@@ -62,14 +62,14 @@ Route::get('/product', function () {
 Route::get('/admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
 
-    return view('admin/product', ['products' => $response]);
+    return view('/admin/product', ['products' => $response]);
 })->name('home-admin'); 
 
-Route::get('/courier-info', function () {
+Route::get('/courier/courier-info', function () {
     return view('courier/courierInfo');
 });
 
-Route::get('/parcel-tracking', function () {
+Route::get('/courier/parcel-tracking', function () {
     return view('courier/parcelTracking');
 });
 
@@ -159,3 +159,8 @@ use App\Http\Controllers\OrderManagementController;
 
 Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
 
+use App\Http\Controllers\CourierController;
+
+Route::get('/courier/parcel-tracking', [CourierController::class, 'getCourier']);
+Route::post('/courier/parcel-tracking', [CourierController::class, 'finish'])->name('courier.finish');
+Route::get('/courier/courier-info', [CourierController::class, 'getDelivery']);

@@ -31,7 +31,7 @@ class DeliveryController extends Controller
     public function indexCourierNow()
     {
         $user = auth('sanctum')->user();
-        $delivery = Delivery::with(['deliveryClass', 'user', 'courier', 'transaction.transactionStatus'])->where('courier_id', $user->user_id)->get();
+        $delivery = Delivery::with(['deliveryClass', 'user', 'courier', 'transaction.transactionStatus', 'transaction.transactionDetails.product.productType', 'transaction.users'])->where('courier_id', $user->user_id)->get();
         if ($delivery) {
             return DeliveryResource::collection($delivery);
         } else {
