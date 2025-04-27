@@ -45,4 +45,3 @@ class CourierController extends Controller
     }  
 }    
 
-

@@ -136,11 +136,13 @@ class TransactionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transaction $transaction)
+    public function show($id)
     {
-        $product = Transaction::with(['users', 'delivery.deliveryClass', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])->get();
+        $product = Transaction::with(['users', 'delivery.deliveryClass', 'cart.product', 'transactionStatus', 'transactionDetails.product.productType', 'transactionDetails.product.petType'])
+        ->where('transaction_id', $id)
+        ->first();
         if ($product) {
-            return TransactionResource::collection($product);
+            return new TransactionResource($product);
         } else {
             return response()->json(['message' => 'No Record Available'], 200);
         }
@@ -165,8 +167,20 @@ class TransactionController extends Controller
         }
 
         $transaction = Transaction::where('transaction_id', $request->transaction_id)->first();
+
+        $transactionStatus = 0;
+        if ($request->status_name == 'complete') {
+            $transactionStatus = 1;
+        }elseif ($request->status_name == 'progress') {
+            $transactionStatus = 2;
+        }elseif ($request->status_name == 'pending') {
+            $transactionStatus = 3;
+        }else{
+            $transactionStatus = 4;
+        }
+
         $transaction->update([
-            'transactions_transaction_status_id' => 4
+            'transactions_transaction_status_id' => $transactionStatus
         ]);
 
         return response()->json([
