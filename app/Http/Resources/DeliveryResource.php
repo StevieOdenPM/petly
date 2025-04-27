@@ -18,6 +18,7 @@ class DeliveryResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'delivery_id' => $this->delivery_id,
             'delivery_deadline' => $this->delivery_deadline,
             'delivery_address' => $this->delivery_address,
             'courier' => new UserResource($this->whenLoaded('user')),
