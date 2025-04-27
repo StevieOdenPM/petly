@@ -153,8 +153,9 @@ Route::post('/checkout', [CheckoutController::class, 'storeCheckout'])->name('ch
 Route::post('/checkout/update-shipping', [CheckoutController::class, 'updateShipping'])->name('checkout.update-shipping');
 Route::post('/checkout/update-payment', [CheckoutController::class, 'updatePaymentMethod'])->name('checkout.update-payment');
 Route::post('/checkout/process-payment', [CheckoutController::class, 'storePayment'])->name('checkout.payment');
+// Route::get('/checkout/{id}', [CheckoutController::class, 'getHistory'])->name('single.checkout');
 
-use App\Http\Controllers\OrderManagementController;
+use App\Http\Controllers\OrderManagementController; 
 
 Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
 
