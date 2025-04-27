@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('customer')->middleware(['req' => "App\Http\Middleware\CheckRole:customer"])->group(function () {
         Route::apiResource('/pets', PetController::class);
         Route::apiResource('/transaction', TransactionController::class);
+        Route::get('/transaction/{id}', [TransactionController::class, 'show']);
         Route::post('/transaction-update', [TransactionController::class, 'update']);
         Route::post('/payment', [PaymentController::class, 'store']);
         Route::apiResource('/cart', CartController::class);

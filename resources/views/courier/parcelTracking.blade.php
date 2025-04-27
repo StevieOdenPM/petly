@@ -72,9 +72,6 @@
                                 <p class="text-xs text-gray-500">Estimated Time of Arrival</p>
                                 <p class="text-xl font-semibold">13:50</p>
                             </div>
-                            {{-- <div class="text-right">
-                                <p class="text-sm text-gray-500">Dec 25, 2025</p>
-                            </div> --}}
                         </div>
 
                         <div class="relative flex items-center justify-between py-2 mb-3">

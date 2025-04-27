@@ -35,6 +35,13 @@
                                 {{-- Status : <span class="text-green-500">Completed</span> --}}
                             </p>
                         </div>
+                        {{-- <form action="{{ route('single.checkout', $transaction['transaction_id']) }}" method="GET">
+                            @csrf
+                            <button type="submit"
+                                class="rounded-full px-7 py-3 bg-[#FF9494] text-white font-semibold text-sm transition-all duration-500">
+                                Pay Now
+                            </button>
+                        </form> --}}
                     </div>
                     <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2"
                         viewBox="0 0 1216 2" fill="none">
@@ -44,8 +51,8 @@
                     <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
                         <div class="grid grid-cols-4 w-full">
                             <div class="col-span-4 sm:col-span-1">
-                                <img src="{{ $transaction['transaction_details']['product']['product_image'] }}" alt="sdawdadaw"
-                                    class="max-sm:mx-auto object-cover">
+                                <img src="{{ $transaction['transaction_details']['product']['product_image'] }}"
+                                    alt="sdawdadaw" class="max-sm:mx-auto object-cover">
                             </div>
                             <div
                                 class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
@@ -73,7 +80,8 @@
 
                     <div class="px-3 md:px-11 py-8 flex justify-end">
                         <p class="font-medium text-xl leading-8 text-black">Total Price:
-                            <span class="text-gray-500"> {{ $transaction['transaction_details']['total_payment'] }}</span>
+                            <span class="text-gray-500">
+                                {{ $transaction['transaction_details']['total_payment'] }}</span>
                         </p>
                     </div>
                     {{-- @endforeach --}}
