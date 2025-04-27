@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('customer')->middleware(['req' => "App\Http\Middleware\CheckRole:customer"])->group(function () {
         Route::apiResource('/pets', PetController::class);
         Route::apiResource('/transaction', TransactionController::class);
+        Route::get('/transaction/{id}', [TransactionController::class, 'show']);
         Route::post('/transaction-update', [TransactionController::class, 'update']);
         Route::get('/delivery', [DeliveryController::class, 'index']);
         Route::post('/delivery', [DeliveryController::class, 'store']);
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('courier')->middleware(['req' => "App\Http\Middleware\CheckRole:courier"])->group(function () {
         Route::post('/delivery', [DeliveryController::class, 'update']);
+        Route::get('/transaction-progress', [TransactionController::class, 'indexWithStatusProgress']);
     });
 
     Route::apiResource('/roles', RoleController::class);
