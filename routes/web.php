@@ -101,9 +101,9 @@ Route::get('/theme', function () {
     return view('theme');
 });
 
-Route::get('/courier', function () {
-    return view('courier/courierInfo'); 
-})->name('home-courier');
+// Route::get('/courier/courier-info', function () {
+//     // return view('/courier/courierInfo'); 
+// })->name('home-courier');
 
 use App\Http\Controllers\loginController;
 
@@ -164,4 +164,4 @@ use App\Http\Controllers\CourierController;
 
 Route::get('/courier/parcel-tracking', [CourierController::class, 'getCourier']);
 Route::post('/courier/parcel-tracking', [CourierController::class, 'finish'])->name('courier.finish');
-Route::get('/courier/courier-info', [CourierController::class, 'getDelivery']);
+Route::get('/courier/courier-info', [CourierController::class, 'getDelivery'])->name('home-courier');
