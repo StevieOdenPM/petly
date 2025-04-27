@@ -22,10 +22,10 @@
                 {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <i class="ri-file-list-line text-gray-400 text-xl"></i>
         </a> --}}
-                <a href="/" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                <a href="/courier/courier-info" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
                     <i class="ri-user-line text-pink-400 text-xl"></i>
                 </a>
-                <a href="/parcel-tracking" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <a href="/courier/parcel-tracking" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-truck-line text-gray-400 text-xl"></i>
                 </a>
             </div>
@@ -198,77 +198,46 @@
 
                 <div class="overflow-x-auto">
                     <table class="w-full">
-                        <thead>
-                            <tr class="text-left text-[#373737] border-t border-b">
-                                <th class="py-3 pl-2 font-medium text-sm">ID</th>
-                                <th class="py-3 pl-2 font-medium text-sm">Customer Name</th>
-                                <th class="py-3 pl-2 font-medium text-sm">Items</th>
-                                <th class="py-3 pl-2 font-medium text-sm">Date</th>
-                                <th class="py-3 pl-11 font-medium text-sm">Status</th>
-                                <th class="py-3 pl-2 font-medium text-sm">Sent</th>
-                                <th class="py-3 pl-6 font-medium text-sm">Received</th>
-                                <th class="py-3 pl-2 font-medium text-sm">Duration</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-gray-100">
-                                <td class="py-3 text-gray-800 px-2">TR001</td>
-                                <td class="py-3 text-gray-800 px-2">Ahmed Rashdan</td>
-                                <td class="py-3 text-gray-800 px-2">Dog Food</td>
-                                <td class="py-3 text-gray-500 px-2">25 December 2025</td>
-                                <td class="py-3 px-2">
-                                    <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-[13px]">
-                                        Delivered On Time
-                                    </span>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">09:00</td>
-                                <td class="py-3 px-2">
-                                    <div class="flex items-center">
-                                        <span class="text-gray-400 mr-1">------</span>
-                                        9:25
-                                    </div>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">25m</td>
-                            </tr>
-                            <tr class="border-b border-gray-100">
-                                <td class="py-3 text-gray-800 px-2">TR002</td>
-                                <td class="py-3 text-gray-800 px-2">Ahmed Ali</td>
-                                <td class="py-3 text-gray-800 px-2">Cat Food</td>
-                                <td class="py-3 text-gray-500 px-2">25 December 2025</td>
-                                <td class="py-3 px-2">
-                                    <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-[13px]">
-                                        Delivered On Time
-                                    </span>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">09:25</td>
-                                <td class="py-3 px-2">
-                                    <div class="flex items-center">
-                                        <span class="text-gray-400 mr-1">------</span>
-                                        9:55
-                                    </div>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">30m</td>
-                            </tr>
-                            <tr class="border-b border-gray-100">
-                                <td class="py-3 text-gray-800 px-2">TR003</td>
-                                <td class="py-3 text-gray-800 px-2">Saliwak Enak</td>
-                                <td class="py-3 text-gray-800 px-2">Dog Food</td>
-                                <td class="py-3 text-gray-500 px-2">25 December 2025</td>
-                                <td class="py-3 px-2">
-                                    <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-[13px]">
-                                        Delivered On Time
-                                    </span>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">10:00</td>
-                                <td class="py-3 px-2">
-                                    <div class="flex items-center">
-                                        <span class="text-gray-400 mr-1">------</span>
-                                        10:21
-                                    </div>
-                                </td>
-                                <td class="py-3 text-gray-800 px-2">21m</td>
-                            </tr>
-                        </tbody>
+                        @if (!empty($couriers))
+                            <thead>
+                                <tr class="text-left text-[#373737] border-t border-b">
+                                    <th class="py-3 pl-2 font-medium text-sm">ID</th>
+                                    <th class="py-3 pl-2 font-medium text-sm">Customer Name</th>
+                                    <th class="py-3 pl-1 font-medium text-sm">Product Type</th>
+                                    <th class="py-3 pl-2 font-medium text-sm">Date</th>
+                                    <th class="py-3 pl-2 font-medium text-sm">Status</th>
+                                    <th class="py-3 pl-2 font-medium text-sm">Delivery Class</th>
+                                    <th class="py-3 pl-2 font-medium text-sm">Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($couriers as $delivery)
+                                    <tr class="border-b border-gray-100">
+                                        <td class="py-3 text-gray-800 px-2">{{ $delivery['delivery_id'] }}</td>
+                                        <td class="py-3 text-gray-800 px-2">
+                                            {{ $delivery['transaction']['user']['username'] }}</td>
+                                        <td class="py-3 text-gray-800 px-2">
+                                            {{ ucwords($delivery['transaction']['transaction_details']['product']['product_type']['product_type_name']) }}
+                                        </td>
+                                        <td class="py-3 text-gray-500 px-2">
+                                            {{ \Carbon\Carbon::parse($delivery['delivery_deadline'])->format('d M Y, H:i') }}
+                                        </td>
+                                        <td class="py-1 px-1 uppercase">
+                                            <span class="px-1 py-1 bg-green-100 text-green-600 rounded text-[13px]">
+                                                {{ $delivery['transaction']['transaction_status']['transaction_status_name'] }}
+                                            </span>
+                                        </td>
+                                        <td class="py-3 text-gray-800 px-2 ">
+                                            {{ $delivery['delivery_class']['delivery_class_name'] }}</td>
+                                        <td class="py-3 text-gray-800 px-2">
+                                            {{ explode(',', $delivery['delivery_address'])[1] }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <p class="text-center text-gray-500">No Data Available</p>
+                        @endif
+
                     </table>
                 </div>
             </div>

@@ -24,10 +24,11 @@
                 {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
             <i class="ri-file-list-line text-gray-400 text-xl"></i>
         </a> --}}
-                <a href="/courier-info" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <a href="/courier/courier-info" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-user-line text-gray-400 text-xl"></i>
                 </a>
-                <a href="/parcel-tracking" class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
+                <a href="/courier/parcel-tracking"
+                    class="p-2 rounded-lg bg-pink-50 hover:bg-pink-100 transition-colors">
                     <i class="ri-truck-line text-pink-400 text-xl"></i>
                 </a>
             </div>
@@ -55,43 +56,72 @@
             <div class="flex flex-col lg:flex-row gap-4">
                 <!-- Shipping Cards Column -->
                 <div class="w-full lg:w-2/5 space-y-4">
-                    <div class="bg-white rounded-xl p-4 shadow-sm">
-                        <div class="flex justify-between items-center mb-2">
-                            <div>
-                                <span class="text-gray-700 font-medium">Shipping ID : #731845</span>
-                            </div>
-                            <div>
-                                <span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-600">
-                                    On Delivery
-                                </span>
-                            </div>
-                        </div>
 
-                        <div class="flex justify-between items-center mb-3">
-                            <div>
-                                <p class="text-xs text-gray-500">Estimated Time of Arrival</p>
-                                <p class="text-xl font-semibold">13:50</p>
-                            </div>
-                            {{-- <div class="text-right">
-                                <p class="text-sm text-gray-500">Dec 25, 2025</p>
-                            </div> --}}
-                        </div>
+                    <!-- resources/views/admin/order.blade.php -->
 
-                        <div class="relative flex items-center justify-between py-2 mb-3">
-                            <div class="flex items-center">
-                                <p class="text-md font-medium mx-2">Petly</p>
+                    @foreach ($couriers as $delivery)
+                        <div class="bg-white rounded-xl p-4 shadow-sm">
+                            <div class="flex justify-between items-center mb-2">
+                                <div>
+                                    <span class="text-gray-700 font-medium">Shipping ID : #
+                                        {{ $delivery['delivery_id'] }}</span>
+                                </div>
+                                <div>
+                                    <span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-600">
+                                        {{ $delivery['transaction']['transaction_status']['transaction_status_name'] }}
+                                    </span>
+                                </div>
                             </div>
-                            <div class="flex-grow border-t border-gray-300 mx-2"></div>
-                            <div class="flex items-center">
-                                <p class="text-md font-medium mx-2">Kemangisan</p>
+                            <div class="flex justify-between items-center mb-3">
+                                <div>
+                                    <p class="text-xs text-gray-500">Delivery Deadline</p>
+                                    <p class="text-xl font-semibold">
+                                        {{ \Carbon\Carbon::parse($delivery['delivery_deadline'])->format('d M Y, H:i') }}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Delivery Class</p>
+                                    <p class="text-md font-medium">
+                                        {{ $delivery['delivery_class']['delivery_class_name'] }}</p>
+                                </div>
+                            </div>
+                            <div class="relative flex items-center justify-between py-2 mb-3">
+                                <div class="flex items-center">
+                                    <p class="text-md font-medium mx-2">Kemanggisan</p>
+                                </div>
+                                <div class="flex-grow border-t border-gray-300 mx-2"></div>
+                                <div class="flex items-center">
+                                    <p class="text-md font-medium mx-2">
+                                        {{ explode(',', $delivery['delivery_address'])[1] }}</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 mb-2">
+                                <p class="text-xs text-gray-500">Full Address</p>
+                                <p class="text-sm">{{ $delivery['delivery_address'] }}</p>
+                            </div>
+                            <div class="mt-3 mb-2">
+                                <p class="text-xs text-gray-500">Estimated Delivery</p>
+                                <p class="text-sm">{{ $delivery['delivery_class']['delivery_class_desc'] }}</p>
+                            </div>
+                            <div class="mt-3 mb-2">
+                                <p class="text-xs text-gray-500">Transaction Date</p>
+                                <p class="text-sm">
+                                    {{ \Carbon\Carbon::parse($delivery['transaction']['transaction_date'])->format('d M Y, H:i') }}
+                                </p>
+                            </div>
+                            <div class="mt-5">
+                                <form action="{{ route('courier.finish') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="courier_id" value="">
+                                    <input type="hidden" name="delivery_id" value="{{ $delivery['delivery_id'] }}">
+                                    <button type="submit"
+                                        class="w-full bg-pink-400 text-white py-2 rounded-lg transition-colors">
+                                        Finish Delivery
+                                    </button>
+                                </form>
                             </div>
                         </div>
-                        <div class="mt-5">
-                            <button class="w-full bg-pink-400 text-white py-2 rounded-lg transition-colors">
-                                Finish Delivery
-                            </button>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
                 <!-- Delivery Details -->
