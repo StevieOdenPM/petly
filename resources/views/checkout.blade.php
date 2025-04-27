@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <div class="rounded-lg border border-gray-200 p-7 ps-4 {{ $shippingFee == 50000 }}">
+                            {{-- <div class="rounded-lg border border-gray-200 p-7 ps-4 {{ $shippingFee == 50000 }}">
                                 <div class="flex items-start">
                                     <div class="flex h-5 items-center">
                                         <input id="express" aria-describedby="express-text" type="radio"
@@ -103,7 +103,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
                 </div>
@@ -113,8 +113,7 @@
                     <form method="POST" action="{{ route('checkout.update-payment') }}">
                         @csrf
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                            <div
-                                class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
+                            <div class="rounded-lg border border-gray-200 p-7 ps-4">
                                 <div class="flex items-start">
                                     <div class="flex h-5 items-center">
                                         <input id="credit-card" aria-describedby="credit-card-text" type="radio"
@@ -135,8 +134,8 @@
 
                             </div>
 
-                            <div
-                                class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
+                            {{-- <div
+                                class="rounded-lg border border-gray-200 p-7 ps-4">
                                 <div class="flex items-start">
                                     <div class="flex h-5 items-center">
                                         <input id="pay-on-delivery" aria-describedby="pay-on-delivery-text"
@@ -155,7 +154,7 @@
                                             cash on delivery</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </form>
@@ -166,7 +165,7 @@
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div
-                            class="rounded-lg border border-gray-200 bg-gray-50 p-7 ps-4 dark:border-gray-700 dark:bg-gray-800">
+                            class="rounded-lg border border-gray-200 p-7 ps-4">
                             <div class="flex items-start">
                                 <div class="flex h-5 items-center">
                                     <input id="dhl" aria-describedby="dhl-text" type="radio"
@@ -218,8 +217,7 @@
                 <p class="text-xl font-semibold text-gray-900 dark:text-white">Product Details</p>
                 <div class="mt-6 space-y-6 sm:mt-8">
                     <div class="flow-root">
-                        <div id="checkout-items-container"
-                            class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
+                        <div id="checkout-items-container" class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
                             <!-- Cart items will be loaded here -->
                             <div class="flex items-center">
                                 <div
@@ -288,7 +286,6 @@
                     <div class="space-y-2">
                         <form method="POST" action="{{ route('checkout.payment') }}">
                             @csrf
-
                             <input type="hidden" name="payment_method" value="{{ $paymentMethod }}">
                             <input type="hidden" name="delivery_class"
                                 value="{{ $shippingFee == 50000 ? 'express' : 'standard' }}">
@@ -297,8 +294,9 @@
                                 class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2 text-base font-medium text-white">Confirm
                                 order</button>
                         </form>
-                        <form method="POST" action="{{ route('checkout.payment') }}">
+                        <form method="POST" action="{{ route('checkout.cancel') }}">
                             @csrf
+                            <input type="hidden" name="transaction_id" value="{{ $transactionId }}">
                             <button type="cancel" onclick="route('cart.index')"
                                 class="flex w-full items-center justify-center rounded-lg border border-red-400 bg-white px-5 py-2 text-base font-medium text-red-500 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-200">Cancel
                                 order</button>
