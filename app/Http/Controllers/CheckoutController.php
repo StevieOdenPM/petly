@@ -133,6 +133,7 @@ class CheckoutController extends Controller
         $shippingFee = session('shipping_fee', 15000);
         $payMethod = session('payment_method', 'Credit Card');
         $taxAmount = 25000;
+
         $total = $taxAmount + $checkoutData['cart']['total_price'] + $shippingFee;
 
         return view('checkout', [
@@ -174,4 +175,48 @@ class CheckoutController extends Controller
         }
         
     }
+
+    public function finish(Request $request)
+    {
+        $apiToken = session('api_token');
+        $courierID = session('user_id');
+        Http::withToken($apiToken)
+            ->post('http://petly.test:8080/api/customer/transaction-update', [
+                'transaction_id' => $request->transaction_id,
+                'status_name' => 'canceled',
+            ]);
+
+            return redirect()->route('history')->with('status');
+    }
+    // public function getHistory($id)
+    // {       
+    //     $apiToken = session('api_token');
+    //     $response = Http::withToken($apiToken)
+    //                     ->get('http://petly.test:8080/api/customer/transaction/' . $id);
+        
+    //     // Decode the JSON response
+    //     $responseData = json_decode($response->body(), true);
+        
+    //     // Extract the data portion of the response
+    //     $data = $responseData['data'];
+    //     // dd($data['cart']['total_price']);
+    //     // Calculate the total
+    //     $taxAmount = 25000;
+    //     $shippingFee = 15000;
+    //     $total = $taxAmount + $data['cart']['total_price'] + $shippingFee;
+    
+    //     return redirect()->route('checkout', [    
+    //         'transactionId' => $data['transaction_id'],
+    //         'subtotal' => $data['cart']['total_price'],
+    //         'product' => $data['cart']['products'],
+    //         'user' => $data['user'],
+    //         'shippingFee' => 'standard',
+    //         'shippingFeeAmount' => $shippingFee,
+    //         'paymentMethod' => 'credit_card',
+    //         'userDetail' => $data['user'],
+    //         'cart' => $data['cart'],
+    //         'taxAmount' => $taxAmount,
+    //         'total' => $total,
+    //     ]);
+    // }
 }
