@@ -30,14 +30,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('/pets', PetController::class);
         Route::apiResource('/transaction', TransactionController::class);
         Route::post('/transaction-update', [TransactionController::class, 'update']);
-        Route::get('/delivery', [DeliveryController::class, 'index']);
-        Route::post('/delivery', [DeliveryController::class, 'store']);
         Route::post('/payment', [PaymentController::class, 'store']);
         Route::apiResource('/cart', CartController::class);
     });
 
     Route::prefix('courier')->middleware(['req' => "App\Http\Middleware\CheckRole:courier"])->group(function () {
         Route::post('/delivery', [DeliveryController::class, 'update']);
+        Route::get('/delivery_courier', [DeliveryController::class, 'indexCourierNow']);
+        Route::get('/delivery_unknown', [DeliveryController::class, 'indexGetCourierNull']);
+        Route::get('/transaction-progress', [TransactionController::class, 'indexWithStatusProgress']);
     });
 
     Route::apiResource('/roles', RoleController::class);
