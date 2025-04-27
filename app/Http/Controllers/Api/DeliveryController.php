@@ -20,7 +20,28 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $delivery = Delivery::with(['deliveryClass', 'user', 'courier'])->get();
+        $delivery = Delivery::with(['deliveryClass', 'user', 'courier', 'transaction.transactionStatus'])->get();
+        if ($delivery) {
+            return DeliveryResource::collection($delivery);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
+    }
+
+    public function indexCourierNow()
+    {
+        $user = auth('sanctum')->user();
+        $delivery = Delivery::with(['deliveryClass', 'user', 'courier', 'transaction.transactionStatus'])->where('courier_id', $user->user_id)->get();
+        if ($delivery) {
+            return DeliveryResource::collection($delivery);
+        } else {
+            return response()->json(['message' => 'No Record Available'], 200);
+        }
+    }
+
+    public function indexGetCourierNull()
+    {
+        $delivery = Delivery::with(['deliveryClass', 'user', 'courier', 'transaction.transactionStatus'])->where('courier_id', null)->get();
         if ($delivery) {
             return DeliveryResource::collection($delivery);
         } else {
