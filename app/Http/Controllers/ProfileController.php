@@ -11,7 +11,7 @@ class ProfileController extends Controller
     {
         $apiToken = session('api_token');
         $response = Http::withToken($apiToken)
-                        ->get('http://petly.test:8080/api/profile');
+            ->get('http://petly.test:8080/api/profile');
 
         $data = $response->json();
 
@@ -45,8 +45,8 @@ class ProfileController extends Controller
         ]);
 
         if ($response->successful()) {
+            session(['address' => $fullAddress]);
             return back();
         }
     }
 }
-

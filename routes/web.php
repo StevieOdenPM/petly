@@ -63,7 +63,7 @@ Route::get('/admin/product', function () {
     $response = Http::get("http://petly.test:8080/api/products");
 
     return view('/admin/product', ['products' => $response]);
-})->name('home-admin'); 
+})->name('home-admin');
 
 Route::get('/courier/courier-info', function () {
     return view('courier/courierInfo');
@@ -86,6 +86,7 @@ Route::get('/admin/addproduct', function () {
 });
 
 use App\Http\Controllers\UserManagementController;
+
 Route::get('/admin/user', [UserManagementController::class, 'show']);
 Route::delete('/admin/user/{id}', [UserManagementController::class, 'destroy'])->name('user.destroy');
 
@@ -156,7 +157,7 @@ Route::post('/checkout/process-payment', [CheckoutController::class, 'storePayme
 Route::post('/checkout/cancel-payment', [CheckoutController::class, 'finish'])->name('checkout.cancel');
 // Route::get('/checkout/{id}', [CheckoutController::class, 'getHistory'])->name('single.checkout');
 
-use App\Http\Controllers\OrderManagementController; 
+use App\Http\Controllers\OrderManagementController;
 
 Route::get('/admin/order', [OrderManagementController::class, 'getTransactions']);
 
