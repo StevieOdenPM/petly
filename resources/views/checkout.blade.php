@@ -272,7 +272,7 @@
 
 
                     <!-- Order buttons -->
-                    @if (session('alert'))
+                    {{-- @if (session('alert'))
                         <script>
                             if (confirm('{{ session('alert') }}')) {
                                 // User clicked YES
@@ -282,7 +282,7 @@
                                 console.log('User canceled!');
                             }
                         </script>
-                    @endif
+                    @endif --}}
                     <div class="space-y-2">
                         <form method="POST" action="{{ route('checkout.payment') }}">
                             @csrf

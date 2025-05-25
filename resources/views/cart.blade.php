@@ -2,6 +2,19 @@
     <section class="py-10 relative">
         <h2 class="font-semibold text-2xl text-black mb-5">Shopping Cart</h2>
 
+        <!-- Alert for address validation -->
+        @if (session('alert'))
+            <script>
+                if (confirm('{{ session('alert') }}')) {
+                    // User clicked YES
+                    window.location.href = "{{ route('profile') }}";
+                } else {
+                    // User clicked NO
+                    console.log('User canceled!');
+                }
+            </script>
+        @endif
+
         <div class="flex flex-col lg:flex-row gap-10">
             <div class="w-full lg:w-2/3 space-y-6">
                 @forelse($items as $item)
@@ -12,8 +25,7 @@
                                 <div class="flex items-center md:order-0 mr-2">
                                     <input type="radio" name="selected_item" value="{{ $item['cart_id'] }}"
                                         class="h-5 w-5 rounded border-gray-300"
-                                        @if (isset($selectedCartId) && $selectedCartId == $item['cart_id']) checked @endif 
-                                        onChange="this.form.submit()">
+                                        @if (isset($selectedCartId) && $selectedCartId == $item['cart_id']) checked @endif onChange="this.form.submit()">
                                 </div>
                             </form>
 
@@ -83,14 +95,15 @@
                     <span>Total</span>
                     <span>IDR {{ number_format($total) }}</span>
                 </div>
-                <form action="{{ route('checkout.store') }}" method="POST">
+                <form action="{{ route('checkout.store') }}" method="POST" id="checkout-form">
                     @csrf
-                    @if(isset($selectedCartId) && $selectedCartId)
+                    @if (isset($selectedCartId) && $selectedCartId)
                         <input type="hidden" name="selected_item" value="{{ $selectedCartId }}">
                     @endif
-                    <button type="submit"
+
+                    <button type="button"
                         class="flex w-full items-center justify-center rounded-lg bg-[#FE9494] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#e58585] focus:outline-none focus:ring-4 focus:ring-[#ffc1c1] dark:bg-[#FE9494] dark:hover:bg-[#e58585] dark:focus:ring-[#ff9a9a]"
-                        @if(!isset($selectedCartId) || !$selectedCartId) disabled @endif>
+                        @if (!isset($selectedCartId) || !$selectedCartId) disabled @endif onclick="checkAddressAndSubmit()">
                         Proceed to Checkout
                     </button>
                 </form>
@@ -110,4 +123,21 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function checkAddressAndSubmit() {
+            @if (!session('address'))
+                if (confirm('You need to add an address before checking out. Would you like to add an address now?')) {
+                    // User clicked YES
+                    window.location.href = "{{ route('profile') }}";
+                } else {
+                    // User clicked NO
+                    console.log('User canceled adding address!');
+                }
+            @else
+                // Address exists, submit the form
+                document.getElementById('checkout-form').submit();
+            @endif
+        }
+    </script>
 </x-main>
