@@ -64,7 +64,8 @@
 
                     <input type="tel"
                         class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300 form-control @error('phone_number') is-invalid @enderror"
-                        id="phone_number" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number" required>
+                        id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                        placeholder="Phone Number" required>
 
                     <input type="password"
                         class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300 form-control @error('password') is-invalid @enderror"
@@ -72,13 +73,14 @@
                     <div class="form-text">Password must be at least 8 characters.</div>
 
                     <input type="password" class="w-full px-4 py-2 mb-2 rounded-lg border border-gray-300 form-control"
-                        id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation" required>
+                        id="password_confirmation" name="password_confirmation" placeholder="Password Confirmation"
+                        required>
 
                     <div class="flex items-center text-xs text-gray-600 mb-3">
-                        <input type="checkbox" name="terms" class="mr-2">
+                        {{-- <input type="checkbox" name="terms" class="mr-2">
                         <span>I agree to the <a href="#" class="text-[#FF9494] font-semibold">Terms and
                                 Conditions</a> and the <a href="#" class="text-[#FF9494] font-semibold">Privacy
-                                Policy</a>.</span>
+                                Policy</a>.</span> --}}
                     </div>
 
                     <button type="submit"
