@@ -14,9 +14,7 @@
         <!-- Sidebar -->
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
-                <a href="/">
-                    <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
-                </a>
+                <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
             </div>
             <div class="flex flex-col items-center gap-8">
                 {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -109,38 +107,57 @@
                     <div class="bg-white rounded-lg p-4 shadow-sm relative overflow-hidden">
                         <div class="flex justify-between items-start">
                             <div class="flex items-center">
-                                <i class="ri-temp-hot-line text-red-400 mr-2 text-sm"></i>
-                                <h2 class="text-3xl font-light text-gray-700">27°C</h2>
+                                <i class="ri-time-line text-red-400 mr-2 text-sm"></i>
+                                <h2 id="live-time" class="text-4xl font-light text-gray-700">--:--:--</h2>
                             </div>
                             <div class="absolute right-4 top-4">
-                                <i class="ri-sun-cloudy-line text-pink-200 text-3xl"></i>
+                                <i class="ri-calendar-event-line text-pink-200 text-3xl"></i>
                             </div>
                         </div>
 
                         <div class="mt-2 text-right">
                             <p class="text-gray-500 text-xs">Today:</p>
-                            <p class="text-gray-400 text-xs">25th December 2025</p>
+                            <p id="live-date" class="text-gray-400 text-xs">Loading...</p>
                         </div>
 
                         <div class="grid grid-cols-4 gap-2 mt-3">
                             <div class="text-center">
-                                <p class="text-gray-500 text-[10px] mb-0.5">HUMIDITY</p>
-                                <p class="font-medium text-xs">99%</p>
+                                <p class="text-gray-500 text-[10px] mb-0.5">TIME ZONE</p>
+                                <p class="font-medium text-xs">GMT+7</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-gray-500 text-[10px] mb-0.5">VISIBILITY</p>
-                                <p class="font-medium text-xs">8km</p>
+                                <p class="text-gray-500 text-[10px] mb-0.5">SUNRISE</p>
+                                <p class="font-medium text-xs">05:45</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-gray-500 text-[10px] mb-0.5">AIR PRESSURE</p>
-                                <p class="font-medium text-xs">1005hPa</p>
+                                <p class="text-gray-500 text-[10px] mb-0.5">SUNSET</p>
+                                <p class="font-medium text-xs">18:10</p>
                             </div>
                             <div class="text-center">
-                                <p class="text-gray-500 text-[10px] mb-0.5">WIND</p>
-                                <p class="font-medium text-xs">2mph</p>
+                                <p class="text-gray-500 text-[10px] mb-0.5">COUNTRY</p>
+                                <p class="font-medium text-xs">IDN</p>
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        function updateClock() {
+                            const now = new Date();
+                            const timeString = now.toLocaleTimeString('en-GB');
+                            const dateString = now.toLocaleDateString('en-GB', {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+
+                            document.getElementById('live-time').textContent = timeString;
+                            document.getElementById('live-date').textContent = dateString;
+                        }
+
+                        setInterval(updateClock, 1000);
+                        updateClock();
+                    </script>
 
                     <!-- Total Delivery Card -->
                     <div class="bg-white rounded-lg p-4 shadow-sm relative">
@@ -149,27 +166,18 @@
                                 <h2 class="text-2xl font-normal text-gray-800">{{ count($couriers) }}</h2>
                                 <p class="text-gray-500 text-sm mt-0.5">Total Delivery</p>
                             </div>
-                            <div class="text-pink-300">
-                                <i class="ri-group-line text-xl"></i>
-                            </div>
                         </div>
                     </div>
 
                     <!-- Income Card -->
                     <div class="bg-white rounded-lg p-4 shadow-sm relative">
-                        <div
-                            class="absolute top-3 right-3 bg-pink-100 text-pink-500 rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                            <span>3</span>
-                        </div>
+
                         <h2 class="text-2xl font-normal text-gray-800">Mitsubishi Colt L300</h2>
                         <p class="text-gray-500 text-sm mt-0.5">Vehicle Information</p>
                     </div>
 
                     <!-- Bonus Card -->
                     <div class="bg-white rounded-lg p-4 shadow-sm relative">
-                        <div class="absolute top-3 right-3 text-pink-300">
-                            <i class="ri-gift-line text-lg"></i>
-                        </div>
                         <h2 class="text-2xl font-normal text-gray-800">B 1127 AL</h2>
                         <p class="text-gray-500 text-sm mt-0.5">Plate Number</p>
                     </div>
