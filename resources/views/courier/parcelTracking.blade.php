@@ -16,9 +16,7 @@
         <!-- Sidebar -->
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
-                <a href="/">
-                    <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
-                </a>
+                <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
             </div>
             <div class="flex flex-col items-center gap-8">
                 {{-- <a href="/" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">

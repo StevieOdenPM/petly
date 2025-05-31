@@ -31,7 +31,7 @@ Route::get('/history', function () {
 
 
 Route::get('/aboutus', function () {
-    session()->flush();
+    // session()->flush();
     return view('aboutus');
 });
 
