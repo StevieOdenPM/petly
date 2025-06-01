@@ -8,9 +8,7 @@
         <!-- Sidebar -->
         <div class="w-16 bg-white flex flex-col items-center py-4 shadow-sm">
             <div class="mb-8">
-                {{-- <a href="#"> --}}
                 <img src="/img/logopet.png" alt="Petty Logo" class="w-10 h-7">
-                {{-- </a> --}}
             </div>
             <div class="flex flex-col items-center gap-8">
                 {{-- <a href="/admin/dashboard" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
@@ -104,16 +102,12 @@
                             @endforeach
                         @else
                     </tbody>
-                    <p class="text-center text-gray-500">No Data Available</p>
+                    <tr>
+                        <td colspan="100%" class="text-center text-gray-500 py-4">No Data Available</td>
+                    </tr>
                     @endif
                 </table>
 
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-4 flex justify-center space-x-2">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">Previous</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">Next</button>
             </div>
         </div>
 
