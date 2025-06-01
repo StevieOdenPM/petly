@@ -104,11 +104,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <div class="mt-4 flex justify-center space-x-2">
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">Previous</button>
-                <button class="px-4 py-2 bg-gray-200 rounded-lg">Next</button>
-            </div>
         </div>
 
     </div>
