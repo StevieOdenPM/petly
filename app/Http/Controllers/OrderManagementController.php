@@ -11,7 +11,7 @@ class OrderManagementController extends Controller
     {
         $apiToken = session('api_token');
         $response = Http::withToken($apiToken)
-                    ->get('http://petly.test:8080/api/admin/transaction');
+        ->get('http://petly.test:8080/api/admin/transaction');
         
         $data = $response->json();
         return view('admin/order', [

@@ -21,6 +21,9 @@
                     <i class="ri-shopping-bag-3-line text-pink-400 text-xl"></i>
                 </a>
                 <a href="/admin/order" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="ri-shopping-cart-line text-gray-400 text-xl"></i>
+                </a>
+                <a href="/admin/user" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
                     <i class="ri-group-line text-gray-400 text-xl"></i>
                 </a>
             </div>
