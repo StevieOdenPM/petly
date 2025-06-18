@@ -10,6 +10,19 @@ You can find our project documentation at the link below
 - [Use Case & Description](https://docs.google.com/document/d/19TAbjlhc3pjHJ3MwaDicQSX8pJDX8mlgfbXbBO0gnBs/edit?usp=sharing)
 - [Class Diagram](https://drive.google.com/file/d/15m3194yPbA4TpRoFZ20xNIgZ6N2mGydK/view?usp=sharing)
 
+## Account
+
+admin account
+```bash
+email admin@gmail.com
+password admin1234
+```
+courier account
+```bash
+email salikinsalimin@gmail.com
+password courier1234
+```
+
 ## Getting Started
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
